@@ -1,0 +1,6 @@
+BLUTH, CHANGES
+
+#### 0.5.2 (2010-12-10) ###############################
+
+Initial public release
+

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Delano Mandelbaum"]
-  s.date = %q{2010-12-10}
+  s.date = %q{2010-12-17}
   s.description = %q{A Redis queuing system built on top of Familia}
   s.email = %q{delano@solutious.com}
   s.extra_rdoc_files = [
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION.yml",
+     "bluth.gemspec",
      "lib/bluth.rb",
      "lib/bluth/gob.rb",
      "lib/bluth/worker.rb",
@@ -39,14 +40,14 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<familia>, [">= 0.5.3"])
+      s.add_runtime_dependency(%q<familia>, ["= 0.5.3"])
       s.add_runtime_dependency(%q<sysinfo>, [">= 0.7.3"])
     else
-      s.add_dependency(%q<familia>, [">= 0.5.3"])
+      s.add_dependency(%q<familia>, ["= 0.5.3"])
       s.add_dependency(%q<sysinfo>, [">= 0.7.3"])
     end
   else
-    s.add_dependency(%q<familia>, [">= 0.5.3"])
+    s.add_dependency(%q<familia>, ["= 0.5.3"])
     s.add_dependency(%q<sysinfo>, [">= 0.7.3"])
   end
 end

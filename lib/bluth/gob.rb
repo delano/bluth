@@ -6,7 +6,7 @@ module Bluth
     MAX_ATTEMPTS = 3.freeze unless defined?(Gob::MAX_ATTEMPTS)
     include Familia
     prefix :gob
-    ttl 1.hour
+    ttl 3600 #.seconds
     field :id => Gibbler::Digest
     field :kind => String
     field :data => Hash

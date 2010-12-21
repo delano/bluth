@@ -93,7 +93,7 @@ module Bluth
   
   class Worker < Storable
     include WorkerBase
-    @interval = 2.seconds
+    @interval = 2 #.seconds
     class << self
       attr_accessor :interval
     end

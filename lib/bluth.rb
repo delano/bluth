@@ -1,9 +1,16 @@
 # encoding: utf-8
 BLUTH_LIB_HOME = File.expand_path File.dirname(__FILE__) unless defined?(BLUTH_LIB_HOME)
 
-require 'sysinfo'
-require 'familia'
+local_libs = %w{familia}
+local_libs.each { |dir| 
+  a = File.join(BLUTH_LIB_HOME, '..', '..', dir, 'lib')
+  $:.unshift a
+}
 
+require 'sysinfo'
+require 'storable'
+require 'gibbler'
+require 'familia'
 
 module Bluth
   module VERSION
@@ -29,7 +36,7 @@ module Bluth
   
   @db = 15
   @queues = {}
-  @poptimeout = 60.seconds
+  @poptimeout = 60 #.seconds
   @handlers = []
   @locks = []
   @sysinfo = nil

@@ -27,7 +27,6 @@ module Bluth
       @host, @user, @wid, = h || Bluth.sysinfo.hostname, u || Bluth.sysinfo.user, w
       @pid_file ||= "/tmp/#{self.class.prefix}-#{wid}.pid"
       @log_file ||= "/tmp/#{self.class.prefix}-#{wid}.log"
-      @success, @failure, @problem = 0, 0, 0
     end
     
     def wid
@@ -74,21 +73,18 @@ module Bluth
         me = new nil, nil, wid
         super(me.index)
       end
-
       def run!(*args)
         me = new
         Familia.info "Created: #{me.rediskey}"
         me.run!
         me
       end
-
       def run(*args)
         me = new
         Familia.info "Created: #{me.rediskey}"
         me.run
         me
       end
-      
       def kill(pid_file)
         pid = read_pid_file pid_file
         super(pid_file, 10)
@@ -97,11 +93,11 @@ module Bluth
   end
   
   class Worker < Storable
-    include WorkerBase
     @interval = 2 #.seconds
     class << self
       attr_accessor :interval
     end
+    include WorkerBase
     include Familia
     include Logging
     include Daemonizable
@@ -114,27 +110,15 @@ module Bluth
     field :pid_file
     field :log_file
     field :current_job
-    field :success => Integer
-    field :failure => Integer
-    field :problem => Integer
     include Familia::Stamps
-    def success!
-      @success += 1
-      @current_job = ""
-      update_time
-      save
-    end
-    def failure!
-      @failure += 1
-      @current_job = ""
-      update_time
-      save
-    end
-    def problem!
-      @problem += 1
-      @current_job = ""
-      update_time
-      save
+    
+    [:success, :failure, :problem].each do |name|
+      string name
+      define_method "#{name}!" do
+        self.send(name).increment
+        self.instance_variable_set '@current_job', ''
+        update_time!
+      end
     end
     
     def run!
@@ -155,19 +139,9 @@ module Bluth
       begin
         @process_id = $$
         save
-      
         scheduler = Rufus::Scheduler.start_new
         Familia.info "Setting interval: #{Worker.interval} sec (poptimeout: #{Bluth.poptimeout})"
         Familia.reconnect_all! # Need to reconnect after daemonize
-        ## TODO: Works but needs to restart scheduler
-        ##Signal.trap("USR1") do
-        ##  Worker.interval += 1
-        ##  Familia.info "Setting interval: #{Worker.interval} sec"
-        ##end
-        ##Signal.trap("USR2") do
-        ##  Worker.interval -= 1
-        ##  Familia.info "Setting interval: #{Worker.interval}"
-        ##end
         scheduler.every Worker.interval, :blocking => true do |task|
           Familia.ld "#{$$} TICK @ #{Time.now.utc}"
           sleep rand
@@ -177,8 +151,8 @@ module Bluth
             
       rescue => ex
         msg = "#{ex.class}: #{ex.message}"
-        STDERR.puts msg
-        Familia.ld :EXCEPTION, msg, caller[1] if Familia.debug?
+        Familia.puts msg
+        Familia.trace :EXCEPTION, msg, caller[1] if Familia.debug?
         destroy!
       rescue Interrupt => ex
         puts <<-EOS.gsub(/(?:^|\n)\s*/, "\n")

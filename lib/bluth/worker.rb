@@ -3,6 +3,18 @@ require 'rufus/scheduler'
 require 'daemonizing'
 require 'timeout'
 
+class Rufus::Scheduler::SchedulerCore
+  # See lib/rufus/sc/scheduler.rb
+  def handle_exception(job, exception)
+    case exception
+    when SystemExit
+      exit
+    else
+      super
+    end
+  end
+end
+
 module Bluth
   @salt = rand.gibbler.shorten(10).freeze
   class << self
@@ -11,17 +23,17 @@ module Bluth
   
   module WorkerBase
 
-    def id
-      @id ||= [host, user, rand, Time.now].gibbler.short
+    def wid
+      @wid ||= [host, user, rand, Time.now].gibbler.short
     end
     
     def longid
-      [host, user, id].join('-')
+      [host, user, wid].join('-')
     end
     
     # Used by daemonize as the process name (linux only)
     def name
-      "bs-#{self.class.prefix}-#{id}"
+      "bs-#{self.class.prefix}-#{wid}"
     end
     
     def rediskey(suffix=nil)
@@ -30,8 +42,8 @@ module Bluth
     
     def initialize
       @host, @user = Bluth.sysinfo.hostname, Bluth.sysinfo.user
-      @pid_file ||= "/tmp/#{self.class.prefix}-#{id}.pid"
-      @log_file ||= "/tmp/#{self.class.prefix}-#{id}.log"
+      @pid_file ||= "/tmp/#{self.class.prefix}-#{wid}.pid"
+      @log_file ||= "/tmp/#{self.class.prefix}-#{wid}.log"
       @success, @failure, @problem = 0, 0, 0
     end
     
@@ -63,7 +75,7 @@ module Bluth
     module ClassMethods
       def from_redis(wid)
         me = new 
-        me.id = wid
+        me.wid = wid
         super(me.longid)
       end
 
@@ -101,10 +113,10 @@ module Bluth
     include Logging
     include Daemonizable
     prefix :worker
-    index :id
+    index :wid
     field :host
     field :user
-    field :id
+    field :wid
     field :process_id => Integer
     field :pid_file
     field :log_file
@@ -204,7 +216,7 @@ module Bluth
             job.failure! "Too many attempts"
           else
             job.stime = Time.now.utc.to_i
-            self.working! job.id
+            self.working! job.jobid
             tms = Benchmark.measure do
               job.perform
             end
@@ -261,10 +273,10 @@ module Bluth
     include Logging
     include Daemonizable
     prefix :scheduler
-    index :id
+    index :wid
     field :host
     field :user
-    field :id
+    field :wid
     field :process_id => Integer
     field :pid_file
     field :log_file
@@ -341,16 +353,6 @@ module Bluth
     
   end
   
+  Bluth.scheduler = Bluth::ScheduleWorker
 end
 
-class Rufus::Scheduler::SchedulerCore
-  # See lib/rufus/sc/scheduler.rb
-  def handle_exception(job, exception)
-    case exception
-    when SystemExit
-      exit
-    else
-      super
-    end
-  end
-end

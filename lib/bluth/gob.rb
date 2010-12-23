@@ -7,8 +7,8 @@ module Bluth
     include Familia
     prefix :gob
     ttl 3600 #.seconds
-    index :id
-    field :id => Gibbler::Digest
+    index :jobid
+    field :jobid => Gibbler::Digest
     field :kind => String
     field :data => Hash
     field :messages => Array
@@ -37,8 +37,8 @@ module Bluth
         q ||= self.queue
         job = Gob.create generate_id(data), self, data
         job.current_queue = q
-        Familia.ld "ENQUEUING: #{self} #{job.id.short} to #{q}"
-        Bluth::Queue.redis.lpush q.rediskey, job.id
+        Familia.ld "ENQUEUING: #{self} #{job.jobid.short} to #{q}"
+        Bluth::Queue.redis.lpush q.rediskey, job.jobid
         job.create_time = Time.now.utc.to_f
         job.attempts = 0
         job
@@ -95,9 +95,9 @@ module Bluth
       end
     end
     
-    def id
-      @id = Gibbler::Digest.new(@id) if String === @id
-      @id
+    def jobid
+      @jobid = Gibbler::Digest.new(@jobid) if String === @jobid
+      @jobid
     end
     def clear!
       @attempts = 0
@@ -158,8 +158,8 @@ module Bluth
       et - @stime
     end
     def dequeue!
-      Familia.ld "Deleting #{self.id} from #{current_queue.rediskey}"
-      Bluth::Queue.redis.lrem current_queue.rediskey, 0, self.id
+      Familia.ld "Deleting #{self.jobid} from #{current_queue.rediskey}"
+      Bluth::Queue.redis.lrem current_queue.rediskey, 0, self.jobid
     end
     private
     def move!(to, msg=nil)
@@ -167,11 +167,11 @@ module Bluth
       if to.to_s == current_queue.to_s
         raise Bluth::Buster, "Cannot move job to the queue it's in: #{to}"
       end
-      Familia.ld "Moving #{self.id.short} from #{current_queue.rediskey} to #{to.rediskey}"
+      Familia.ld "Moving #{self.jobid.short} from #{current_queue.rediskey} to #{to.rediskey}"
       @messages << msg unless msg.nil? || msg.empty?
       # We push first to make sure we never lose a Gob ID. Instead
       # there's the small chance of a job ID being in two queues. 
-      Bluth::Queue.redis.lpush to.rediskey, @id
+      Bluth::Queue.redis.lpush to.rediskey, @jobid
       dequeue!
       save # update messages
       @current_queue = to

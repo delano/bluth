@@ -1,7 +1,7 @@
+require 'benchmark'
 require 'eventmachine'
 require 'rufus/scheduler'
 require 'daemonizing'
-require 'timeout'
 
 class Rufus::Scheduler::SchedulerCore
   # See lib/rufus/sc/scheduler.rb
@@ -22,13 +22,17 @@ module Bluth
   end
   
   module WorkerBase
-
-    def wid
-      @wid ||= [host, user, rand, Time.now].gibbler.short
+    
+    def initialize(h=nil, u=nil, w=nil)
+      @host, @user, @wid, = h || Bluth.sysinfo.hostname, u || Bluth.sysinfo.user, w
+      @pid_file ||= "/tmp/#{self.class.prefix}-#{wid}.pid"
+      @log_file ||= "/tmp/#{self.class.prefix}-#{wid}.log"
+      @success, @failure, @problem = 0, 0, 0
     end
     
-    def longid
-      [host, user, wid].join('-')
+    def wid
+      @wid ||= [host, user, rand, Time.now.to_f].gibbler.short
+      @wid
     end
     
     # Used by daemonize as the process name (linux only)
@@ -36,16 +40,9 @@ module Bluth
       "bs-#{self.class.prefix}-#{wid}"
     end
     
-    def rediskey(suffix=nil)
-      self.class.rediskey longid, suffix
-    end
-    
-    def initialize
-      @host, @user = Bluth.sysinfo.hostname, Bluth.sysinfo.user
-      @pid_file ||= "/tmp/#{self.class.prefix}-#{wid}.pid"
-      @log_file ||= "/tmp/#{self.class.prefix}-#{wid}.log"
-      @success, @failure, @problem = 0, 0, 0
-    end
+    #def rediskey(suffix=nil)
+    #  self.class.rediskey index, suffix
+    #end
     
     def current_job 
       Gibbler::Digest.new(@current_job || '')
@@ -53,12 +50,12 @@ module Bluth
     
     def kill(force=false)
       if force || host == Bluth.sysinfo.hostname
-        STDERR.puts "Destroying #{self.index} (this machine is: #{Bluth.sysinfo.hostname}; worker is: #{host})"
+        Familia.info "Destroying #{self.index} (this machine is: #{Bluth.sysinfo.hostname}; worker is: #{host})"
         Worker.kill self.pid_file if File.exists?(self.pid_file) rescue Errno::ESRCH
         File.delete self.log_file if File.exists?(self.log_file)
         destroy!
       else
-        STDERR.puts "Worker #{self.index} not running on #{Bluth.sysinfo.hostname}"
+        Familia.info "Worker #{self.index} not running on #{Bluth.sysinfo.hostname}"
       end
     end
     
@@ -74,9 +71,8 @@ module Bluth
     
     module ClassMethods
       def from_redis(wid)
-        me = new 
-        me.wid = wid
-        super(me.longid)
+        me = new nil, nil, wid
+        super(me.index)
       end
 
       def run!(*args)
@@ -97,10 +93,7 @@ module Bluth
         pid = read_pid_file pid_file
         super(pid_file, 10)
       end
-      
-      
     end
-    
   end
   
   class Worker < Storable
@@ -113,7 +106,7 @@ module Bluth
     include Logging
     include Daemonizable
     prefix :worker
-    index :wid
+    index [:host, :user, :wid]
     field :host
     field :user
     field :wid
@@ -202,7 +195,7 @@ module Bluth
     
     
     private 
-    require 'benchmark'
+    
     # DO NOT return from this method
     def find_gob(task=nil)
       begin

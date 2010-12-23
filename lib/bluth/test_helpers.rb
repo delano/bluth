@@ -15,6 +15,9 @@ class ExampleJob < Bluth::Gob
     rescue => ex
       
     end
-  end
+  end  
+end
+
+class ExampleWorker < Bluth::Worker
   
 end

@@ -62,10 +62,10 @@ module Bluth
   end
   
   def Bluth.queue?(n)
-    @queues.has_key?(n.to_sym)
+    Bluth::Queue.queues(&:name).member?(n.to_s.to_sym)
   end
   def Bluth.queue(n)
-    @queues[n.to_sym]
+    Bluth::Queue.send n
   end
   
   require 'bluth/gob'
@@ -74,7 +74,7 @@ module Bluth
   module Queue  # if this is a module the 
     include Familia
     prefix [:bluth, :queue]
-    class_list :critical #, :include => Bluth::Queue::ListMethods
+    class_list :critical #, :class => Bluth::Gob
     class_list :high
     class_list :low
     class_list :running

@@ -247,31 +247,16 @@ module Bluth
     field :process_id => Integer
     field :pid_file
     field :log_file
-    field :scheduled => Integer
-    field :monitored => Integer
-    field :timeouts => Integer
     include Familia::Stamps
-    attr_reader :schedule
-    attr_reader :monitors
-
-    def scheduled!(count=1)
-      @scheduled ||= 0
-      @scheduled += count
-      update_time
-      save
+    
+    [:scheduled, :monitored, :timeout].each do |name|
+      string name
+      define_method "#{name}!" do
+        self.send(name).increment
+        update_time!
+      end
     end
-    def monitored!(count=1)
-      @monitored ||= 0
-      @monitored += count
-      update_time
-      save
-    end
-    def timeout!(count=1)
-      @timeouts ||= 0
-      @timeouts += count
-      update_time
-      save
-    end
+    
     def run!
       run
     end
@@ -315,9 +300,8 @@ module Bluth
     end
     
     def scheduled_work(keeper)
-      STDOUT.puts "Come on!"
+      Familia.info "Come on!"
     end
-    
   end
   
   Bluth.scheduler = Bluth::ScheduleWorker

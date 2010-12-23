@@ -17,7 +17,6 @@ ret.class
 #=> Familia::List
 
 ## Can push on to a queue
-
 Bluth::Queue.critical.push 'job1'
 Bluth::Queue.critical.push 'job2'
 Bluth::Queue.critical.push 'job3'
@@ -27,9 +26,5 @@ Bluth::Queue.critical.size
 ## Can shift from a queue
 job = Bluth::Queue.critical.shift
 #=> 'job1'
-
-
-
-
 
 Bluth::Queue.critical.clear

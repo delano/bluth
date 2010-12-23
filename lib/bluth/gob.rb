@@ -22,6 +22,14 @@ module Bluth
     field :wid => Gibbler::Digest
     include Familia::Stamps
     
+    [:success, :failure, :running].each do |name|
+      class_string name
+      define_method "#{name}!" do
+        self.send(name).increment
+        update_time!
+      end
+    end
+    
     def self.inherited(obj)
       obj.extend Bluth::Gob::ClassMethods
       obj.prefix [:job, obj.to_s.split('::').last.downcase].join(':')
@@ -83,24 +91,10 @@ module Bluth
       def prepare
       end
       
-      
-      # TODO: Remove or use RedisObjects
-      [:success, :failure, :running].each do |w|
-        define_method "#{w}_key" do                # success_key
-          Familia.rediskey(self.prefix, w)
-        end
-        define_method "#{w}!" do |*args|           # success!(1)
-          by = args.first || 1
-          Bluth::Gob.redis.incrby send("#{w}_key"), by    
-        end
-        define_method "#{w}" do                    # success
-          Bluth::Gob.redis.get(send("#{w}_key")).to_i 
-        end
-      end
     end
     
     def jobid
-      @jobid ||= Gibbler::Digest.new(@jobid) if String === @jobid
+      @jobid = Gibbler::Digest.new(@jobid) if String === @jobid
       @jobid
     end
     def clear!
@@ -149,36 +143,42 @@ module Bluth
     def failure!(msg=nil)
       @etime = Time.now.utc.to_i
       self.kind.failure!
-      move! Bluth::Failed, msg
+      move! :failed, msg
     end
     def success!(msg=nil)
       @etime = Time.now.utc.to_i
       self.kind.success!
-      move! Bluth::Successful, msg
+      move! :successful, msg
     end
     def duration
       return 0 if @stime.nil?
       et = @etime || Time.now.utc.to_i
       et - @stime
     end
-    def dequeue!
-      Familia.ld "Deleting #{self.jobid} from #{current_queue.rediskey}"
-      Bluth::Queue.redis.lrem current_queue.rediskey, 0, self.jobid
+    def queue
+      Bluth.queue(current_queue)
     end
-    private
+    def dequeue!
+      Familia.ld "Deleting #{self.jobid} from #{queue.rediskey}"
+      queue.remove 0, self.jobid
+    end
+    def running!
+      move! :running
+    end
     def move!(to, msg=nil)
       @thread_id = $$
       if to.to_s == current_queue.to_s
         raise Bluth::Buster, "Cannot move job to the queue it's in: #{to}"
       end
-      Familia.ld "Moving #{self.jobid.short} from #{current_queue.rediskey} to #{to.rediskey}"
+      from, to = Bluth.queue(current_queue), Bluth.queue(to)
+      Familia.ld "Moving #{self.jobid} from #{from.rediskey} to #{to.rediskey}"
       @messages << msg unless msg.nil? || msg.empty?
       # We push first to make sure we never lose a Gob ID. Instead
       # there's the small chance of a job ID being in two queues. 
-      Bluth::Queue.redis.lpush to.rediskey, @jobid
-      dequeue!
+      to << @jobid
+      from.remove 0, @jobid
+      @current_queue = to.name
       save # update messages
-      @current_queue = to
     end
   end
   

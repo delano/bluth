@@ -25,12 +25,21 @@ Bluth::Queue.critical.range.member? @job.jobid
 @popped_job.jobid
 #=> @job.jobid
 
+## Popped job has args
+@popped_job.data['arg1']
+#=> 'val1'
+
 ## Popped job is still critical
 @popped_job.current_queue
 #=> :critical
 
-## Popped job has args
-@popped_job.data['arg1']
-#=> 'val1'
+## Move job to another queue
+@popped_job.running!
+#=> true
+
+## Popped job is still critical
+@popped_job.current_queue
+#=> :running
+
 
 @job.destroy!

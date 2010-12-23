@@ -86,6 +86,7 @@ module Bluth
         me
       end
       def kill(pid_file)
+        self.class.runblock :onexit
         pid = read_pid_file pid_file
         super(pid_file, 10)
       end
@@ -96,6 +97,19 @@ module Bluth
     @interval = 2 #.seconds
     class << self
       attr_accessor :interval
+      def onstart &blk
+        @onstart = blk unless blk.nil?
+        @onstart
+      end
+      def onexit &blk
+        @onexit = blk unless blk.nil?
+        @onexit
+      end
+      def runblock meth
+        blk = self.send(meth)
+        return if blk.nil?
+        blk.call
+      end
     end
     include WorkerBase
     include Familia
@@ -123,14 +137,17 @@ module Bluth
     
     def run!
       begin
+        self.class.runblock :onstart
         find_gob
       rescue => ex
         msg = "#{ex.class}: #{ex.message}"
         Familia.info msg
         Familia.trace :EXCEPTION, msg, caller[1] if Familia.debug?
+        self.class.runblock :onexit
         destroy!
       rescue Interrupt => ex
         puts $/, "Exiting..."
+        self.class.runblock :onexit
         destroy!
       end
     end
@@ -139,6 +156,7 @@ module Bluth
       begin
         @process_id = $$
         save
+        self.class.runblock :onstart
         scheduler = Rufus::Scheduler.start_new
         Familia.info "Setting interval: #{Worker.interval} sec (poptimeout: #{Bluth.poptimeout})"
         Familia.reconnect_all! # Need to reconnect after daemonize
@@ -153,6 +171,7 @@ module Bluth
         msg = "#{ex.class}: #{ex.message}"
         Familia.puts msg
         Familia.trace :EXCEPTION, msg, caller[1] if Familia.debug?
+        self.class.runblock :onexit
         destroy!
       rescue Interrupt => ex
         puts <<-EOS.gsub(/(?:^|\n)\s*/, "\n")
@@ -162,6 +181,7 @@ module Bluth
         EOS
         # We reconnect to the queue in case we're currently
         # waiting on a brpop (blocking pop) timeout.
+        self.class.runblock :onexit
         destroy!
       end
       
@@ -263,8 +283,8 @@ module Bluth
     def run
       begin
         raise Familia::Problem, "Only 1 scheduler at a time" if ScheduleWorker.any?
-        
         EM.run {
+          self.class.runblock :onstart
           @process_id = $$
           srand(Bluth.salt.to_i(16) ** @process_id)
           @schedule = Rufus::Scheduler::EmScheduler.start_new

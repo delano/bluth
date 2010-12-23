@@ -21,3 +21,12 @@ end
 class ExampleWorker < Bluth::Worker
   
 end
+
+
+Bluth::Worker.onstart do
+  puts "onstart called"
+end
+
+Bluth::Worker.onexit do
+  puts "onexit called"
+end

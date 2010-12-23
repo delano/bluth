@@ -49,7 +49,6 @@ module Bluth
       Familia.info worker_class.all.collect &:key
     end
     
-    
     private 
     
     def kill_worker wid, worker_class=Bluth::Worker

@@ -90,13 +90,6 @@ module Bluth
         pid = read_pid_file pid_file
         super(pid_file, 10)
       end
-    end
-  end
-  
-  class Worker < Storable
-    @interval = 2 #.seconds
-    class << self
-      attr_accessor :interval
       def onstart &blk
         @onstart = blk unless blk.nil?
         @onstart
@@ -110,6 +103,13 @@ module Bluth
         return if blk.nil?
         blk.call
       end
+    end
+  end
+  
+  class Worker < Storable
+    @interval = 2 #.seconds
+    class << self
+      attr_accessor :interval
     end
     include WorkerBase
     include Familia

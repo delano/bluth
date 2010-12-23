@@ -4,6 +4,8 @@ BLUTH, CHANGES
 
 * CHANGE: Now depends on Familia 0.6
 * CHANGE: Worker process name now starts with 'bluth'
+* CHANGE: Bluth.pop is now correctly named Bluth.shift (b/c it's returning
+          the first value in the lists)
 
 
 #### 0.5.3 (2010-12-17) ###############################

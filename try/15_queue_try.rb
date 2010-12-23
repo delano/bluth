@@ -3,9 +3,13 @@ require 'bluth/test_helpers'
 
 Bluth::Queue.critical.clear
 
-## Knows queues
-Bluth::Queue.queues
+## Knows queue names
+Bluth::Queue.queues.collect(&:name)
 #=> [:critical, :high, :low, :running, :failed, :orphaned]
+
+## Knows queue keys
+Bluth::Queue.queues.collect(&:rediskey)
+#=> ["bluth:queue:critical", "bluth:queue:high", "bluth:queue:low", "bluth:queue:running", "bluth:queue:failed", "bluth:queue:orphaned"]
 
 ## Knows a queue
 ret = Bluth::Queue.critical

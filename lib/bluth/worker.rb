@@ -126,8 +126,8 @@ module Bluth
         find_gob
       rescue => ex
         msg = "#{ex.class}: #{ex.message}"
-        STDERR.puts msg
-        Familia.ld :EXCEPTION, msg, caller[1] if Familia.debug?
+        Familia.info msg
+        Familia.trace :EXCEPTION, msg, caller[1] if Familia.debug?
         destroy!
       rescue Interrupt => ex
         puts $/, "Exiting..."
@@ -290,9 +290,9 @@ module Bluth
               scheduled_work(keeper_task)
             rescue => ex
               msg = "#{ex.class}: #{ex.message}"
-              STDERR.puts msg
-              STDERR.puts ex.backtrace
-              Familia.ld :EXCEPTION, msg, caller[1] if Familia.debug?
+              Familia.info msg
+              Familia.info ex.backtrace
+              Familia.trace :EXCEPTION, msg, caller[1] if Familia.debug?
             end
             sleep rand  # prevent thrashing
           end
@@ -300,8 +300,8 @@ module Bluth
       rescue => ex
         msg = "#{ex.class}: #{ex.message}"
         puts msg
-        STDERR.puts ex.backtrace
-        Familia.ld :EXCEPTION, msg, caller[1] if Familia.debug?
+        Familia.info ex.backtrace
+        Familia.trace :EXCEPTION, msg, caller[1] if Familia.debug?
         destroy!
       rescue Interrupt => ex
         puts $/, "Exiting..."

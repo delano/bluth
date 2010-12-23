@@ -1,7 +1,7 @@
 
 
 class ExampleJob < Bluth::Gob
-  #TODO queue Bluth::Critical
+  queue :critical
   
   # :hostid => String
   # :force => Boolean (update all monitors)

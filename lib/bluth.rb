@@ -71,23 +71,30 @@ module Bluth
   require 'bluth/gob'
   require 'bluth/worker'
   
-  class Queue
+  module Queue  # if this is a module the 
     include Familia
-    prefix :queue
-    class_list :critical
+    prefix [:bluth, :queue]
+    class_list :critical #, :include => Bluth::Queue::ListMethods
     class_list :high
     class_list :low
     class_list :running
     class_list :failed
     class_list :orphaned
     class << self
+      # The complete list of queues in the order they were defined
       def queues
-        Bluth::Queue.class_lists.collect(&:name)
+        Bluth::Queue.class_lists.collect(&:name).collect do |qname|
+          self.send qname
+        end
+      end
+      # The subset of queues that new jobs arrive in, in order of priority
+      def entry_queues
+        Bluth.priority.collect { |qname| self.send qname }
       end
     end
     
-    # Use the natural order of the defined lists
-    Bluth.priority = Bluth::Queue.class_lists.collect(&:name)
+    # Set default priority
+    Bluth.priority = [:critical, :high, :low]
   end
   
   # Workers use a blocking pop and will wait for up to 
@@ -97,36 +104,42 @@ module Bluth
   # value is use. See: 
   #
   # http://code.google.com/p/redis/wiki/BlpopCommand
+  def Bluth.shift
+    blocking_queue_handler :blpop
+  end
+  
   def Bluth.pop
-    #Bluth.priority.each { |queue| 
-    #  ret = queue.pop
-    #  return ret unless ret.nil?
-    #}
+    blocking_queue_handler :brpop
+  end
+  
+  private
+  
+  # +meth+ is either :blpop or :brpop
+  def Bluth.blocking_queue_handler meth
+    gob = nil
     begin
-      #Familia.ld :BRPOP, Queue.redis, self, caller[1] if Familia.debug?
-      order = Bluth.priority.collect { |queue| queue.rediskey }
+      order = Bluth::Queue.entry_queues.collect(&:rediskey)
       order << Bluth.poptimeout  # We do it this way to support Ruby 1.8
-      gobinfo = Bluth::Queue.redis.brpop *order
-      unless gobinfo.nil?
-        Familia.info "FOUND #{gobinfo.inspect}" if Familia.debug?
-        gob = Gob.from_redis gobinfo[1]
-        raise Bluth::Buster, "No such gob object: #{gobinfo[1]}" if gob.nil?
-        Bluth::Running.push gob.jobid
-        gob.current_queue = Bluth::Running
+      queue, gobid = *(Bluth::Queue.redis.send(meth, *order) || [])
+      unless queue.nil?
+        Familia.ld "FOUND #{gobid} id #{queue}"
+        gob = Gob.from_redis gobid
+        raise Bluth::Buster, "No such gob object: #{gobid}" if gob.nil?
+        Bluth::Queue.running << gob.jobid
+        gob.current_queue = :running
         gob.save
       end
     rescue => ex
-      if gobinfo.nil?
+      if queue.nil?
         Familia.info "ERROR: #{ex.message}"
       else
-        Familia.info "ERROR (#{ex.message}); putting #{gobinfo[1]} back on queue"
-        Bluth::Orphaned.push gobinfo[1]
+        Familia.info "ERROR (#{ex.message}): #{gobid} is an orphan"
+        Bluth::Queue.orphaned << gobid
       end
+      Familia.ld ex.backtrace
     end
     gob
   end
-  
-  
   
   
 end

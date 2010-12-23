@@ -5,7 +5,7 @@ module Bluth
   class Gob < Storable
     MAX_ATTEMPTS = 3.freeze unless defined?(Gob::MAX_ATTEMPTS)
     include Familia
-    prefix :gob
+    prefix [:bluth, :gob]
     ttl 3600 #.seconds
     index :jobid
     field :jobid => Gibbler::Digest
@@ -16,10 +16,11 @@ module Bluth
     field :create_time => Float
     field :stime => Float
     field :etime => Float
-    field :current_queue => String
+    field :current_queue => Symbol
     field :thread_id => Integer
     field :cpu => Array
     field :wid => Gibbler::Digest
+    include Familia::Stamps
     
     def self.inherited(obj)
       obj.extend Bluth::Gob::ClassMethods
@@ -34,18 +35,19 @@ module Bluth
         end
       end
       def enqueue(data={},q=nil)
-        q ||= self.queue
+        q = self.queue(q)
         job = Gob.create generate_id(data), self, data
-        job.current_queue = q
-        Familia.ld "ENQUEUING: #{self} #{job.jobid.short} to #{q}"
-        Bluth::Queue.redis.lpush q.rediskey, job.jobid
-        job.create_time = Time.now.utc.to_f
+        job.current_queue = q.name
+        job.created
         job.attempts = 0
+        job.save
+        Familia.ld "ENQUEUING: #{self} #{job.jobid.short} to #{q}"
+        q << job.jobid
         job
       end
       def queue(name=nil)
         @queue = name if name
-        @queue || Bluth::High
+        Bluth::Queue.send(@queue || :high)
       end
       def generate_id(*args)
         a = [self, Process.pid, Bluth.sysinfo.hostname, Time.now.to_f, *args]
@@ -81,6 +83,8 @@ module Bluth
       def prepare
       end
       
+      
+      # TODO: Remove or use RedisObjects
       [:success, :failure, :running].each do |w|
         define_method "#{w}_key" do                # success_key
           Familia.rediskey(self.prefix, w)
@@ -96,7 +100,7 @@ module Bluth
     end
     
     def jobid
-      @jobid = Gibbler::Digest.new(@jobid) if String === @jobid
+      @jobid ||= Gibbler::Digest.new(@jobid) if String === @jobid
       @jobid
     end
     def clear!
@@ -140,7 +144,7 @@ module Bluth
       start > Time.now.utc.to_f
     end
     def retry!(msg=nil) 
-      move! Bluth::High, msg
+      move! :high, msg
     end
     def failure!(msg=nil)
       @etime = Time.now.utc.to_i

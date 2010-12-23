@@ -98,6 +98,7 @@ module Bluth
         @onexit = blk unless blk.nil?
         @onexit
       end
+      # A convenience method for calling onstart/onexit blocks
       def runblock meth
         blk = self.send(meth)
         return if blk.nil?
@@ -307,9 +308,11 @@ module Bluth
         puts msg
         Familia.info ex.backtrace
         Familia.trace :EXCEPTION, msg, caller[1] if Familia.debug?
+        self.class.runblock :onexit
         destroy!
       rescue Interrupt => ex
         puts $/, "Exiting..."
+        self.class.runblock :onexit
         destroy!
       end
     end

@@ -34,6 +34,10 @@ class Bluth::CLI::Definition
   global :D, :debug do
     Familia.debug = true
   end
+  global :U, :uri, String, "Redis connection URI" do |v|
+    uri = URI.parse v
+    Bluth.uri = uri
+  end
   global :v, :verbose, "Increase output" do 
     @verbose ||= 0
     @verbose += 1

@@ -33,8 +33,7 @@ module Bluth
   class Maeby < Familia::Problem; end
   # A shutdown request. We burn down the banana stand.
   class Shutdown < Familia::Problem; end
-  
-  @db = 15
+  @db = 0
   @queues = {}
   @poptimeout = 60 #.seconds
   @handlers = []

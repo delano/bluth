@@ -78,14 +78,14 @@ module Bluth
   end
   
   def Bluth.find_locks
-    @locks = Bluth.redis.keys(Familia.key('*', :lock))
+    @locks = Bluth.redis.keys(Familia.rediskey('*', :lock))
   end
   
   class Queue
     include Familia
     prefix :queue
     def self.rangeraw(count=100)
-      gobids = Queue.redis.lrange(key, 0, count-1) || []
+      gobids = Queue.redis.lrange(rediskey, 0, count-1) || []
     end
     def self.range(count=100)
       gobids = rangeraw count
@@ -97,7 +97,7 @@ module Bluth
       }.compact
     end
     def self.dequeue(gobid)
-      Queue.redis.lrem key, 0, gobid
+      Queue.redis.lrem rediskey, 0, gobid
     end
     def self.inherited(obj)
       obj.prefix self.prefix
@@ -106,8 +106,8 @@ module Bluth
       Bluth.queues[obj.suffix] = obj
       super(obj)
     end
-    def self.key(pref=nil,suff=nil)
-      Familia.key( pref || prefix, suff || suffix)
+    def self.rediskey(pref=nil,suff=nil)
+      Familia.rediskey(pref || prefix, suff || suffix)
     end
     def self.report
       Bluth.queues.keys.collect { |q| 
@@ -129,20 +129,20 @@ module Bluth
 
     def self.size
       begin
-        Queue.redis.llen key
+        Queue.redis.llen rediskey
       rescue => ex
         STDERR.puts ex.message, ex.backtrace
         0
       end
     end 
     def self.push(gobid)
-      Queue.redis.lpush self.key, gobid
+      Queue.redis.lpush self.rediskey, gobid
     end
     
     def self.pop
-      gobid = Queue.redis.rpoplpush key, Bluth::Running.key
+      gobid = Queue.redis.rpoplpush rediskey, Bluth::Running.rediskey
       return if gobid.nil?
-      Familia.ld "FOUND gob #{gobid} from #{self.key}"
+      Familia.ld "FOUND gob #{gobid} from #{self.rediskey}"
       gob = Gob.from_redis gobid
       if gob.nil?
         Familia.info "No such gob object: #{gobid}" 
@@ -169,7 +169,7 @@ module Bluth
     #}
     begin
       #Familia.ld :BRPOP, Queue.redis, self, caller[1] if Familia.debug?
-      order = Bluth.priority.collect { |queue| queue.key }
+      order = Bluth.priority.collect { |queue| queue.rediskey }
       order << Bluth.poptimeout  # We do it this way to support Ruby 1.8
       gobinfo = Bluth::Queue.redis.brpop *order
       unless gobinfo.nil?

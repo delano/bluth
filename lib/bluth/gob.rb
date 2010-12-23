@@ -7,6 +7,7 @@ module Bluth
     include Familia
     prefix :gob
     ttl 3600 #.seconds
+    index :id
     field :id => Gibbler::Digest
     field :kind => String
     field :data => Hash
@@ -37,7 +38,7 @@ module Bluth
         job = Gob.create generate_id(data), self, data
         job.current_queue = q
         Familia.ld "ENQUEUING: #{self} #{job.id.short} to #{q}"
-        Bluth::Queue.redis.lpush q.key, job.id
+        Bluth::Queue.redis.lpush q.rediskey, job.id
         job.create_time = Time.now.utc.to_f
         job.attempts = 0
         job
@@ -59,7 +60,7 @@ module Bluth
         all.size
       end
       def lock_key
-        Familia.key(prefix, :lock)
+        Familia.rediskey(prefix, :lock)
       end
       def lock!
         raise Bluth::Buster, "#{self} is already locked!" if locked?
@@ -82,7 +83,7 @@ module Bluth
       
       [:success, :failure, :running].each do |w|
         define_method "#{w}_key" do                # success_key
-          Familia.key(self.prefix, w)
+          Familia.rediskey(self.prefix, w)
         end
         define_method "#{w}!" do |*args|           # success!(1)
           by = args.first || 1
@@ -96,6 +97,7 @@ module Bluth
     
     def id
       @id = Gibbler::Digest.new(@id) if String === @id
+      @id
     end
     def clear!
       @attempts = 0
@@ -156,8 +158,8 @@ module Bluth
       et - @stime
     end
     def dequeue!
-      Familia.ld "Deleting #{self.id} from #{current_queue.key}"
-      Bluth::Queue.redis.lrem current_queue.key, 0, self.id
+      Familia.ld "Deleting #{self.id} from #{current_queue.rediskey}"
+      Bluth::Queue.redis.lrem current_queue.rediskey, 0, self.id
     end
     private
     def move!(to, msg=nil)
@@ -165,11 +167,11 @@ module Bluth
       if to.to_s == current_queue.to_s
         raise Bluth::Buster, "Cannot move job to the queue it's in: #{to}"
       end
-      Familia.ld "Moving #{self.id.short} from #{current_queue.key} to #{to.key}"
+      Familia.ld "Moving #{self.id.short} from #{current_queue.rediskey} to #{to.rediskey}"
       @messages << msg unless msg.nil? || msg.empty?
       # We push first to make sure we never lose a Gob ID. Instead
       # there's the small chance of a job ID being in two queues. 
-      Bluth::Queue.redis.lpush to.key, @id
+      Bluth::Queue.redis.lpush to.rediskey, @id
       dequeue!
       save # update messages
       @current_queue = to

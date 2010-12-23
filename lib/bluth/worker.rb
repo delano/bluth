@@ -24,8 +24,8 @@ module Bluth
       "bs-#{self.class.prefix}-#{id}"
     end
     
-    def key(suffix=nil)
-      self.class.key longid, suffix
+    def rediskey(suffix=nil)
+      self.class.rediskey longid, suffix
     end
     
     def initialize
@@ -69,14 +69,14 @@ module Bluth
 
       def run!(*args)
         me = new
-        Familia.info "Created: #{me.key}"
+        Familia.info "Created: #{me.rediskey}"
         me.run!
         me
       end
 
       def run(*args)
         me = new
-        Familia.info "Created: #{me.key}"
+        Familia.info "Created: #{me.rediskey}"
         me.run
         me
       end

@@ -36,7 +36,7 @@ module Bluth
     
     # Used by daemonize as the process name (linux only)
     def name
-      "bs-#{self.class.prefix}-#{wid}"
+      "bluth-#{self.class.prefix}-#{wid}"
     end
     
     #def rediskey(suffix=nil)

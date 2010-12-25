@@ -196,7 +196,7 @@ module Bluth
       begin
         job = Bluth.pop
         unless job.nil?
-          job.wid = self.id
+          job.wid = self.wid
           if job.delayed?
             job.attempts = 0
             job.retry!

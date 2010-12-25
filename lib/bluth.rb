@@ -34,7 +34,6 @@ module Bluth
   # A shutdown request. We burn down the banana stand.
   class Shutdown < Familia::Problem; end
   @db = 0
-  @queues = {}
   @poptimeout = 60 #.seconds
   @handlers = []
   @locks = []
@@ -42,7 +41,7 @@ module Bluth
   @priority = []
   @scheduler = nil 
   class << self
-    attr_reader :queues, :handlers, :db, :conf, :locks
+    attr_reader :handlers, :db, :conf, :locks
     attr_accessor :redis, :uri, :priority, :scheduler, :poptimeout
     def sysinfo
       @sysinfo ||= SysInfo.new.freeze

@@ -176,7 +176,7 @@ module Bluth
       # We push first to make sure we never lose a Gob ID. Instead
       # there's the small chance of a job ID being in two queues. 
       to << @jobid
-      from.remove 0, @jobid
+      ret = from.remove @jobid, 0
       @current_queue = to.name
       save # update messages
     end

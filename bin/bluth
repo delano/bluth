@@ -89,5 +89,5 @@ rescue Interrupt
   exit 1
 rescue => ex
   STDERR.puts "ERROR (#{ex.class.to_s}): #{ex.message}"
-  STDERR.puts ex.backtrace if Familia.debug
+  STDERR.puts ex.backtrace #if Familia.debug
 end

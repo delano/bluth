@@ -4,13 +4,17 @@ require 'bluth/test_helpers'
 Familia.debug = true
 
 ## Can enqueue a job
-@job = ExampleJob.enqueue :arg1 => :val1
+@job = ExampleHandler.enqueue :arg1 => :val1
 @job.class
 #=> Bluth::Gob
 
-## ExampleGob knows it's on critical queue
+## Job knows it's on critical queue
 @job.current_queue
 #=> :critical
+
+## Job knows it's handler
+@job.handler
+#=> ExampleHandler
 
 ## Bluth::Critical has job id
 Bluth::Queue.critical.range.member? @job.jobid

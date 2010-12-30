@@ -3,9 +3,9 @@ require 'bluth/test_helpers'
 
 #Familia.debug = true
 
-ExampleJob.enqueue :item => :val1
-ExampleJob.enqueue :item => :val2
-ExampleJob.enqueue :item => :val3
+ExampleHandler.enqueue :item => :val1
+ExampleHandler.enqueue :item => :val2
+ExampleHandler.enqueue :item => :val3
 
 
 ## Critical queue should have 3 items

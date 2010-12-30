@@ -1,6 +1,7 @@
 
 
-class ExampleJob < Bluth::Gob
+module ExampleHandler
+  extend Bluth::Handler
   queue :critical
   
   # :hostid => String

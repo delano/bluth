@@ -23,7 +23,7 @@ module Bluth
   
   module WorkerBase
     
-    def initialize(h=nil, u=nil, w=nil)
+    def init(h=nil, u=nil, w=nil)
       @host, @user, @wid, = h || Bluth.sysinfo.hostname, u || Bluth.sysinfo.user, w
       @pid_file ||= "/tmp/#{self.class.prefix}-#{wid}.pid"
       @log_file ||= "/tmp/#{self.class.prefix}-#{wid}.log"
@@ -81,7 +81,7 @@ module Bluth
       end
       def run(*args)
         me = new
-        Familia.info "Created: #{me.rediskey}"
+        Familia.info "Created: #{me.rediskey} #{me.index} #{me.host}"
         me.run
         me
       end

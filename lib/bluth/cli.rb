@@ -33,15 +33,16 @@ module Bluth
     end
     
     def stop_workers worker_class=Bluth::Worker
-      worker_class.instances.each do |wid|
-        kill_worker wid, worker_class
+      worker_class.instances.each do |worker|
+        kill_worker worker, worker_class
       end
     end
     
     def stop_worker wid=nil,worker_class=Bluth::Worker
       wids = wid ? [wid] : @argv
       wids.each do |wid|
-        kill_worker wid, worker_class
+        worker = worker_class.from_redis wid
+        kill_worker worker, worker_class
       end
     end
     
@@ -51,8 +52,7 @@ module Bluth
     
     private 
     
-    def kill_worker wid, worker_class=Bluth::Worker
-      worker = worker_class.from_redis wid
+    def kill_worker worker, worker_class=Bluth::Worker
       if worker.nil?
         Familia.info "No such worker"
         exit 1

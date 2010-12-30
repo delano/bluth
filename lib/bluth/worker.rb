@@ -5,12 +5,14 @@ require 'daemonizing'
 
 class Rufus::Scheduler::SchedulerCore
   # See lib/rufus/sc/scheduler.rb
-  def handle_exception(job, exception)
+  def handle_exception(task, exception)
     case exception
     when SystemExit
       exit
     else
-      # ignore
+      Familia.info exception.message
+      Familia.info exception.backtrace
+      task.unschedule
     end
   end
 end
@@ -102,7 +104,7 @@ module Bluth
       def runblock meth
         blk = self.send(meth)
         return if blk.nil?
-        blk.call
+        instance_eval &blk
       end
     end
   end
@@ -243,23 +245,31 @@ module Bluth
         #end
       end
     end
-
   end
   
+  # TODO: Refactor somehow. When this is subclassed
+  # (eg BS::SchduleWorker) the self.object is not created. 
   class ScheduleWorker < Storable
     include WorkerBase
+    include Familia
+    include Logging
+    include Daemonizable
     @interval = 20
     @timeout = 60 #not working
+    @every = []
     class << self
-      attr_accessor :interval, :timeout
+      attr_accessor :interval, :timeout, :schedule
       def interval(v=nil)
         @interval = v unless v.nil?
         @interval
       end
+      def every interval=nil, opts={}, &blk
+        unless interval.nil?
+          @every << [interval, opts, blk]
+        end
+        @every
+      end
     end
-    include Familia
-    include Logging
-    include Daemonizable
     prefix :scheduler
     index [:host, :user, :wid]
     field :host
@@ -270,37 +280,23 @@ module Bluth
     field :log_file
     include Familia::Stamps
     
-    [:scheduled, :monitored, :timeout].each do |name|
-      string name
-      define_method "#{name}!" do
-        self.send(name).increment
-        update_time!
-      end
-    end
-    
     def run!
       run
     end
+    
     def run
       begin
-        raise Familia::Problem, "Only 1 scheduler at a time" if ScheduleWorker.any?
+        raise Familia::Problem, "Only 1 scheduler at a time" if !ScheduleWorker.instances.empty?
         EM.run {
-          self.class.runblock :onstart
           @process_id = $$
           srand(Bluth.salt.to_i(16) ** @process_id)
-          @schedule = Rufus::Scheduler::EmScheduler.start_new
+          ScheduleWorker.schedule = Rufus::Scheduler::EmScheduler.start_new
           save # persist and make note the scheduler is running
-          prepare
-          @schedule.every self.class.interval, :tags => :keeper do |keeper_task|
-            begin
-              scheduled_work(keeper_task)
-            rescue => ex
-              msg = "#{ex.class}: #{ex.message}"
-              Familia.info msg
-              Familia.info ex.backtrace
-              Familia.trace :EXCEPTION, msg, caller[1] if Familia.debug?
-            end
-            sleep rand  # prevent thrashing
+          self.class.runblock :onstart
+          self.class.every.each do |args|
+            interval, opts, blk = *args
+            Familia.ld " scheduling every #{interval}: #{opts}"
+            ScheduleWorker.schedule.every interval, opts, &blk
           end
         }
       rescue => ex
@@ -317,14 +313,6 @@ module Bluth
       end
     end
     
-    protected
-  
-    def prepare
-    end
-    
-    def scheduled_work(keeper)
-      Familia.info "Come on!"
-    end
   end
   
   Bluth.scheduler = Bluth::ScheduleWorker

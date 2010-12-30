@@ -22,21 +22,22 @@ module Bluth
     field :wid => Gibbler::Digest
     include Familia::Stamps
     
-    [:success, :failure, :running].each do |name|
-      class_string name
-      define_method "#{name}!" do
-        self.send(name).increment
-        update_time!
-      end
-    end
-    
     def self.inherited(obj)
       obj.extend Bluth::Gob::ClassMethods
       obj.prefix [:job, obj.to_s.split('::').last.downcase].join(':')
+      [:success, :failure, :running].each do |name|
+        obj.class_string name 
+      end
       Bluth.handlers << obj
     end
     
     module ClassMethods
+      [:success, :failure, :running].each do |name|
+        define_method "#{name}!" do
+          self.send(name).increment
+        end
+      end
+          
       def clear
         keys.each do |key|
           Gob.redis.del key
@@ -92,10 +93,8 @@ module Bluth
       end
       
     end
-    
     def jobid
-      @jobid = Gibbler::Digest.new(@jobid) if String === @jobid
-      @jobid
+      Gibbler::Digest.new(@jobid)
     end
     def clear!
       @attempts = 0
@@ -117,8 +116,7 @@ module Bluth
       @current_queue
     end
     def kind
-      @kind = eval "::#{@kind}" rescue @kind if @kind.is_a?(String)
-      @kind
+      eval "::#{@kind}"
     end
     def kind=(v)
       @kind = v
@@ -167,9 +165,9 @@ module Bluth
     end
     def move!(to, msg=nil)
       @thread_id = $$
-      if to.to_s == current_queue.to_s
-        raise Bluth::Buster, "Cannot move job to the queue it's in: #{to}"
-      end
+      #if to.to_s == current_queue.to_s
+      #  raise Bluth::Buster, "Cannot move job to the queue it's in: #{to}"
+      #end
       from, to = Bluth.queue(current_queue), Bluth.queue(to)
       Familia.ld "Moving #{self.jobid} from #{from.rediskey} to #{to.rediskey}"
       @messages << msg unless msg.nil? || msg.empty?

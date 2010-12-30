@@ -10,7 +10,7 @@ class Rufus::Scheduler::SchedulerCore
     when SystemExit
       exit
     else
-      super
+      # ignore
     end
   end
 end
@@ -170,7 +170,7 @@ module Bluth
             
       rescue => ex
         msg = "#{ex.class}: #{ex.message}"
-        Familia.puts msg
+        Familia.info msg
         Familia.trace :EXCEPTION, msg, caller[1] if Familia.debug?
         self.class.runblock :onexit
         destroy!

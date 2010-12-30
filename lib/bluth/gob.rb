@@ -1,4 +1,49 @@
 
+module Bluth
+  module Handler
+    
+    def self.extended(obj)
+      obj.send :include, Familia
+      obj.class_string :success
+      obj.class_string :failure
+      obj.class_string :running
+      Bluth.handlers << obj
+    end
+    
+    [:success, :failure, :running].each do |name| 
+      define_method "#{name}!" do
+        self.send(name).increment
+      end
+    end
+    
+    def enqueue(data={},q=nil)
+      q = self.queue(q)
+      gob = Gob.create generate_id(data), self, data
+      gob.current_queue = q.name
+      gob.created
+      gob.attempts = 0
+      gob.save
+      Familia.ld "ENQUEUING: #{self} #{gob.jobid.short} to #{q}"
+      q << gob.jobid
+      gob
+    end
+    def queue(name=nil)
+      @queue = name if name
+      Bluth::Queue.send(@queue || :high)
+    end
+    def generate_id(*args)
+      [self, Process.pid, Bluth.sysinfo.hostname, Time.now.to_f, *args].gibbler
+    end
+    def all
+      Bluth::Gob.instances.select do |gob|
+        gob.handler == self
+      end
+    end
+    def prepare
+    end
+    
+  end
+end
 
 module Bluth
   
@@ -9,7 +54,7 @@ module Bluth
     ttl 3600 #.seconds
     index :jobid
     field :jobid => Gibbler::Digest
-    field :kind => String
+    field :handler => String
     field :data => Hash
     field :messages => Array
     field :attempts => Integer
@@ -22,77 +67,6 @@ module Bluth
     field :wid => Gibbler::Digest
     include Familia::Stamps
     
-    def self.inherited(obj)
-      obj.extend Bluth::Gob::ClassMethods
-      obj.prefix [:job, obj.to_s.split('::').last.downcase].join(':')
-      [:success, :failure, :running].each do |name|
-        obj.class_string name 
-      end
-      Bluth.handlers << obj
-    end
-    
-    module ClassMethods
-      [:success, :failure, :running].each do |name|
-        define_method "#{name}!" do
-          self.send(name).increment
-        end
-      end
-          
-      def clear
-        keys.each do |key|
-          Gob.redis.del key
-        end
-      end
-      def enqueue(data={},q=nil)
-        q = self.queue(q)
-        job = Gob.create generate_id(data), self, data
-        job.current_queue = q.name
-        job.created
-        job.attempts = 0
-        job.save
-        Familia.ld "ENQUEUING: #{self} #{job.jobid.short} to #{q}"
-        q << job.jobid
-        job
-      end
-      def queue(name=nil)
-        @queue = name if name
-        Bluth::Queue.send(@queue || :high)
-      end
-      def generate_id(*args)
-        a = [self, Process.pid, Bluth.sysinfo.hostname, Time.now.to_f, *args]
-        a.gibbler
-      end
-      def all
-        Bluth::Gob.all.select do |job|
-          job.kind == self
-        end
-      end
-      def size
-        all.size
-      end
-      def lock_key
-        Familia.rediskey(prefix, :lock)
-      end
-      def lock!
-        raise Bluth::Buster, "#{self} is already locked!" if locked?
-        Familia.info "Locking #{self}"
-        ret = Bluth::Gob.redis.set lock_key, 1
-        Bluth.locks << lock_key
-        ret == 'OK'
-      end
-      def unlock!
-        Familia.info "Unlocking #{self}"
-        ret = Bluth::Gob.redis.del lock_key
-        Bluth.locks.delete lock_key
-        ret
-      end
-      def locked?
-        Bluth::Gob.redis.exists lock_key
-      end
-      def prepare
-      end
-      
-    end
     def jobid
       Gibbler::Digest.new(@jobid)
     end
@@ -115,19 +89,16 @@ module Bluth
     def current_queue
       @current_queue
     end
-    def kind
-      eval "::#{@kind}"
-    end
-    def kind=(v)
-      @kind = v
+    def handler
+      eval "::#{@handler}" if @handler
     end
     def perform
       @attempts += 1
       Familia.ld "PERFORM: #{self.to_hash.inspect}"
       @stime = Time.now.utc.to_f
       save # update the time
-      self.kind.prepare if self.class.respond_to?(:prepare)
-      self.kind.perform @data
+      self.handler.prepare if self.class.respond_to?(:prepare)
+      self.handler.perform @data
       @etime = Time.now.utc.to_f
       save # update the time
     end
@@ -140,12 +111,12 @@ module Bluth
     end
     def failure!(msg=nil)
       @etime = Time.now.utc.to_i
-      self.kind.failure!
+      self.handler.failure!
       move! :failed, msg
     end
     def success!(msg=nil)
       @etime = Time.now.utc.to_i
-      self.kind.success!
+      self.handler.success!
       move! :successful, msg
     end
     def duration

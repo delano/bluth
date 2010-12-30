@@ -81,7 +81,7 @@ module Bluth
       end
       def run(*args)
         me = new
-        Familia.info "Created: #{me.rediskey} #{me.index} #{me.host}"
+        Familia.info "Created: #{me.rediskey}"
         me.run
         me
       end
@@ -261,7 +261,7 @@ module Bluth
     include Logging
     include Daemonizable
     prefix :scheduler
-    index :wid
+    index [:host, :user, :wid]
     field :host
     field :user
     field :wid

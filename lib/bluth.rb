@@ -60,9 +60,10 @@ module Bluth
   end
   
   def Bluth.queue?(n)
-    Bluth::Queue.queues(&:name).member?(n.to_s.to_sym)
+    Bluth::Queue.queues.collect(&:name).member?(n.to_s.to_sym)
   end
   def Bluth.queue(n)
+    raise ArgumentError, "No such queue: #{n}" unless queue?(n)
     Bluth::Queue.send n
   end
   
@@ -76,6 +77,7 @@ module Bluth
     class_list :high
     class_list :low
     class_list :running
+    class_list :successful
     class_list :failed
     class_list :orphaned
     class << self

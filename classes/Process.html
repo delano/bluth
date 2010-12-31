@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang='en'>
   <head>
-    <title>: Process [bluth 0.5.3.]</title>
+    <title>: Process [bluth 0.6.0.]</title>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
     <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
     <script type='text/javascript'>
@@ -41,14 +41,14 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000077">running?</a></li>
+              <li><a href="#M000078">running?</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='method public-class' id='method-M000077'>
-                <a name='M000077'>      </a>
+              <div class='method public-class' id='method-M000078'>
+                <a name='M000078'>      </a>
                 <div class='synopsis'>
                   <span class='name'>running?</span>
                   <span class='arguments'>(pid)</span>
@@ -59,10 +59,10 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000077-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000078-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000077-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 6</span>&#x000A;  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">running?</span>(<span class="ruby-identifier">pid</span>)&#x000A;    <span class="ruby-constant">Process</span>.<span class="ruby-identifier">getpgid</span>(<span class="ruby-identifier">pid</span>) <span class="ruby-operator">!=</span> <span class="ruby-value">-1</span>&#x000A;  <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ESRCH</span>&#x000A;    <span class="ruby-keyword kw">false</span>&#x000A;  <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000078-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 6</span>&#x000A;  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">running?</span>(<span class="ruby-identifier">pid</span>)&#x000A;    <span class="ruby-constant">Process</span>.<span class="ruby-identifier">getpgid</span>(<span class="ruby-identifier">pid</span>) <span class="ruby-operator">!=</span> <span class="ruby-value">-1</span>&#x000A;  <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ESRCH</span>&#x000A;    <span class="ruby-keyword kw">false</span>&#x000A;  <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

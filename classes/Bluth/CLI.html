@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: Bluth::CLI [bluth 0.6.0.]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          Bluth::CLI
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../files/lib/bluth/cli_rb.html">lib/bluth/cli.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong>Drydock::Command</strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000047">schedulers</a></li>
+              <li><a href="#M000045">start_scheduler</a></li>
+              <li><a href="#M000048">start_worker</a></li>
+              <li><a href="#M000044">start_workers</a></li>
+              <li><a href="#M000046">stop_scheduler</a></li>
+              <li><a href="#M000050">stop_worker</a></li>
+              <li><a href="#M000049">stop_workers</a></li>
+              <li><a href="#M000051">workers</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000047'>
+                <a name='M000047'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>schedulers</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000047-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000047-source'><span class="ruby-comment cmt"># File lib/bluth/cli.rb, line 19</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">schedulers</span>&#x000A;      <span class="ruby-identifier">workers</span> <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">scheduler</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000045'>
+                <a name='M000045'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>start_scheduler</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000045-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000045-source'><span class="ruby-comment cmt"># File lib/bluth/cli.rb, line 11</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start_scheduler</span>&#x000A;      <span class="ruby-identifier">start_worker</span> <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">scheduler</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000048'>
+                <a name='M000048'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>start_worker</span>
+                  <span class='arguments'>(worker_class=Bluth::Worker)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  def flush_workers
+                  </p>
+                  <pre>if @global.auto || Annoy.are_you_sure?&#x000A;  Bluth::Worker.prefix&#x000A;end</pre>
+                  <p>
+                  end
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000048-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000048-source'><span class="ruby-comment cmt"># File lib/bluth/cli.rb, line 29</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start_worker</span> <span class="ruby-identifier">worker_class</span>=<span class="ruby-constant">Bluth</span><span class="ruby-operator">::</span><span class="ruby-constant">Worker</span>&#x000A;      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@global</span>.<span class="ruby-identifier">daemon</span>&#x000A;        <span class="ruby-identifier">worker</span> = <span class="ruby-identifier">worker_class</span>.<span class="ruby-identifier">new</span>&#x000A;        <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;Created: #{worker.rediskey}&quot;</span>&#x000A;        <span class="ruby-identifier">worker</span>.<span class="ruby-identifier">daemonize</span>&#x000A;        <span class="ruby-identifier">worker</span>.<span class="ruby-identifier">run</span>&#x000A;      <span class="ruby-keyword kw">else</span>&#x000A;        <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">poptimeout</span> = <span class="ruby-value">3</span>.<span class="ruby-identifier">seconds</span>&#x000A;        <span class="ruby-identifier">worker_class</span>.<span class="ruby-identifier">run</span>&#x000A;      <span class="ruby-keyword kw">end</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000044'>
+                <a name='M000044'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>start_workers</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000044-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000044-source'><span class="ruby-comment cmt"># File lib/bluth/cli.rb, line 7</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start_workers</span>&#x000A;      <span class="ruby-identifier">start_worker</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000046'>
+                <a name='M000046'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>stop_scheduler</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000046-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000046-source'><span class="ruby-comment cmt"># File lib/bluth/cli.rb, line 15</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stop_scheduler</span>&#x000A;      <span class="ruby-identifier">stop_workers</span> <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">scheduler</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000050'>
+                <a name='M000050'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>stop_worker</span>
+                  <span class='arguments'>(wid=nil,worker_class=Bluth::Worker)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000050-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000050-source'><span class="ruby-comment cmt"># File lib/bluth/cli.rb, line 47</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stop_worker</span> <span class="ruby-identifier">wid</span>=<span class="ruby-keyword kw">nil</span>,<span class="ruby-identifier">worker_class</span>=<span class="ruby-constant">Bluth</span><span class="ruby-operator">::</span><span class="ruby-constant">Worker</span>&#x000A;      <span class="ruby-identifier">wids</span> = <span class="ruby-identifier">wid</span> <span class="ruby-value">? </span>[<span class="ruby-identifier">wid</span>] <span class="ruby-operator">:</span> <span class="ruby-ivar">@argv</span>&#x000A;      <span class="ruby-identifier">wids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">wid</span><span class="ruby-operator">|</span>&#x000A;        <span class="ruby-identifier">worker</span> = <span class="ruby-identifier">worker_class</span>.<span class="ruby-identifier">from_redis</span> <span class="ruby-identifier">wid</span>&#x000A;        <span class="ruby-identifier">kill_worker</span> <span class="ruby-identifier">worker</span>, <span class="ruby-identifier">worker_class</span>&#x000A;      <span class="ruby-keyword kw">end</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000049'>
+                <a name='M000049'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>stop_workers</span>
+                  <span class='arguments'>(worker_class=Bluth::Worker)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000049-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000049-source'><span class="ruby-comment cmt"># File lib/bluth/cli.rb, line 41</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stop_workers</span> <span class="ruby-identifier">worker_class</span>=<span class="ruby-constant">Bluth</span><span class="ruby-operator">::</span><span class="ruby-constant">Worker</span>&#x000A;      <span class="ruby-identifier">worker_class</span>.<span class="ruby-identifier">instances</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">worker</span><span class="ruby-operator">|</span>&#x000A;        <span class="ruby-identifier">kill_worker</span> <span class="ruby-identifier">worker</span>, <span class="ruby-identifier">worker_class</span>&#x000A;      <span class="ruby-keyword kw">end</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000051'>
+                <a name='M000051'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>workers</span>
+                  <span class='arguments'>(worker_class=Bluth::Worker)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000051-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000051-source'><span class="ruby-comment cmt"># File lib/bluth/cli.rb, line 55</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">workers</span> <span class="ruby-identifier">worker_class</span>=<span class="ruby-constant">Bluth</span><span class="ruby-operator">::</span><span class="ruby-constant">Worker</span>&#x000A;      <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">info</span> <span class="ruby-identifier">worker_class</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">collect</span> <span class="ruby-operator">&amp;</span><span class="ruby-identifier">:key</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

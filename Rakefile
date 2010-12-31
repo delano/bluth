@@ -25,8 +25,9 @@ begin
     gem.email = "delano@solutious.com"
     gem.homepage = "http://github.com/delano/bluth"
     gem.authors = ["Delano Mandelbaum"]
-    gem.add_dependency("familia",    "= 0.6.2")
+    gem.add_dependency("familia",    "= 0.6.3")
     gem.add_dependency('sysinfo',    '>= 0.7.3')
+    gem.add_dependency('annoy')
     
     #gem.add_development_dependency("rspec", ">= 1.2.9")
     #gem.add_development_dependency("mocha", ">= 0.9.8")

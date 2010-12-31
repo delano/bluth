@@ -20,6 +20,12 @@ module Bluth
       workers Bluth.scheduler
     end
     
+    #def flush_workers
+    #  if @global.auto || Annoy.are_you_sure?
+    #    Bluth::Worker.prefix
+    #  end
+    #end
+    
     def start_worker worker_class=Bluth::Worker
       if @global.daemon
         worker = worker_class.new

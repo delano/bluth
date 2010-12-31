@@ -1,0 +1,99 @@
+#!/usr/bin/ruby
+
+# = Bluth: the queuing system.
+# 
+#
+# Usage:
+# 
+#     $ bluth -h
+#     $ bluth -Ipath/2/inc -ryourlib start
+#     $ bluth -Ipath/2/inc -ryourlib stop
+#
+#--
+
+# Put our local lib in first place
+BASE_PATH = File.expand_path File.join(File.dirname(__FILE__), '..')
+$:.unshift File.join(BASE_PATH, 'lib')
+
+require 'bluth'
+require 'bluth/cli'
+
+autoload :Rye, 'rye'
+autoload :Annoy, 'annoy'
+
+# Command-line interface for bin/bluth
+class Bluth::CLI::Definition
+  extend Drydock
+
+  debug :on
+  
+  global :Y, :auto, "Auto confirm"
+  global :d, :database, Integer, "Redis database"
+  global :e, :environment, String
+  global :d, :daemon, "Start as a daemon"
+  global :D, :debug do
+    Familia.debug = true
+  end
+  global :U, :uri, String, "Redis connection URI" do |v|
+    uri = URI.parse v
+    Bluth.uri = uri
+  end
+  global :v, :verbose, "Increase output" do 
+    @verbose ||= 0
+    @verbose += 1
+  end
+  global :I, String, "Add a load path" do |v|
+    $LOAD_PATH << v
+  end
+  global :r, String, "Require a library" do |v|
+    $LOAD_PATH << 'lib' if File.exists? 'lib'
+    begin
+      require v
+    rescue LoadError => ex
+      puts ex.message
+      exit
+    end
+  end
+  global :V, :version, "Display version" do 
+    puts "Version: #{Bluth::VERSION.to_s}"
+    exit 0
+  end
+  
+  before do |obj|
+    obj.global.environment ||= 'dev'
+  end
+    
+  #TODO: command :enqueue
+  
+  command :start_worker => Bluth::CLI
+  command :start_scheduler => Bluth::CLI
+
+  option :f, :force
+  command :stop_workers => Bluth::CLI
+  option :f, :force
+  command :stop_worker => Bluth::CLI
+  option :f, :force
+  command :stop_scheduler => Bluth::CLI
+
+  command :workers => Bluth::CLI  
+  command :schedulers => Bluth::CLI
+  
+  #command :flush_workers => Bluth::CLI  
+end
+
+begin
+  Drydock.run!(ARGV, STDIN) if Drydock.run? && !Drydock.has_run?
+rescue Drydock::ArgError, Drydock::OptError => ex
+  STDERR.puts ex.message
+  STDERR.puts ex.usage
+rescue Drydock::InvalidArgument => ex
+  STDERR.puts ex.message
+rescue Drydock::UnknownCommand => ex
+  STDERR.puts "Unknown command: %s" % ex.name
+rescue Interrupt
+  puts $/, "Exiting..."
+  exit 1
+rescue => ex
+  STDERR.puts "ERROR (#{ex.class.to_s}): #{ex.message}"
+  STDERR.puts ex.backtrace #if Familia.debug
+end

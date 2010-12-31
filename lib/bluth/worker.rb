@@ -29,6 +29,9 @@ module Bluth
       @host, @user, @wid, = h || Bluth.sysinfo.hostname, u || Bluth.sysinfo.user, w
       @pid_file ||= "/tmp/#{self.class.prefix}-#{wid}.pid"
       @log_file ||= "/tmp/#{self.class.prefix}-#{wid}.log"
+      @success ||= 0
+      @failure ||= 0
+      @problem ||= 0
     end
     
     def wid
@@ -127,14 +130,16 @@ module Bluth
     field :pid_file
     field :log_file
     field :current_job
+    field :success => Integer
+    field :failure => Integer
+    field :problem => Integer
     include Familia::Stamps
-    
     [:success, :failure, :problem].each do |name|
-      string name
       define_method "#{name}!" do
-        self.send(name).increment
+        v = self.send(name) + 1
+        self.send :"#{name}=", v
         self.instance_variable_set '@current_job', ''
-        update_time!
+        update_time!  # calls save
       end
     end
     

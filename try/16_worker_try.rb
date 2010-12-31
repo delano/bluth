@@ -19,6 +19,5 @@ require 'bluth/test_helpers'
 
 
 if @worker
-  @worker.success.clear 
   @worker.destroy!
 end

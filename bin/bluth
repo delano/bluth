@@ -61,6 +61,7 @@ class Bluth::CLI::Definition
   
   before do |obj|
     obj.global.environment ||= 'dev'
+    Bluth.env = obj.global.environment
   end
     
   #TODO: command :enqueue

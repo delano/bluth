@@ -9,7 +9,7 @@ require 'bluth/test_helpers'
 
 ## Worker has a redis key
 @worker.rediskey
-#=> 'worker:host:user:wid:object'
+#=> 'bluth:worker:host:user:wid:object'
 
 ## Worker counts success
 @worker.success!

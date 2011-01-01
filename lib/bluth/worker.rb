@@ -27,8 +27,8 @@ module Bluth
     
     def init(h=nil, u=nil, w=nil)
       @host, @user, @wid, = h || Bluth.sysinfo.hostname, u || Bluth.sysinfo.user, w
-      @pid_file ||= "/tmp/#{self.class.prefix}-#{wid}.pid"
-      @log_file ||= "/tmp/#{self.class.prefix}-#{wid}.log"
+      @pid_file ||= "/tmp/#{name}.pid"
+      @log_file ||= "/tmp/#{name}.log"
       @success ||= 0
       @failure ||= 0
       @problem ||= 0

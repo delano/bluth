@@ -42,10 +42,10 @@ class Bluth::CLI::Definition
     @verbose ||= 0
     @verbose += 1
   end
-  global :I, String, "Add a load path" do |v|
+  global :I, :include, String, "Add a load path" do |v|
     $LOAD_PATH << v
   end
-  global :r, String, "Require a library" do |v|
+  global :R, :require, String, "Require a library" do |v|
     $LOAD_PATH << 'lib' if File.exists? 'lib'
     begin
       require v

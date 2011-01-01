@@ -121,7 +121,7 @@ module Bluth
     include Familia
     include Logging
     include Daemonizable
-    prefix :worker
+    prefix [:bluth, :worker]
     index [:host, :user, :wid]
     field :host
     field :user
@@ -275,7 +275,7 @@ module Bluth
         @every
       end
     end
-    prefix :scheduler
+    prefix [:bluth, :scheduler]
     index [:host, :user, :wid]
     field :host
     field :user

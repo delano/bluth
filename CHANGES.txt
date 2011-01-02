@@ -1,7 +1,7 @@
 BLUTH, CHANGES
 
 
-#### 0.6.2 (2011-01-01) ###############################
+#### 0.6.3 (2011-01-02) ###############################
 
 * CHANGE: Added :bluth prefix to Worker and Scheduler keys. 
 * CHANGE: Depends on Familia 0.6.5

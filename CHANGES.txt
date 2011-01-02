@@ -1,5 +1,8 @@
 BLUTH, CHANGES
 
+#### 0.6.4 (2011-01-02) ###############################
+
+* CHANGE: Don't save the worker until after onstart is called (b/c config info can be passed)
 
 #### 0.6.3 (2011-01-02) ###############################
 

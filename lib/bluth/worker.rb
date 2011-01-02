@@ -32,6 +32,7 @@ module Bluth
       @success ||= 0
       @failure ||= 0
       @problem ||= 0
+      self.class.runblock :onstart
     end
     
     def wid
@@ -163,7 +164,6 @@ module Bluth
     def run
       begin
         @process_id = $$
-        self.class.runblock :onstart
         scheduler = Rufus::Scheduler.start_new
         Familia.info "Setting interval: #{Worker.interval} sec (queuetimeout: #{Bluth.queuetimeout})"
         Familia.reconnect_all! # Need to reconnect after daemonize
@@ -296,7 +296,6 @@ module Bluth
           @process_id = $$
           srand(Bluth.salt.to_i(16) ** @process_id)
           ScheduleWorker.schedule = Rufus::Scheduler::EmScheduler.start_new
-          self.class.runblock :onstart
           save # persist and make note the scheduler is running
           self.class.every.each do |args|
             interval, opts, blk = *args

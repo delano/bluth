@@ -1,5 +1,9 @@
 BLUTH, CHANGES
 
+#### 0.6.5 (2011-01-02) ###############################
+
+* FIXED: The previous change required a different approach for the scheduler. 
+
 #### 0.6.4 (2011-01-02) ###############################
 
 * CHANGE: Don't save the worker until after onstart is called (b/c config info can be passed)

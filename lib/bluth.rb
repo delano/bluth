@@ -35,7 +35,7 @@ module Bluth
   class Shutdown < Familia::Problem; end
   @db = 0
   @env = :dev
-  @poptimeout = 60 #.seconds
+  @queuetimeout = 60 #.seconds
   @handlers = []
   @locks = []
   @sysinfo = nil
@@ -43,7 +43,7 @@ module Bluth
   @scheduler = nil 
   class << self
     attr_reader :handlers, :db, :conf, :locks
-    attr_accessor :redis, :uri, :priority, :scheduler, :poptimeout, :env
+    attr_accessor :redis, :uri, :priority, :scheduler, :queuetimeout, :env
     def sysinfo
       @sysinfo ||= SysInfo.new.freeze
       @sysinfo 
@@ -98,7 +98,7 @@ module Bluth
   end
   
   # Workers use a blocking pop and will wait for up to 
-  # Bluth.poptimeout (seconds) before returnning nil. 
+  # Bluth.queuetimeout (seconds) before returnning nil. 
   # Note that the queues are still processed in order. 
   # If all queues are empty, the first one to return a
   # value is use. See: 
@@ -119,7 +119,7 @@ module Bluth
     gob = nil
     begin
       order = Bluth::Queue.entry_queues.collect(&:rediskey)
-      order << Bluth.poptimeout  # We do it this way to support Ruby 1.8
+      order << Bluth.queuetimeout  # We do it this way to support Ruby 1.8
       queue, gobid = *(Bluth::Queue.redis.send(meth, *order) || [])
       unless queue.nil?
         Familia.ld "FOUND #{gobid} id #{queue}"

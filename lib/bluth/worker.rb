@@ -166,7 +166,7 @@ module Bluth
         save
         self.class.runblock :onstart
         scheduler = Rufus::Scheduler.start_new
-        Familia.info "Setting interval: #{Worker.interval} sec (poptimeout: #{Bluth.poptimeout})"
+        Familia.info "Setting interval: #{Worker.interval} sec (queuetimeout: #{Bluth.queuetimeout})"
         Familia.reconnect_all! # Need to reconnect after daemonize
         scheduler.every Worker.interval, :blocking => true do |task|
           Familia.ld "#{$$} TICK @ #{Time.now.utc}"
@@ -184,7 +184,7 @@ module Bluth
       rescue Interrupt => ex
         puts <<-EOS.gsub(/(?:^|\n)\s*/, "\n")
           Exiting...
-          (You may need to wait up to #{Bluth.poptimeout} seconds
+          (You may need to wait up to #{Bluth.queuetimeout} seconds
           for this worker to exit cleanly.)
         EOS
         # We reconnect to the queue in case we're currently

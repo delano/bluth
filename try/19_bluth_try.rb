@@ -12,8 +12,8 @@ ExampleHandler.enqueue :item => :val3
 Bluth::Queue.critical.size
 #=> 3
 
-## Can set poptimeout
-Bluth.poptimeout = 2
+## Can set queuetimeout
+Bluth.queuetimeout = 2
 #=> 2
 
 ## Bluth.shift returns first value
@@ -31,7 +31,7 @@ Bluth.poptimeout = 2
 @job3.data['item']
 #=> 'val2'
 
-## Bluth.pop returns nil after waiting for poptimeout
+## Bluth.pop returns nil after waiting for queuetimeout
 Bluth.pop
 #=> nil
 

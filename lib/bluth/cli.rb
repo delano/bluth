@@ -33,7 +33,7 @@ module Bluth
         worker.daemonize
         worker.run
       else
-        Bluth.poptimeout = 3.seconds
+        Bluth.queuetimeout = 3.seconds
         worker_class.run
       end
     end

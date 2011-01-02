@@ -6,6 +6,7 @@ BLUTH, CHANGES
 * CHANGE: Added :bluth prefix to Worker and Scheduler keys. 
 * CHANGE: Depends on Familia 0.6.5
 * CHANGE: Option -r for bin/bluth is now -R
+* CHANGE: Bluth.poptimeout -> Bluth.queuetimeout
 
 
 #### 0.6.1 (2010-12-31) ###############################

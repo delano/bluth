@@ -32,7 +32,6 @@ module Bluth
       @success ||= 0
       @failure ||= 0
       @problem ||= 0
-      self.class.runblock :onstart
     end
     
     def wid
@@ -165,6 +164,7 @@ module Bluth
       begin
         @process_id = $$
         scheduler = Rufus::Scheduler.start_new
+        self.class.runblock :onstart
         Familia.info "Setting interval: #{Worker.interval} sec (queuetimeout: #{Bluth.queuetimeout})"
         Familia.reconnect_all! # Need to reconnect after daemonize
         save
@@ -252,8 +252,6 @@ module Bluth
     end
   end
   
-  # TODO: Refactor somehow. When this is subclassed
-  # (eg BS::SchduleWorker) the self.object is not created. 
   class ScheduleWorker < Storable
     include WorkerBase
     include Familia
@@ -291,12 +289,15 @@ module Bluth
     
     def run
       begin
-        raise Familia::Problem, "Only 1 scheduler at a time" if !ScheduleWorker.instances.empty?
         EM.run {
           @process_id = $$
           srand(Bluth.salt.to_i(16) ** @process_id)
-          ScheduleWorker.schedule = Rufus::Scheduler::EmScheduler.start_new
+          self.class.runblock :onstart
+          Familia.info "Setting interval: #{Worker.interval} sec (queuetimeout: #{Bluth.queuetimeout})"
+          Familia.reconnect_all! # Need to reconnect after daemonize
+          raise Familia::Problem, "Only 1 scheduler at a time" if !ScheduleWorker.instances.empty?
           save # persist and make note the scheduler is running
+          ScheduleWorker.schedule = Rufus::Scheduler::EmScheduler.start_new
           self.class.every.each do |args|
             interval, opts, blk = *args
             Familia.ld " scheduling every #{interval}: #{opts}"

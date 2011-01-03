@@ -39,6 +39,7 @@ module Bluth
     end
     
     def stop_workers worker_class=Bluth::Worker
+      worker_class.onstart
       worker_class.instances.each do |worker|
         kill_worker worker, worker_class
       end

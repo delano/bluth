@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang='en'>
   <head>
-    <title>: Bluth::Handler [bluth 0.6.1.]</title>
+    <title>: Bluth::Handler [bluth 0.6.7]</title>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
     <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
     <script type='text/javascript'>
@@ -41,97 +41,97 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000026">extended</a></li>
+              <li><a href="#M000028">extended</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000030">all</a></li>
-              <li><a href="#M000027">enqueue</a></li>
-              <li><a href="#M000029">generate_id</a></li>
-              <li><a href="#M000031">prepare</a></li>
-              <li><a href="#M000028">queue</a></li>
+              <li><a href="#M000032">all</a></li>
+              <li><a href="#M000029">enqueue</a></li>
+              <li><a href="#M000031">generate_id</a></li>
+              <li><a href="#M000033">prepare</a></li>
+              <li><a href="#M000030">queue</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='method public-class' id='method-M000026'>
-                <a name='M000026'>      </a>
+              <div class='method public-class' id='method-M000028'>
+                <a name='M000028'>      </a>
                 <div class='synopsis'>
                   <span class='name'>extended</span>
                   <span class='arguments'>(obj)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000026-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000028-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000026-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 150</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">extended</span>(<span class="ruby-identifier">obj</span>)&#x000A;      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">send</span> <span class="ruby-identifier">:include</span>, <span class="ruby-constant">Familia</span>&#x000A;      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">class_string</span> <span class="ruby-identifier">:success</span>&#x000A;      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">class_string</span> <span class="ruby-identifier">:failure</span>&#x000A;      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">class_string</span> <span class="ruby-identifier">:running</span>&#x000A;      <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">handlers</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000028-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 168</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">extended</span>(<span class="ruby-identifier">obj</span>)&#x000A;      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">send</span> <span class="ruby-identifier">:include</span>, <span class="ruby-constant">Familia</span>&#x000A;      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">class_string</span> <span class="ruby-identifier">:success</span>&#x000A;      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">class_string</span> <span class="ruby-identifier">:failure</span>&#x000A;      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">class_string</span> <span class="ruby-identifier">:running</span>&#x000A;      <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">handlers</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000030'>
-                <a name='M000030'>      </a>
+              <div class='method public-instance' id='method-M000032'>
+                <a name='M000032'>      </a>
                 <div class='synopsis'>
                   <span class='name'>all</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000030-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000032-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000030-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 182</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">all</span>&#x000A;      <span class="ruby-constant">Bluth</span><span class="ruby-operator">::</span><span class="ruby-constant">Gob</span>.<span class="ruby-identifier">instances</span>.<span class="ruby-identifier">select</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gob</span><span class="ruby-operator">|</span>&#x000A;        <span class="ruby-identifier">gob</span>.<span class="ruby-identifier">handler</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">self</span>&#x000A;      <span class="ruby-keyword kw">end</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000027'>
-                <a name='M000027'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>enqueue</span>
-                  <span class='arguments'>(data={},q=nil)</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000027-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000027-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 164</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">enqueue</span>(<span class="ruby-identifier">data</span>={},<span class="ruby-identifier">q</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;      <span class="ruby-identifier">q</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">queue</span>(<span class="ruby-identifier">q</span>)&#x000A;      <span class="ruby-identifier">gob</span> = <span class="ruby-constant">Gob</span>.<span class="ruby-identifier">create</span> <span class="ruby-identifier">generate_id</span>(<span class="ruby-identifier">data</span>), <span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">data</span>&#x000A;      <span class="ruby-identifier">gob</span>.<span class="ruby-identifier">current_queue</span> = <span class="ruby-identifier">q</span>.<span class="ruby-identifier">name</span>&#x000A;      <span class="ruby-identifier">gob</span>.<span class="ruby-identifier">created</span>&#x000A;      <span class="ruby-identifier">gob</span>.<span class="ruby-identifier">attempts</span> = <span class="ruby-value">0</span>&#x000A;      <span class="ruby-identifier">gob</span>.<span class="ruby-identifier">save</span>&#x000A;      <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">ld</span> <span class="ruby-node">&quot;ENQUEUING: #{self} #{gob.jobid.short} to #{q}&quot;</span>&#x000A;      <span class="ruby-identifier">q</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">gob</span>.<span class="ruby-identifier">jobid</span>&#x000A;      <span class="ruby-identifier">gob</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000032-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 200</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">all</span>&#x000A;      <span class="ruby-constant">Bluth</span><span class="ruby-operator">::</span><span class="ruby-constant">Gob</span>.<span class="ruby-identifier">instances</span>.<span class="ruby-identifier">select</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gob</span><span class="ruby-operator">|</span>&#x000A;        <span class="ruby-identifier">gob</span>.<span class="ruby-identifier">handler</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">self</span>&#x000A;      <span class="ruby-keyword kw">end</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='method public-instance' id='method-M000029'>
                 <a name='M000029'>      </a>
                 <div class='synopsis'>
-                  <span class='name'>generate_id</span>
-                  <span class='arguments'>(*args)</span>
+                  <span class='name'>enqueue</span>
+                  <span class='arguments'>(data={},q=nil)</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000029-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000029-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 179</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_id</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;      [<span class="ruby-keyword kw">self</span>, <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>, <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">sysinfo</span>.<span class="ruby-identifier">hostname</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_f</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>].<span class="ruby-identifier">gibbler</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000029-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 182</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">enqueue</span>(<span class="ruby-identifier">data</span>={},<span class="ruby-identifier">q</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;      <span class="ruby-identifier">q</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">queue</span>(<span class="ruby-identifier">q</span>)&#x000A;      <span class="ruby-identifier">gob</span> = <span class="ruby-constant">Gob</span>.<span class="ruby-identifier">create</span> <span class="ruby-identifier">generate_id</span>(<span class="ruby-identifier">data</span>), <span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">data</span>&#x000A;      <span class="ruby-identifier">gob</span>.<span class="ruby-identifier">current_queue</span> = <span class="ruby-identifier">q</span>.<span class="ruby-identifier">name</span>&#x000A;      <span class="ruby-identifier">gob</span>.<span class="ruby-identifier">created</span>&#x000A;      <span class="ruby-identifier">gob</span>.<span class="ruby-identifier">attempts</span> = <span class="ruby-value">0</span>&#x000A;      <span class="ruby-identifier">gob</span>.<span class="ruby-identifier">save</span>&#x000A;      <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">ld</span> <span class="ruby-node">&quot;ENQUEUING: #{self} #{gob.jobid.short} to #{q}&quot;</span>&#x000A;      <span class="ruby-identifier">q</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">gob</span>.<span class="ruby-identifier">jobid</span>&#x000A;      <span class="ruby-identifier">gob</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='method public-instance' id='method-M000031'>
                 <a name='M000031'>      </a>
                 <div class='synopsis'>
-                  <span class='name'>prepare</span>
-                  <span class='arguments'>()</span>
+                  <span class='name'>generate_id</span>
+                  <span class='arguments'>(*args)</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000031-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000031-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 187</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000031-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 197</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_id</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;      [<span class="ruby-keyword kw">self</span>, <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>, <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">sysinfo</span>.<span class="ruby-identifier">hostname</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_f</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>].<span class="ruby-identifier">gibbler</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000028'>
-                <a name='M000028'>      </a>
+              <div class='method public-instance' id='method-M000033'>
+                <a name='M000033'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>prepare</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000033-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000033-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 205</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000030'>
+                <a name='M000030'>      </a>
                 <div class='synopsis'>
                   <span class='name'>queue</span>
                   <span class='arguments'>(name=nil)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000028-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000030-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000028-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 175</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">queue</span>(<span class="ruby-identifier">name</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;      <span class="ruby-ivar">@queue</span> = <span class="ruby-identifier">name</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span>&#x000A;      <span class="ruby-constant">Bluth</span><span class="ruby-operator">::</span><span class="ruby-constant">Queue</span>.<span class="ruby-identifier">send</span>(<span class="ruby-ivar">@queue</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">:high</span>)&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000030-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 193</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">queue</span>(<span class="ruby-identifier">name</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;      <span class="ruby-ivar">@queue</span> = <span class="ruby-identifier">name</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span>&#x000A;      <span class="ruby-constant">Bluth</span><span class="ruby-operator">::</span><span class="ruby-constant">Queue</span>.<span class="ruby-identifier">send</span>(<span class="ruby-ivar">@queue</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">:high</span>)&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

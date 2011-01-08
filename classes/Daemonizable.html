@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang='en'>
   <head>
-    <title>: Daemonizable [bluth 0.6.1.]</title>
+    <title>: Daemonizable [bluth 0.6.7]</title>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
     <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
     <script type='text/javascript'>
@@ -61,21 +61,21 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000067">included</a></li>
+              <li><a href="#M000069">included</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000070">change_privilege</a></li>
-              <li><a href="#M000069">daemonize</a></li>
-              <li><a href="#M000071">on_restart</a></li>
-              <li><a href="#M000068">pid</a></li>
-              <li><a href="#M000072">restart</a></li>
+              <li><a href="#M000072">change_privilege</a></li>
+              <li><a href="#M000071">daemonize</a></li>
+              <li><a href="#M000073">on_restart</a></li>
+              <li><a href="#M000070">pid</a></li>
+              <li><a href="#M000074">restart</a></li>
             </ol>
             <h3>protected instance</h3>
             <ol>
-              <li><a href="#M000073">remove_pid_file</a></li>
-              <li><a href="#M000075">remove_stale_pid_file</a></li>
-              <li><a href="#M000074">write_pid_file</a></li>
+              <li><a href="#M000075">remove_pid_file</a></li>
+              <li><a href="#M000077">remove_stale_pid_file</a></li>
+              <li><a href="#M000076">write_pid_file</a></li>
             </ol>
           </div>
           <div id='section'>
@@ -102,22 +102,22 @@
             </div>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='method public-class' id='method-M000067'>
-                <a name='M000067'>      </a>
+              <div class='method public-class' id='method-M000069'>
+                <a name='M000069'>      </a>
                 <div class='synopsis'>
                   <span class='name'>included</span>
                   <span class='arguments'>(base)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000067-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000069-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000067-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 26</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)&#x000A;      <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">ClassMethods</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000069-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 26</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)&#x000A;      <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">ClassMethods</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000070'>
-                <a name='M000070'>      </a>
+              <div class='method public-instance' id='method-M000072'>
+                <a name='M000072'>      </a>
                 <div class='synopsis'>
                   <span class='name'>change_privilege</span>
                   <span class='arguments'>(user, group=user)</span>
@@ -128,14 +128,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000070-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000072-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000070-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 60</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">change_privilege</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">group</span>=<span class="ruby-identifier">user</span>)&#x000A;      <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;&gt;&gt; Changing process privilege to #{user}:#{group}&quot;</span>&#x000A;      &#x000A;      <span class="ruby-identifier">uid</span>, <span class="ruby-identifier">gid</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">euid</span>, <span class="ruby-constant">Process</span>.<span class="ruby-identifier">egid</span>&#x000A;      <span class="ruby-identifier">target_uid</span> = <span class="ruby-constant">Etc</span>.<span class="ruby-identifier">getpwnam</span>(<span class="ruby-identifier">user</span>).<span class="ruby-identifier">uid</span>&#x000A;      <span class="ruby-identifier">target_gid</span> = <span class="ruby-constant">Etc</span>.<span class="ruby-identifier">getgrnam</span>(<span class="ruby-identifier">group</span>).<span class="ruby-identifier">gid</span>&#x000A;&#x000A;      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">uid</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">target_uid</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">gid</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">target_gid</span>&#x000A;        <span class="ruby-comment cmt"># Change process ownership</span>&#x000A;        <span class="ruby-constant">Process</span>.<span class="ruby-identifier">initgroups</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">target_gid</span>)&#x000A;        <span class="ruby-constant">Process</span><span class="ruby-operator">::</span><span class="ruby-constant">GID</span>.<span class="ruby-identifier">change_privilege</span>(<span class="ruby-identifier">target_gid</span>)&#x000A;        <span class="ruby-constant">Process</span><span class="ruby-operator">::</span><span class="ruby-constant">UID</span>.<span class="ruby-identifier">change_privilege</span>(<span class="ruby-identifier">target_uid</span>)&#x000A;      <span class="ruby-keyword kw">end</span>&#x000A;    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EPERM</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>&#x000A;      <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;Couldn't change user and group to #{user}:#{group}: #{e}&quot;</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000072-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 60</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">change_privilege</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">group</span>=<span class="ruby-identifier">user</span>)&#x000A;      <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;&gt;&gt; Changing process privilege to #{user}:#{group}&quot;</span>&#x000A;      &#x000A;      <span class="ruby-identifier">uid</span>, <span class="ruby-identifier">gid</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">euid</span>, <span class="ruby-constant">Process</span>.<span class="ruby-identifier">egid</span>&#x000A;      <span class="ruby-identifier">target_uid</span> = <span class="ruby-constant">Etc</span>.<span class="ruby-identifier">getpwnam</span>(<span class="ruby-identifier">user</span>).<span class="ruby-identifier">uid</span>&#x000A;      <span class="ruby-identifier">target_gid</span> = <span class="ruby-constant">Etc</span>.<span class="ruby-identifier">getgrnam</span>(<span class="ruby-identifier">group</span>).<span class="ruby-identifier">gid</span>&#x000A;&#x000A;      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">uid</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">target_uid</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">gid</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">target_gid</span>&#x000A;        <span class="ruby-comment cmt"># Change process ownership</span>&#x000A;        <span class="ruby-constant">Process</span>.<span class="ruby-identifier">initgroups</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">target_gid</span>)&#x000A;        <span class="ruby-constant">Process</span><span class="ruby-operator">::</span><span class="ruby-constant">GID</span>.<span class="ruby-identifier">change_privilege</span>(<span class="ruby-identifier">target_gid</span>)&#x000A;        <span class="ruby-constant">Process</span><span class="ruby-operator">::</span><span class="ruby-constant">UID</span>.<span class="ruby-identifier">change_privilege</span>(<span class="ruby-identifier">target_uid</span>)&#x000A;      <span class="ruby-keyword kw">end</span>&#x000A;    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EPERM</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>&#x000A;      <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;Couldn't change user and group to #{user}:#{group}: #{e}&quot;</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000069'>
-                <a name='M000069'>      </a>
+              <div class='method public-instance' id='method-M000071'>
+                <a name='M000071'>      </a>
                 <div class='synopsis'>
                   <span class='name'>daemonize</span>
                   <span class='arguments'>()</span>
@@ -147,14 +147,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000069-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000071-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000069-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 35</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">daemonize</span>&#x000A;      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,        <span class="ruby-value str">'You must specify a pid_file to daemonize'</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@pid_file</span>&#x000A;      &#x000A;      <span class="ruby-identifier">remove_stale_pid_file</span>&#x000A;      &#x000A;      <span class="ruby-identifier">pwd</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span> <span class="ruby-comment cmt"># Current directory is changed during daemonization, so store it</span>&#x000A;      &#x000A;      <span class="ruby-comment cmt"># HACK we need to create the directory before daemonization to prevent a bug under 1.9</span>&#x000A;      <span class="ruby-comment cmt">#      ignoring all signals when the directory is created after daemonization.</span>&#x000A;      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@pid_file</span>)&#x000A;      &#x000A;      <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">daemonize</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-ivar">@log_file</span>), <span class="ruby-identifier">name</span>)&#x000A;      &#x000A;      <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">pwd</span>)&#x000A;      &#x000A;      <span class="ruby-identifier">write_pid_file</span>&#x000A;      &#x000A;      <span class="ruby-identifier">at_exit</span> <span class="ruby-keyword kw">do</span>&#x000A;        <span class="ruby-identifier">log</span> <span class="ruby-value str">&quot;&gt;&gt; Exiting!&quot;</span>&#x000A;        <span class="ruby-identifier">remove_pid_file</span>&#x000A;      <span class="ruby-keyword kw">end</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000071-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 35</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">daemonize</span>&#x000A;      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,        <span class="ruby-value str">'You must specify a pid_file to daemonize'</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@pid_file</span>&#x000A;      &#x000A;      <span class="ruby-identifier">remove_stale_pid_file</span>&#x000A;      &#x000A;      <span class="ruby-identifier">pwd</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span> <span class="ruby-comment cmt"># Current directory is changed during daemonization, so store it</span>&#x000A;      &#x000A;      <span class="ruby-comment cmt"># HACK we need to create the directory before daemonization to prevent a bug under 1.9</span>&#x000A;      <span class="ruby-comment cmt">#      ignoring all signals when the directory is created after daemonization.</span>&#x000A;      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@pid_file</span>)&#x000A;      &#x000A;      <span class="ruby-constant">Daemonize</span>.<span class="ruby-identifier">daemonize</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-ivar">@log_file</span>), <span class="ruby-identifier">name</span>)&#x000A;      &#x000A;      <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">pwd</span>)&#x000A;      &#x000A;      <span class="ruby-identifier">write_pid_file</span>&#x000A;      &#x000A;      <span class="ruby-identifier">at_exit</span> <span class="ruby-keyword kw">do</span>&#x000A;        <span class="ruby-identifier">log</span> <span class="ruby-value str">&quot;&gt;&gt; Exiting!&quot;</span>&#x000A;        <span class="ruby-identifier">remove_pid_file</span>&#x000A;      <span class="ruby-keyword kw">end</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000071'>
-                <a name='M000071'>      </a>
+              <div class='method public-instance' id='method-M000073'>
+                <a name='M000073'>      </a>
                 <div class='synopsis'>
                   <span class='name'>on_restart</span>
                   <span class='arguments'>(&amp;block)</span>
@@ -165,27 +165,27 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000071-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000073-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000071-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 78</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">on_restart</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)&#x000A;      <span class="ruby-ivar">@on_restart</span> = <span class="ruby-identifier">block</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000073-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 78</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">on_restart</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)&#x000A;      <span class="ruby-ivar">@on_restart</span> = <span class="ruby-identifier">block</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000068'>
-                <a name='M000068'>      </a>
+              <div class='method public-instance' id='method-M000070'>
+                <a name='M000070'>      </a>
                 <div class='synopsis'>
                   <span class='name'>pid</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000068-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000070-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000068-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 30</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pid</span>&#x000A;      <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">pid_file</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">open</span>(<span class="ruby-identifier">pid_file</span>).<span class="ruby-identifier">read</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000070-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 30</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pid</span>&#x000A;      <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">pid_file</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">open</span>(<span class="ruby-identifier">pid_file</span>).<span class="ruby-identifier">read</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000072'>
-                <a name='M000072'>      </a>
+              <div class='method public-instance' id='method-M000074'>
+                <a name='M000074'>      </a>
                 <div class='synopsis'>
                   <span class='name'>restart</span>
                   <span class='arguments'>()</span>
@@ -196,28 +196,28 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000072-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000074-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000072-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 83</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">restart</span>&#x000A;      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@on_restart</span>&#x000A;        <span class="ruby-identifier">log</span> <span class="ruby-value str">'&gt;&gt; Restarting ...'</span>&#x000A;        <span class="ruby-identifier">stop</span>&#x000A;        <span class="ruby-identifier">remove_pid_file</span>&#x000A;        <span class="ruby-ivar">@on_restart</span>.<span class="ruby-identifier">call</span>&#x000A;        <span class="ruby-identifier">exit!</span>&#x000A;      <span class="ruby-keyword kw">end</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000074-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 83</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">restart</span>&#x000A;      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@on_restart</span>&#x000A;        <span class="ruby-identifier">log</span> <span class="ruby-value str">'&gt;&gt; Restarting ...'</span>&#x000A;        <span class="ruby-identifier">stop</span>&#x000A;        <span class="ruby-identifier">remove_pid_file</span>&#x000A;        <span class="ruby-ivar">@on_restart</span>.<span class="ruby-identifier">call</span>&#x000A;        <span class="ruby-identifier">exit!</span>&#x000A;      <span class="ruby-keyword kw">end</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Protected instance methods</h2>
-              <div class='method protected-instance' id='method-M000073'>
-                <a name='M000073'>      </a>
+              <div class='method protected-instance' id='method-M000075'>
+                <a name='M000075'>      </a>
                 <div class='synopsis'>
                   <span class='name'>remove_pid_file</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000073-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000075-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000073-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 152</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_pid_file</span>&#x000A;        <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-ivar">@pid_file</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@pid_file</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-ivar">@pid_file</span>)&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000075-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 152</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_pid_file</span>&#x000A;        <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-ivar">@pid_file</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@pid_file</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-ivar">@pid_file</span>)&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method protected-instance' id='method-M000075'>
-                <a name='M000075'>      </a>
+              <div class='method protected-instance' id='method-M000077'>
+                <a name='M000077'>      </a>
                 <div class='synopsis'>
                   <span class='name'>remove_stale_pid_file</span>
                   <span class='arguments'>()</span>
@@ -228,23 +228,23 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000075-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000077-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000075-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 163</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_stale_pid_file</span>&#x000A;        <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@pid_file</span>)&#x000A;          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">pid</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Process</span>.<span class="ruby-identifier">running?</span>(<span class="ruby-identifier">pid</span>)&#x000A;            <span class="ruby-identifier">raise</span> <span class="ruby-constant">PidFileExist</span>, <span class="ruby-node">&quot;#{@pid_file} already exists, seems like it's already running (process ID: #{pid}). &quot;</span> <span class="ruby-operator">+</span>&#x000A;                                <span class="ruby-node">&quot;Stop the process or delete #{@pid_file}.&quot;</span>&#x000A;          <span class="ruby-keyword kw">else</span>&#x000A;            <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;&gt;&gt; Deleting stale PID file #{@pid_file}&quot;</span>&#x000A;            <span class="ruby-identifier">remove_pid_file</span>&#x000A;          <span class="ruby-keyword kw">end</span>&#x000A;        <span class="ruby-keyword kw">end</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000077-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 163</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_stale_pid_file</span>&#x000A;        <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@pid_file</span>)&#x000A;          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">pid</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Process</span>.<span class="ruby-identifier">running?</span>(<span class="ruby-identifier">pid</span>)&#x000A;            <span class="ruby-identifier">raise</span> <span class="ruby-constant">PidFileExist</span>, <span class="ruby-node">&quot;#{@pid_file} already exists, seems like it's already running (process ID: #{pid}). &quot;</span> <span class="ruby-operator">+</span>&#x000A;                                <span class="ruby-node">&quot;Stop the process or delete #{@pid_file}.&quot;</span>&#x000A;          <span class="ruby-keyword kw">else</span>&#x000A;            <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;&gt;&gt; Deleting stale PID file #{@pid_file}&quot;</span>&#x000A;            <span class="ruby-identifier">remove_pid_file</span>&#x000A;          <span class="ruby-keyword kw">end</span>&#x000A;        <span class="ruby-keyword kw">end</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method protected-instance' id='method-M000074'>
-                <a name='M000074'>      </a>
+              <div class='method protected-instance' id='method-M000076'>
+                <a name='M000076'>      </a>
                 <div class='synopsis'>
                   <span class='name'>write_pid_file</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000074-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000076-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000074-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 156</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_pid_file</span>&#x000A;        <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;&gt;&gt; Writing PID to #{@pid_file}&quot;</span>&#x000A;        <span class="ruby-identifier">open</span>(<span class="ruby-ivar">@pid_file</span>,<span class="ruby-value str">&quot;w&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>) }&#x000A;        <span class="ruby-constant">File</span>.<span class="ruby-identifier">chmod</span>(<span class="ruby-value">0644</span>, <span class="ruby-ivar">@pid_file</span>)&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000076-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 156</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_pid_file</span>&#x000A;        <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;&gt;&gt; Writing PID to #{@pid_file}&quot;</span>&#x000A;        <span class="ruby-identifier">open</span>(<span class="ruby-ivar">@pid_file</span>,<span class="ruby-value str">&quot;w&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>) }&#x000A;        <span class="ruby-constant">File</span>.<span class="ruby-identifier">chmod</span>(<span class="ruby-value">0644</span>, <span class="ruby-ivar">@pid_file</span>)&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

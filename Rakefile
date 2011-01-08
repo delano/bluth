@@ -20,7 +20,7 @@ begin
     gem.version = "#{config[:MAJOR]}.#{config[:MINOR]}.#{config[:PATCH]}"
     gem.name = name
     gem.rubyforge_project = gem.name
-    gem.summary = "A Redis queuing system built on top of Familia"
+    gem.summary = "A Redis queuing system built on top of Familia (w/ daemons!)"
     gem.description = "A Redis queuing system built on top of Familia"
     gem.email = "delano@solutious.com"
     gem.homepage = "http://github.com/delano/bluth"

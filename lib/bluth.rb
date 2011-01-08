@@ -48,6 +48,24 @@ module Bluth
       @sysinfo ||= SysInfo.new.freeze
       @sysinfo 
     end
+    # A block to be called before a worker starts.
+    # 
+    # e.g.
+    #      Bluth.onconnect do
+    #        config = YourProject.load_config
+    #        Familia.uri = config[:redis_uri]
+    #      end
+    #
+    # Note:
+    # this block can be called multiple times so do not
+    # put anything with side effects in here.
+    def onconnect &blk
+      @onconnect = blk unless blk.nil?
+      @onconnect
+    end
+    def connect
+      instance_eval &onconnect unless onconnect.nil?
+    end
   end
   
   def Bluth.clear_locks

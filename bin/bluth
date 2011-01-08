@@ -63,7 +63,7 @@ class Bluth::CLI::Definition
     obj.global.environment ||= 'dev'
     Bluth.env = obj.global.environment
   end
-    
+  
   #TODO: command :enqueue
   
   command :start_worker => Bluth::CLI

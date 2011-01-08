@@ -39,7 +39,7 @@ module Bluth
     end
     
     def stop_workers worker_class=Bluth::Worker
-      worker_class.onstart
+      Bluth.connect
       worker_class.instances.each do |worker|
         kill_worker worker, worker_class
       end
@@ -47,6 +47,7 @@ module Bluth
     
     def stop_worker wid=nil,worker_class=Bluth::Worker
       wids = wid ? [wid] : @argv
+      Bluth.connect
       wids.each do |wid|
         worker = worker_class.from_redis wid
         kill_worker worker, worker_class
@@ -65,7 +66,7 @@ module Bluth
         exit 1
       else
         Familia.info "Killing #{worker.rediskey}"
-        worker.kill @global.auto
+        worker.kill @option.force
       end
     end
     

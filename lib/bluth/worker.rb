@@ -145,6 +145,7 @@ module Bluth
     
     def run!
       begin
+        Bluth.connect
         self.class.runblock :onstart
         find_gob
       rescue => ex
@@ -164,6 +165,7 @@ module Bluth
       begin
         @process_id = $$
         scheduler = Rufus::Scheduler.start_new
+        Bluth.connect
         self.class.runblock :onstart
         Familia.info "Setting interval: #{Worker.interval} sec (queuetimeout: #{Bluth.queuetimeout})"
         Familia.reconnect_all! # Need to reconnect after daemonize
@@ -292,10 +294,11 @@ module Bluth
         EM.run {
           @process_id = $$
           srand(Bluth.salt.to_i(16) ** @process_id)
-          self.class.runblock :onstart
+          Bluth.connect
           Familia.info "Setting interval: #{Worker.interval} sec (queuetimeout: #{Bluth.queuetimeout})"
           Familia.reconnect_all! # Need to reconnect after daemonize
           raise Familia::Problem, "Only 1 scheduler at a time" if !ScheduleWorker.instances.empty?
+          self.class.runblock :onstart
           save # persist and make note the scheduler is running
           ScheduleWorker.schedule = Rufus::Scheduler::EmScheduler.start_new
           self.class.every.each do |args|

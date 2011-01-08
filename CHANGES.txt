@@ -1,5 +1,14 @@
 BLUTH, CHANGES
 
+#### 0.6.7 (2011-01-08) ###############################
+
+* FIXED: -f option now works for stop-workers and stop-scheduler commands
+* ADDED: Bluth.onconnect (resolves non-default redis connection issues)
+
+
+#### 0.6.6 (2011-01-02) ###############################
+
+CHANGE: Bluth::Worker.onstart
 
 #### 0.6.5 (2011-01-02) ###############################
 

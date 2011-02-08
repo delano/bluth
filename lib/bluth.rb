@@ -140,7 +140,7 @@ module Bluth
       order << Bluth.queuetimeout  # We do it this way to support Ruby 1.8
       queue, gobid = *(Bluth::Queue.redis.send(meth, *order) || [])
       unless queue.nil?
-        Familia.ld "FOUND #{gobid} id #{queue}"
+        Familia.ld "FOUND #{gobid} id #{queue}" if Familia.debug?
         gob = Gob.from_redis gobid
         raise Bluth::Buster, "No such gob object: #{gobid}" if gob.nil?
         Bluth::Queue.running << gob.jobid
@@ -154,7 +154,7 @@ module Bluth
         Familia.info "ERROR (#{ex.message}): #{gobid} is an orphan"
         Bluth::Queue.orphaned << gobid
       end
-      Familia.ld ex.backtrace
+      Familia.ld ex.backtrace if Familia.debug?
     end
     gob
   end  
@@ -186,7 +186,7 @@ module Bluth
       gob.created
       gob.attempts = 0
       gob.save
-      Familia.ld "ENQUEUING: #{self} #{gob.jobid.short} to #{q}"
+      Familia.ld "ENQUEUING: #{self} #{gob.jobid.short} to #{q}" if Familia.debug?
       q << gob.jobid
       gob
     end
@@ -257,7 +257,7 @@ module Bluth
     end
     def perform
       @attempts += 1
-      Familia.ld "PERFORM: #{self.to_hash.inspect}"
+      Familia.ld "PERFORM: #{self.to_hash.inspect}" if Familia.debug?
       @stime = Time.now.utc.to_f
       save # update the time
       self.handler.prepare if self.class.respond_to?(:prepare)
@@ -291,7 +291,7 @@ module Bluth
       Bluth.queue(current_queue)
     end
     def dequeue!
-      Familia.ld "Deleting #{self.jobid} from #{queue.rediskey}"
+      Familia.ld "Deleting #{self.jobid} from #{queue.rediskey}" if Familia.debug?
       queue.remove 0, self.jobid
     end
     def running!
@@ -303,7 +303,7 @@ module Bluth
       #  raise Bluth::Buster, "Cannot move job to the queue it's in: #{to}"
       #end
       from, to = Bluth.queue(current_queue), Bluth.queue(to)
-      Familia.ld "Moving #{self.jobid} from #{from.rediskey} to #{to.rediskey}"
+      Familia.ld "Moving #{self.jobid} from #{from.rediskey} to #{to.rediskey}" if Familia.debug?
       @messages << msg unless msg.nil? || msg.empty?
       # We push first to make sure we never lose a Gob ID. Instead
       # there's the small chance of a job ID being in two queues. 

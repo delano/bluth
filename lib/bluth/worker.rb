@@ -171,7 +171,7 @@ module Bluth
         Familia.reconnect_all! # Need to reconnect after daemonize
         save
         scheduler.every Worker.interval, :blocking => true do |task|
-          Familia.ld "#{$$} TICK @ #{Time.now.utc}"
+          Familia.ld "#{$$} TICK @ #{Time.now.utc}" if Familia.debug?
           sleep rand
           find_gob task
         end
@@ -303,7 +303,7 @@ module Bluth
           ScheduleWorker.schedule = Rufus::Scheduler::EmScheduler.start_new
           self.class.every.each do |args|
             interval, opts, blk = *args
-            Familia.ld " scheduling every #{interval}: #{opts}"
+            Familia.ld " scheduling every #{interval}: #{opts}" if Familia.debug?
             ScheduleWorker.schedule.every interval, opts, &blk
           end
         }

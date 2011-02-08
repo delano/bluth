@@ -217,7 +217,7 @@ module Bluth
             tms = Benchmark.measure do
               job.perform
             end
-            job.cpu = [tms.utime.fineround(3),tms.stime.fineround(3),tms.real.fineround(3)]
+            job.cpu = [tms.utime,tms.stime,tms.real]
             job.save
             job.success!
             self.success!

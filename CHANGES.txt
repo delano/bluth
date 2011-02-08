@@ -1,9 +1,8 @@
 BLUTH, CHANGES
 
-* TODO: Remove use of fineround in Worker
-
 #### 0.6.8 (2011-02-07) ###############################
 
+* FIXED: Remove use of calls to fineround in Worker
 * CHANGE: Only call Familia.ld when in debug mode.
 
 

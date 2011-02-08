@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang='en'>
   <head>
-    <title>: Bluth::WorkerBase::ClassMethods [bluth 0.6.7]</title>
+    <title>: Bluth::WorkerBase::ClassMethods [bluth 0.6.8]</title>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
     <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
     <script type='text/javascript'>
@@ -41,98 +41,98 @@
             <h2>Methods</h2>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000017">from_redis</a></li>
-              <li><a href="#M000020">kill</a></li>
-              <li><a href="#M000022">onexit</a></li>
-              <li><a href="#M000021">onstart</a></li>
-              <li><a href="#M000019">run</a></li>
-              <li><a href="#M000018">run!</a></li>
-              <li><a href="#M000023">runblock</a></li>
+              <li><a href="#M000019">from_redis</a></li>
+              <li><a href="#M000022">kill</a></li>
+              <li><a href="#M000024">onexit</a></li>
+              <li><a href="#M000023">onstart</a></li>
+              <li><a href="#M000021">run</a></li>
+              <li><a href="#M000020">run!</a></li>
+              <li><a href="#M000025">runblock</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000017'>
-                <a name='M000017'>      </a>
+              <div class='method public-instance' id='method-M000019'>
+                <a name='M000019'>      </a>
                 <div class='synopsis'>
                   <span class='name'>from_redis</span>
                   <span class='arguments'>(wid)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000017-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000019-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000017-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 77</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">from_redis</span>(<span class="ruby-identifier">wid</span>)&#x000A;        <span class="ruby-identifier">me</span> = <span class="ruby-identifier">new</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">wid</span>&#x000A;        <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">me</span>.<span class="ruby-identifier">index</span>)&#x000A;      <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000020'>
-                <a name='M000020'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>kill</span>
-                  <span class='arguments'>(pid_file)</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000020-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000020-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 93</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">kill</span>(<span class="ruby-identifier">pid_file</span>)&#x000A;        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">runblock</span> <span class="ruby-identifier">:onexit</span>&#x000A;        <span class="ruby-identifier">pid</span> = <span class="ruby-identifier">read_pid_file</span> <span class="ruby-identifier">pid_file</span>&#x000A;        <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">pid_file</span>, <span class="ruby-value">10</span>)&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000019-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 77</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">from_redis</span>(<span class="ruby-identifier">wid</span>)&#x000A;        <span class="ruby-identifier">me</span> = <span class="ruby-identifier">new</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">wid</span>&#x000A;        <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">me</span>.<span class="ruby-identifier">index</span>)&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='method public-instance' id='method-M000022'>
                 <a name='M000022'>      </a>
                 <div class='synopsis'>
-                  <span class='name'>onexit</span>
-                  <span class='arguments'>(&amp;blk)</span>
+                  <span class='name'>kill</span>
+                  <span class='arguments'>(pid_file)</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000022-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000022-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 102</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onexit</span> <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>&#x000A;        <span class="ruby-ivar">@onexit</span> = <span class="ruby-identifier">blk</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">blk</span>.<span class="ruby-identifier">nil?</span>&#x000A;        <span class="ruby-ivar">@onexit</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000022-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 93</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">kill</span>(<span class="ruby-identifier">pid_file</span>)&#x000A;        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">runblock</span> <span class="ruby-identifier">:onexit</span>&#x000A;        <span class="ruby-identifier">pid</span> = <span class="ruby-identifier">read_pid_file</span> <span class="ruby-identifier">pid_file</span>&#x000A;        <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">pid_file</span>, <span class="ruby-value">10</span>)&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000021'>
-                <a name='M000021'>      </a>
+              <div class='method public-instance' id='method-M000024'>
+                <a name='M000024'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>onexit</span>
+                  <span class='arguments'>(&amp;blk)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000024-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000024-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 102</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onexit</span> <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>&#x000A;        <span class="ruby-ivar">@onexit</span> = <span class="ruby-identifier">blk</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">blk</span>.<span class="ruby-identifier">nil?</span>&#x000A;        <span class="ruby-ivar">@onexit</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000023'>
+                <a name='M000023'>      </a>
                 <div class='synopsis'>
                   <span class='name'>onstart</span>
                   <span class='arguments'>(&amp;blk)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000021-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000023-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000021-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 98</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onstart</span> <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>&#x000A;        <span class="ruby-ivar">@onstart</span> = <span class="ruby-identifier">blk</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">blk</span>.<span class="ruby-identifier">nil?</span>&#x000A;        <span class="ruby-ivar">@onstart</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000023-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 98</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onstart</span> <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>&#x000A;        <span class="ruby-ivar">@onstart</span> = <span class="ruby-identifier">blk</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">blk</span>.<span class="ruby-identifier">nil?</span>&#x000A;        <span class="ruby-ivar">@onstart</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000019'>
-                <a name='M000019'>      </a>
+              <div class='method public-instance' id='method-M000021'>
+                <a name='M000021'>      </a>
                 <div class='synopsis'>
                   <span class='name'>run</span>
                   <span class='arguments'>(*args)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000019-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000021-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000019-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 87</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;        <span class="ruby-identifier">me</span> = <span class="ruby-identifier">new</span>&#x000A;        <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;Created: #{me.rediskey}&quot;</span>&#x000A;        <span class="ruby-identifier">me</span>.<span class="ruby-identifier">run</span>&#x000A;        <span class="ruby-identifier">me</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000021-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 87</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;        <span class="ruby-identifier">me</span> = <span class="ruby-identifier">new</span>&#x000A;        <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;Created: #{me.rediskey}&quot;</span>&#x000A;        <span class="ruby-identifier">me</span>.<span class="ruby-identifier">run</span>&#x000A;        <span class="ruby-identifier">me</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000018'>
-                <a name='M000018'>      </a>
+              <div class='method public-instance' id='method-M000020'>
+                <a name='M000020'>      </a>
                 <div class='synopsis'>
                   <span class='name'>run!</span>
                   <span class='arguments'>(*args)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000018-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000020-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000018-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 81</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;        <span class="ruby-identifier">me</span> = <span class="ruby-identifier">new</span>&#x000A;        <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;Created: #{me.rediskey}&quot;</span>&#x000A;        <span class="ruby-identifier">me</span>.<span class="ruby-identifier">run!</span>&#x000A;        <span class="ruby-identifier">me</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000020-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 81</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;        <span class="ruby-identifier">me</span> = <span class="ruby-identifier">new</span>&#x000A;        <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;Created: #{me.rediskey}&quot;</span>&#x000A;        <span class="ruby-identifier">me</span>.<span class="ruby-identifier">run!</span>&#x000A;        <span class="ruby-identifier">me</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000023'>
-                <a name='M000023'>      </a>
+              <div class='method public-instance' id='method-M000025'>
+                <a name='M000025'>      </a>
                 <div class='synopsis'>
                   <span class='name'>runblock</span>
                   <span class='arguments'>(meth)</span>
@@ -143,10 +143,10 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000023-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000025-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000023-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 107</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">runblock</span> <span class="ruby-identifier">meth</span>&#x000A;        <span class="ruby-identifier">blk</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">meth</span>)&#x000A;        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">blk</span>.<span class="ruby-identifier">nil?</span>&#x000A;        <span class="ruby-identifier">instance_eval</span> <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000025-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 107</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">runblock</span> <span class="ruby-identifier">meth</span>&#x000A;        <span class="ruby-identifier">blk</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">meth</span>)&#x000A;        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">blk</span>.<span class="ruby-identifier">nil?</span>&#x000A;        <span class="ruby-identifier">instance_eval</span> <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

@@ -88,7 +88,7 @@ module Bluth
   
   require 'bluth/worker'
   
-  module Queue  # if this is a module the 
+  module Queue 
     include Familia
     prefix [:bluth, :queue]
     class_list :critical #, :class => Bluth::Gob
@@ -222,6 +222,7 @@ module Bluth
     field :messages => Array
     field :attempts => Integer
     field :create_time => Float
+    field :backtrace
     field :stime => Float
     field :etime => Float
     field :current_queue => Symbol

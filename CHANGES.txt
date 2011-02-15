@@ -1,5 +1,10 @@
 BLUTH, CHANGES
 
+#### 0.7.0 (2011-02-??) ###############################
+
+* ADDED: backtrace field to Bluth::Gob
+
+
 #### 0.6.8 (2011-02-07) ###############################
 
 * FIXED: Remove use of calls to fineround in Worker

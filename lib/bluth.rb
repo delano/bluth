@@ -179,6 +179,19 @@ module Bluth
       end
     end
     
+    def ennotch(data={}, mins=1, filter=nil, time=nil)
+      time ||= Bluth::TimingBelt.now
+      notch = Bluth::TimingBelt.notch mins, filter, time
+      gob = Gob.create generate_id(data), self, data
+      gob.notch = notch.name
+      gob.created
+      gob.attempts = 0
+      gob.save
+      Familia.ld "ENNOTCHING: #{self} #{gob.jobid.short} to #{notch.rediskey}" if Familia.debug?
+      notch.add gob.jobid
+      gob
+    end
+    
     def enqueue(data={},q=nil)
       q = self.queue(q)
       gob = Gob.create generate_id(data), self, data
@@ -223,6 +236,7 @@ module Bluth
     field :attempts => Integer
     field :create_time => Float
     field :backtrace
+    field :notch     # populated only via TimingBelt
     field :stime => Float
     field :etime => Float
     field :current_queue => Symbol

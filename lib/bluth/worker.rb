@@ -200,7 +200,7 @@ module Bluth
     
     private 
     
-    # DO NOT return from this method
+    # DO NOT call return from this method
     def find_gob(task=nil)
       begin
         job = Bluth.pop

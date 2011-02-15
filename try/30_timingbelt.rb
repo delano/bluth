@@ -2,7 +2,7 @@ require 'bluth'
 require 'bluth/timingbelt'
 require 'bluth/test_helpers'
 
-Familia.debug = true
+#Familia.debug = true
 
 @now = Time.at(1297641600).utc # 2011-02-14 20:00:00
 Bluth::TimingBelt.redis.flushdb
@@ -39,6 +39,10 @@ Bluth::TimingBelt.notch(0, nil, @now).next.stamp
 Bluth::TimingBelt.notch(0, nil, @now).prev.stamp
 #=> '23:59'
 
+## A notch can skip to arbitrary number ahead
+Bluth::TimingBelt.notch(0, nil, @now).skip(15).stamp
+#=> '00:15'
+
 ## Set for the current time doesn't exist
 Bluth::TimingBelt.notch(0, nil, @now).exists?
 #=> false
@@ -52,15 +56,18 @@ Bluth::TimingBelt.priority(2, nil, @now).collect { |q| q.name }
 #=> ["bluth:timingbelt:23:58", "bluth:timingbelt:23:59", "bluth:timingbelt:00:00"]
 
 ## Handler can engauge right now
-ExampleHandler.engauge({}, 0, nil, @now).notch
+notch = Bluth::TimingBelt.notch(0, nil, @now)
+ExampleHandler.engauge({}, notch).notch
 #=> 'bluth:timingbelt:00:00'
 
 ## Handler can engauge 1 minute ago
-ExampleHandler.engauge({}, -1, nil, @now).notch
+notch = Bluth::TimingBelt.notch(-1, nil, @now)
+ExampleHandler.engauge({}, notch).notch
 #=> 'bluth:timingbelt:23:59'
 
 ## Handler can engauge 10 minutes from now
-@gob3 = ExampleHandler.engauge({}, 10, nil, @now)
+notch = Bluth::TimingBelt.notch(10, nil, @now)
+@gob3 = ExampleHandler.engauge({}, notch)
 @gob3.notch
 #=> 'bluth:timingbelt:00:10'
 
@@ -83,5 +90,11 @@ ExampleHandler.engauge({}, -1, nil, @now).notch
 notches = Bluth::TimingBelt.find(@gob3.jobid, nil, @now)
 notches.first.name unless notches.first.nil?
 #=> 'bluth:timingbelt:00:10'
+
+## Can calculate the difference between two notches
+notch1 = Bluth::TimingBelt.notch
+notch2 = Bluth::TimingBelt.notch 67
+notch2 - notch1
+#=> 67
 
 

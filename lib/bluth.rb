@@ -179,9 +179,8 @@ module Bluth
       end
     end
     
-    def engauge(data={}, mins=1, filter=nil, time=nil)
-      time ||= Bluth::TimingBelt.now
-      notch = Bluth::TimingBelt.notch mins, filter, time
+    def engauge(data={}, notch=nil)
+      notch ||= Bluth::TimingBelt.notch 1
       gob = Gob.create generate_id(data), self, data
       gob.notch = notch.name
       gob.created
@@ -192,7 +191,7 @@ module Bluth
       gob
     end
     
-    def enqueue(data={},q=nil)
+    def enqueue(data={}, q=nil)
       q = self.queue(q)
       gob = Gob.create generate_id(data), self, data
       gob.current_queue = q.name

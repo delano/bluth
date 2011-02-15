@@ -27,8 +27,6 @@ module Bluth
     #end
     
     def start_worker worker_class=Bluth::Worker
-      Familia.debug = true
-      BS.debug = true
       if @global.daemon
         worker = worker_class.new
         Familia.info "Created: #{worker.rediskey}"
@@ -36,7 +34,7 @@ module Bluth
         worker.run
       else
         Bluth.queuetimeout = 3.seconds
-        #worker_class.run
+        worker_class.run
       end
     end
     

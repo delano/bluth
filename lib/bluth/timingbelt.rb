@@ -6,7 +6,7 @@ module Bluth
     include Familia
     prefix [:bluth, :timingbelt]
     module Notch
-      attr_accessor :stamp, :filter
+      attr_accessor :stamp, :filter, :time
       def next
         skip
       end
@@ -16,6 +16,9 @@ module Bluth
       def skip mins=1
         time = Time.parse(stamp || '')
         Bluth::TimingBelt.notch mins, filter, time
+      end
+      def -(other)
+        ((self.time - other.time)/60).to_i
       end
     end
     @length = 60 # minutes
@@ -30,6 +33,7 @@ module Bluth
       def each filter=nil, time=now, &blk
         length.times { |idx|
           notch = Bluth::TimingBelt.notch idx, filter, time
+          #p [notch.name, caller[0..6]]
           blk.call notch
         }
       end
@@ -58,9 +62,11 @@ module Bluth
         if @notchcache[key].nil?
           @notchcache[key] ||= Familia::Set.new key, 
               :ttl => 4*60*60, # 4 hours
-              :extend => Bluth::TimingBelt::Notch
+              :extend => Bluth::TimingBelt::Notch, 
+              :db => Bluth::TimingBelt.db
           @notchcache[key].stamp = stamp(mins, time) 
           @notchcache[key].filter = filter
+          @notchcache[key].time = now(mins, time)
         end
         @notchcache[key]
       end
@@ -73,6 +79,10 @@ module Bluth
           return possible if possible.empty?
         }
         nil
+      end
+      def add data, notch=nil
+        notch ||= Bluth::TimingBelt.notch 1
+        notch.add data
       end
       def pop minutes=2, filter=nil, time=now
         gob = nil

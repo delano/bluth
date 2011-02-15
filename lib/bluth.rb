@@ -179,7 +179,7 @@ module Bluth
       end
     end
     
-    def ennotch(data={}, mins=1, filter=nil, time=nil)
+    def engauge(data={}, mins=1, filter=nil, time=nil)
       time ||= Bluth::TimingBelt.now
       notch = Bluth::TimingBelt.notch mins, filter, time
       gob = Gob.create generate_id(data), self, data

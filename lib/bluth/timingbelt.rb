@@ -36,7 +36,6 @@ module Bluth
       def each mins=length, filter=nil, time=now, &blk
         mins.times { |idx|
           notch = Bluth::TimingBelt.notch idx, filter, time
-          #p [notch.name, caller[0..6]]
           blk.call notch
         }
       end

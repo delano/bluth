@@ -1,7 +1,7 @@
 require 'bluth'
 require 'bluth/test_helpers'
 
-Familia.debug = true
+#Familia.debug = true
 
 ## Can enqueue a job
 @job = ExampleHandler.enqueue :arg1 => :val1

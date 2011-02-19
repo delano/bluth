@@ -5,6 +5,8 @@ module Bluth
   module TimingBelt
     include Familia
     prefix [:bluth, :timingbelt]
+    # This module extends the Familia::Set that represents 
+    # a notch. IOW, these are instance methods for notch objs.
     module Notch
       attr_accessor :stamp, :filter, :time
       def next
@@ -24,27 +26,28 @@ module Bluth
     @length = 60 # minutes
     class << self
       attr_reader :notchcache, :length
-      def find v, filter=nil, time=now
+      def find v, mins=length, filter=nil, time=now
         raise ArgumentError, "value cannot be nil" if v.nil?
-        select(filter, time) do |notch| 
+        select(mins, filter, time) do |notch| 
           notch.member?(v)
         end
       end
-      def each filter=nil, time=now, &blk
-        length.times { |idx|
+      # mins: the number of minutes to look ahead. 
+      def each mins=length, filter=nil, time=now, &blk
+        mins.times { |idx|
           notch = Bluth::TimingBelt.notch idx, filter, time
           #p [notch.name, caller[0..6]]
           blk.call notch
         }
       end
-      def select filter=nil, time=now, &blk
+      def select mins=length, filter=nil, time=now, &blk
         ret = []
-        each(filter, time) { |notch| ret << notch if blk.call(notch) }
+        each(mins, filter, time) { |notch| ret << notch if blk.call(notch) }
         ret
       end
-      def collect filter=nil, time=now, &blk
+      def collect mins=length, filter=nil, time=now, &blk
         ret = []
-        each(filter, time) { |notch| ret << blk.call(notch) }
+        each(mins, filter, time) { |notch| ret << blk.call(notch) }
         ret
       end
       def now mins=0, time=Time.now.utc

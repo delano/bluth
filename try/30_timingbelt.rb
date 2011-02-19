@@ -87,13 +87,14 @@ notch = Bluth::TimingBelt.notch(10, nil, @now)
 #=> 'bluth:timingbelt:00:01'
 
 ## Knows next available notch
-notches = Bluth::TimingBelt.find(@gob3.jobid, nil, @now)
+notches = Bluth::TimingBelt.find(@gob3.jobid, 60, nil, @now)
 notches.first.name unless notches.first.nil?
 #=> 'bluth:timingbelt:00:10'
 
 ## Can calculate the difference between two notches
 notch1 = Bluth::TimingBelt.notch
 notch2 = Bluth::TimingBelt.notch 67
+puts notch2.name
 notch2 - notch1
 #=> 67
 

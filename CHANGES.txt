@@ -3,6 +3,7 @@ BLUTH, CHANGES
 #### 0.7.0 (2011-02-??) ###############################
 
 * ADDED: backtrace field to Bluth::Gob
+* ADDED: Bluth::TimingBelt
 
 
 #### 0.6.8 (2011-02-07) ###############################

@@ -20,7 +20,7 @@ Bluth::TimingBelt.stamp 0, @now
 #=> '00:00'
 
 ## Knows the current key
-Bluth::TimingBelt.rediskey 0, nil, @now
+Bluth::TimingBelt.rediskey '00:00', nil
 #=> 'bluth:timingbelt:00:00'
 
 ## Creates a Set object for the current time

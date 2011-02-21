@@ -55,11 +55,8 @@ module Bluth
       def stamp mins=0, time=now
         (time + (mins*60)).strftime('%H:%M')
       end
-      def rediskey mins=0, filter=nil, time=now
-        super stamp(mins, time), filter
-      end
       def notch mins=0, filter=nil, time=now
-        key = rediskey(mins, filter, time)
+        key = rediskey(stamp(mins, time), filter)
         @notchcache ||= {}
         if @notchcache[key].nil?
           @notchcache[key] ||= Familia::Set.new key, 

@@ -223,7 +223,7 @@ module Bluth
     end
     
     def enqueue(data={}, q=nil)
-      q = self.queue(q) if q.nil?
+      q = self.queue(q) if q.nil? || Symbol === q
       gob = create_job data
       gob.current_queue = q.name
       gob.save

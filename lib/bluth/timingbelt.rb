@@ -35,6 +35,12 @@ module Bluth
           notch.member?(v)
         end
       end
+      def range rng, filter=nil, time=now, &blk
+        rng.to_a.each { |idx|
+          notch = Bluth::TimingBelt.notch idx, filter, time
+          blk.call notch
+        }
+      end
       # mins: the number of minutes to look ahead. 
       def each mins=length, filter=nil, time=now, &blk
         mins.times { |idx|

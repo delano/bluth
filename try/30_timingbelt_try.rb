@@ -98,4 +98,23 @@ puts notch2.name
 notch2 - notch1
 #=> 67
 
+## A notch has an associated queue
+notch = Bluth::TimingBelt.notch(0, nil, @now)
+notch.queue.class
+#=> Familia::List
+
+## And that queue has the same timestamp
+notch = Bluth::TimingBelt.notch(0, nil, @now)
+notch.queue.rediskey
+#=> 'bluth:queue:00:00'
+
+## We can get a list of queues by priority
+@current_notch = Bluth::TimingBelt.notch 
+Bluth::Queue.entry_queues.collect { |q| q.name }
+#=> [:critical, @current_notch.prev.prev.queue.name, @current_notch.prev.queue.name, @current_notch.queue.name, :high, :low]
+
+## Just a test
+Bluth.pop
+##=> true
+
 

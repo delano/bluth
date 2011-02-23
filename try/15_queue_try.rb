@@ -27,4 +27,20 @@ Bluth::Queue.critical.size
 job = Bluth::Queue.critical.shift
 #=> 'job1'
 
+
+## Can create a queue on the fly
+q = Bluth::Queue.create_queue :anything
+q.rediskey
+#=> "bluth:queue:anything"
+
+## And that new queue has a method
+q = Bluth::Queue.queue :anything
+q.class
+#=> Familia::List
+
+## We can get a list of queues by priority
+Bluth::Queue.entry_queues.collect { |q| q.name }
+#=> [:critical, :high, :low]
+
+
 Bluth::Queue.critical.clear

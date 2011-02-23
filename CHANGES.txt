@@ -4,6 +4,8 @@ BLUTH, CHANGES
 
 * ADDED: backtrace field to Bluth::Gob
 * ADDED: Bluth::TimingBelt
+* ADDED: Bluth::Queue.queues/entry_queues include TimingBelt queues 
+  when Bluth::TimingBelt is defined.
 
 
 #### 0.6.8 (2011-02-07) ###############################

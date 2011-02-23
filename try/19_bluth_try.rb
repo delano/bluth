@@ -35,6 +35,7 @@ Bluth.queuetimeout = 2
 Bluth.pop
 #=> nil
 
+
 Bluth::Queue.critical.clear
 @job1.destroy! if @job1
 @job2.destroy! if @job2

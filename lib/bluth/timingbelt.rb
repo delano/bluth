@@ -2,7 +2,7 @@ require 'time'
 
 module Bluth 
   
-  module TimingBelt
+  module TimingBelt 
     include Familia
     prefix [:bluth, :timingbelt]
     # This module extends the Familia::Set that represents 
@@ -18,6 +18,9 @@ module Bluth
       def skip mins=1
         time = Time.parse(stamp || '')
         Bluth::TimingBelt.notch mins, filter, time
+      end
+      def queue
+        Bluth::Queue.create_queue stamp
       end
       def -(other)
         ((self.time - other.time)/60).to_i
@@ -60,7 +63,7 @@ module Bluth
         @notchcache ||= {}
         if @notchcache[key].nil?
           @notchcache[key] ||= Familia::Set.new key, 
-              :ttl => 4*60*60, # 4 hours
+              :ttl => 2*60*60, # 2 hours
               :extend => Bluth::TimingBelt::Notch, 
               :db => Bluth::TimingBelt.db
           @notchcache[key].stamp = stamp(mins, time) 

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang='en'>
   <head>
-    <title>Methods [bluth 0.6.8]</title>
+    <title>Methods [bluth 0.7.0]</title>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
     <link href='rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
     <base target='docwin'>
@@ -4331,101 +4331,123 @@
         
         Element.addMethods();
         var search_index = [
-          { method: 'all', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000034"><span class="method_name">all</span> <span class="module_name">(Bluth::Handler)</span></a>' },
-          { method: 'attempt!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000054"><span class="method_name">attempt!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
-          { method: 'attempt?', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000053"><span class="method_name">attempt?</span> <span class="module_name">(Bluth::Gob)</span></a>' },
-          { method: 'change_privilege', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000072"><span class="method_name">change_privilege</span> <span class="module_name">(Daemonizable)</span></a>' },
-          { method: 'clear!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000051"><span class="method_name">clear!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: '-', module: 'bluth::timingbelt::notch', html: '<a href="classes/Bluth/TimingBelt/Notch.html#M000028"><span class="method_name">-</span> <span class="module_name">(Bluth::TimingBelt::Notch)</span></a>' },
+          { method: 'add', module: 'bluth::timingbelt', html: '<a href="classes/Bluth/TimingBelt.html#M000022"><span class="method_name">add</span> <span class="module_name">(Bluth::TimingBelt)</span></a>' },
+          { method: 'all', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000055"><span class="method_name">all</span> <span class="module_name">(Bluth::Handler)</span></a>' },
+          { method: 'attempt!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000076"><span class="method_name">attempt!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'attempt?', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000075"><span class="method_name">attempt?</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'change_privilege', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000094"><span class="method_name">change_privilege</span> <span class="module_name">(Daemonizable)</span></a>' },
+          { method: 'clear!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000073"><span class="method_name">clear!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
           { method: 'clear_locks', module: 'bluth', html: '<a href="classes/Bluth.html#M000006"><span class="method_name">clear_locks</span> <span class="module_name">(Bluth)</span></a>' },
+          { method: 'collect', module: 'bluth::timingbelt', html: '<a href="classes/Bluth/TimingBelt.html#M000016"><span class="method_name">collect</span> <span class="module_name">(Bluth::TimingBelt)</span></a>' },
           { method: 'connect', module: 'bluth', html: '<a href="classes/Bluth.html#M000005"><span class="method_name">connect</span> <span class="module_name">(Bluth)</span></a>' },
-          { method: 'current_job', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000015"><span class="method_name">current_job</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
-          { method: 'current_queue', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000055"><span class="method_name">current_queue</span> <span class="module_name">(Bluth::Gob)</span></a>' },
-          { method: 'daemonize', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000071"><span class="method_name">daemonize</span> <span class="module_name">(Daemonizable)</span></a>' },
-          { method: 'debug', module: 'logging', html: '<a href="classes/Logging.html#M000092"><span class="method_name">debug</span> <span class="module_name">(Logging)</span></a>' },
-          { method: 'debug', module: 'logging', html: '<a href="classes/Logging.html#M000093"><span class="method_name">debug</span> <span class="module_name">(Logging)</span></a>' },
-          { method: 'debug?', module: 'logging', html: '<a href="classes/Logging.html#M000084"><span class="method_name">debug?</span> <span class="module_name">(Logging)</span></a>' },
-          { method: 'delayed?', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000058"><span class="method_name">delayed?</span> <span class="module_name">(Bluth::Gob)</span></a>' },
-          { method: 'dequeue!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000064"><span class="method_name">dequeue!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
-          { method: 'duration', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000062"><span class="method_name">duration</span> <span class="module_name">(Bluth::Gob)</span></a>' },
-          { method: 'enqueue', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000031"><span class="method_name">enqueue</span> <span class="module_name">(Bluth::Handler)</span></a>' },
+          { method: 'create_job', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000051"><span class="method_name">create_job</span> <span class="module_name">(Bluth::Handler)</span></a>' },
+          { method: 'create_queue', module: 'bluth::queue', html: '<a href="classes/Bluth/Queue.html#M000045"><span class="method_name">create_queue</span> <span class="module_name">(Bluth::Queue)</span></a>' },
+          { method: 'current_job', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000032"><span class="method_name">current_job</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
+          { method: 'current_queue', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000077"><span class="method_name">current_queue</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'daemonize', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000093"><span class="method_name">daemonize</span> <span class="module_name">(Daemonizable)</span></a>' },
+          { method: 'debug', module: 'logging', html: '<a href="classes/Logging.html#M000115"><span class="method_name">debug</span> <span class="module_name">(Logging)</span></a>' },
+          { method: 'debug', module: 'logging', html: '<a href="classes/Logging.html#M000114"><span class="method_name">debug</span> <span class="module_name">(Logging)</span></a>' },
+          { method: 'debug?', module: 'logging', html: '<a href="classes/Logging.html#M000106"><span class="method_name">debug?</span> <span class="module_name">(Logging)</span></a>' },
+          { method: 'delayed?', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000080"><span class="method_name">delayed?</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'dequeue!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000086"><span class="method_name">dequeue!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'duration', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000084"><span class="method_name">duration</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'each', module: 'bluth::timingbelt', html: '<a href="classes/Bluth/TimingBelt.html#M000014"><span class="method_name">each</span> <span class="module_name">(Bluth::TimingBelt)</span></a>' },
+          { method: 'engauge', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000050"><span class="method_name">engauge</span> <span class="module_name">(Bluth::Handler)</span></a>' },
+          { method: 'enqueue', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000052"><span class="method_name">enqueue</span> <span class="module_name">(Bluth::Handler)</span></a>' },
           { method: 'enqueue', module: 'examplehandler', html: '<a href="classes/ExampleHandler.html#M000001"><span class="method_name">enqueue</span> <span class="module_name">(ExampleHandler)</span></a>' },
-          { method: 'entry_queues', module: 'bluth::queue', html: '<a href="classes/Bluth/Queue.html#M000029"><span class="method_name">entry_queues</span> <span class="module_name">(Bluth::Queue)</span></a>' },
-          { method: 'every', module: 'bluth::scheduleworker', html: '<a href="classes/Bluth/ScheduleWorker.html#M000047"><span class="method_name">every</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a>' },
-          { method: 'extended', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000030"><span class="method_name">extended</span> <span class="module_name">(Bluth::Handler)</span></a>' },
-          { method: 'failure!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000060"><span class="method_name">failure!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'entry_queues', module: 'bluth::queue', html: '<a href="classes/Bluth/Queue.html#M000047"><span class="method_name">entry_queues</span> <span class="module_name">(Bluth::Queue)</span></a>' },
+          { method: 'every', module: 'bluth::scheduleworker', html: '<a href="classes/Bluth/ScheduleWorker.html#M000069"><span class="method_name">every</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a>' },
+          { method: 'extended', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000049"><span class="method_name">extended</span> <span class="module_name">(Bluth::Handler)</span></a>' },
+          { method: 'failure!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000082"><span class="method_name">failure!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'find', module: 'bluth::timingbelt', html: '<a href="classes/Bluth/TimingBelt.html#M000012"><span class="method_name">find</span> <span class="module_name">(Bluth::TimingBelt)</span></a>' },
           { method: 'find_locks', module: 'bluth', html: '<a href="classes/Bluth.html#M000007"><span class="method_name">find_locks</span> <span class="module_name">(Bluth)</span></a>' },
-          { method: 'force_kill', module: 'daemonizable::classmethods', html: '<a href="classes/Daemonizable/ClassMethods.html#M000081"><span class="method_name">force_kill</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a>' },
-          { method: 'from_redis', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000019"><span class="method_name">from_redis</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
-          { method: 'generate_id', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000033"><span class="method_name">generate_id</span> <span class="module_name">(Bluth::Handler)</span></a>' },
-          { method: 'handle_exception', module: 'rufus::scheduler::schedulercore', html: '<a href="classes/Rufus/Scheduler/SchedulerCore.html#M000067"><span class="method_name">handle_exception</span> <span class="module_name">(Rufus::Scheduler::SchedulerCore)</span></a>' },
-          { method: 'handler', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000056"><span class="method_name">handler</span> <span class="module_name">(Bluth::Gob)</span></a>' },
-          { method: 'included', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000018"><span class="method_name">included</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
-          { method: 'included', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000069"><span class="method_name">included</span> <span class="module_name">(Daemonizable)</span></a>' },
-          { method: 'init', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000012"><span class="method_name">init</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
-          { method: 'interval', module: 'bluth::scheduleworker', html: '<a href="classes/Bluth/ScheduleWorker.html#M000046"><span class="method_name">interval</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a>' },
-          { method: 'jobid', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000050"><span class="method_name">jobid</span> <span class="module_name">(Bluth::Gob)</span></a>' },
-          { method: 'kill', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000016"><span class="method_name">kill</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
-          { method: 'kill', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000022"><span class="method_name">kill</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
-          { method: 'kill', module: 'daemonizable::classmethods', html: '<a href="classes/Daemonizable/ClassMethods.html#M000078"><span class="method_name">kill</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a>' },
-          { method: 'load_config', module: 'bluth::version', html: '<a href="classes/Bluth/VERSION.html#M000027"><span class="method_name">load_config</span> <span class="module_name">(Bluth::VERSION)</span></a>' },
-          { method: 'log', module: 'logging', html: '<a href="classes/Logging.html#M000088"><span class="method_name">log</span> <span class="module_name">(Logging)</span></a>' },
-          { method: 'log', module: 'logging', html: '<a href="classes/Logging.html#M000089"><span class="method_name">log</span> <span class="module_name">(Logging)</span></a>' },
-          { method: 'log_error', module: 'logging', html: '<a href="classes/Logging.html#M000094"><span class="method_name">log_error</span> <span class="module_name">(Logging)</span></a>' },
-          { method: 'log_error', module: 'logging', html: '<a href="classes/Logging.html#M000095"><span class="method_name">log_error</span> <span class="module_name">(Logging)</span></a>' },
-          { method: 'move!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000066"><span class="method_name">move!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
-          { method: 'name', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000014"><span class="method_name">name</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
-          { method: 'on_restart', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000073"><span class="method_name">on_restart</span> <span class="module_name">(Daemonizable)</span></a>' },
+          { method: 'force_kill', module: 'daemonizable::classmethods', html: '<a href="classes/Daemonizable/ClassMethods.html#M000103"><span class="method_name">force_kill</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a>' },
+          { method: 'from_redis', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000036"><span class="method_name">from_redis</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
+          { method: 'generate_id', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000054"><span class="method_name">generate_id</span> <span class="module_name">(Bluth::Handler)</span></a>' },
+          { method: 'handle_exception', module: 'rufus::scheduler::schedulercore', html: '<a href="classes/Rufus/Scheduler/SchedulerCore.html#M000089"><span class="method_name">handle_exception</span> <span class="module_name">(Rufus::Scheduler::SchedulerCore)</span></a>' },
+          { method: 'handler', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000078"><span class="method_name">handler</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'included', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000091"><span class="method_name">included</span> <span class="module_name">(Daemonizable)</span></a>' },
+          { method: 'included', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000035"><span class="method_name">included</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
+          { method: 'init', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000029"><span class="method_name">init</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
+          { method: 'interval', module: 'bluth::scheduleworker', html: '<a href="classes/Bluth/ScheduleWorker.html#M000068"><span class="method_name">interval</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a>' },
+          { method: 'jobid', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000072"><span class="method_name">jobid</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'kill', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000039"><span class="method_name">kill</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
+          { method: 'kill', module: 'daemonizable::classmethods', html: '<a href="classes/Daemonizable/ClassMethods.html#M000100"><span class="method_name">kill</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a>' },
+          { method: 'kill', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000033"><span class="method_name">kill</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
+          { method: 'load_config', module: 'bluth::version', html: '<a href="classes/Bluth/VERSION.html#M000044"><span class="method_name">load_config</span> <span class="module_name">(Bluth::VERSION)</span></a>' },
+          { method: 'log', module: 'logging', html: '<a href="classes/Logging.html#M000110"><span class="method_name">log</span> <span class="module_name">(Logging)</span></a>' },
+          { method: 'log', module: 'logging', html: '<a href="classes/Logging.html#M000111"><span class="method_name">log</span> <span class="module_name">(Logging)</span></a>' },
+          { method: 'log_error', module: 'logging', html: '<a href="classes/Logging.html#M000116"><span class="method_name">log_error</span> <span class="module_name">(Logging)</span></a>' },
+          { method: 'log_error', module: 'logging', html: '<a href="classes/Logging.html#M000117"><span class="method_name">log_error</span> <span class="module_name">(Logging)</span></a>' },
+          { method: 'move!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000088"><span class="method_name">move!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'name', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000031"><span class="method_name">name</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
+          { method: 'next', module: 'bluth::timingbelt::notch', html: '<a href="classes/Bluth/TimingBelt/Notch.html#M000024"><span class="method_name">next</span> <span class="module_name">(Bluth::TimingBelt::Notch)</span></a>' },
+          { method: 'next_empty_notch', module: 'bluth::timingbelt', html: '<a href="classes/Bluth/TimingBelt.html#M000021"><span class="method_name">next_empty_notch</span> <span class="module_name">(Bluth::TimingBelt)</span></a>' },
+          { method: 'notch', module: 'bluth::timingbelt', html: '<a href="classes/Bluth/TimingBelt.html#M000019"><span class="method_name">notch</span> <span class="module_name">(Bluth::TimingBelt)</span></a>' },
+          { method: 'now', module: 'bluth::timingbelt', html: '<a href="classes/Bluth/TimingBelt.html#M000017"><span class="method_name">now</span> <span class="module_name">(Bluth::TimingBelt)</span></a>' },
+          { method: 'on_restart', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000095"><span class="method_name">on_restart</span> <span class="module_name">(Daemonizable)</span></a>' },
           { method: 'onconnect', module: 'bluth', html: '<a href="classes/Bluth.html#M000004"><span class="method_name">onconnect</span> <span class="module_name">(Bluth)</span></a>' },
-          { method: 'onexit', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000024"><span class="method_name">onexit</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
-          { method: 'onstart', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000023"><span class="method_name">onstart</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
+          { method: 'onexit', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000041"><span class="method_name">onexit</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
+          { method: 'onstart', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000040"><span class="method_name">onstart</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
           { method: 'perform', module: 'examplehandler', html: '<a href="classes/ExampleHandler.html#M000002"><span class="method_name">perform</span> <span class="module_name">(ExampleHandler)</span></a>' },
-          { method: 'perform', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000057"><span class="method_name">perform</span> <span class="module_name">(Bluth::Gob)</span></a>' },
-          { method: 'pid', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000070"><span class="method_name">pid</span> <span class="module_name">(Daemonizable)</span></a>' },
+          { method: 'perform', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000079"><span class="method_name">perform</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'pid', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000092"><span class="method_name">pid</span> <span class="module_name">(Daemonizable)</span></a>' },
+          { method: 'pop', module: 'bluth::timingbelt', html: '<a href="classes/Bluth/TimingBelt.html#M000023"><span class="method_name">pop</span> <span class="module_name">(Bluth::TimingBelt)</span></a>' },
           { method: 'pop', module: 'bluth', html: '<a href="classes/Bluth.html#M000011"><span class="method_name">pop</span> <span class="module_name">(Bluth)</span></a>' },
-          { method: 'prepare', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000035"><span class="method_name">prepare</span> <span class="module_name">(Bluth::Handler)</span></a>' },
-          { method: 'preprocess', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000052"><span class="method_name">preprocess</span> <span class="module_name">(Bluth::Gob)</span></a>' },
-          { method: 'queue', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000032"><span class="method_name">queue</span> <span class="module_name">(Bluth::Handler)</span></a>' },
-          { method: 'queue', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000063"><span class="method_name">queue</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'prepare', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000056"><span class="method_name">prepare</span> <span class="module_name">(Bluth::Handler)</span></a>' },
+          { method: 'preprocess', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000074"><span class="method_name">preprocess</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'prev', module: 'bluth::timingbelt::notch', html: '<a href="classes/Bluth/TimingBelt/Notch.html#M000025"><span class="method_name">prev</span> <span class="module_name">(Bluth::TimingBelt::Notch)</span></a>' },
+          { method: 'priority', module: 'bluth::timingbelt', html: '<a href="classes/Bluth/TimingBelt.html#M000020"><span class="method_name">priority</span> <span class="module_name">(Bluth::TimingBelt)</span></a>' },
+          { method: 'queue', module: 'bluth::handler', html: '<a href="classes/Bluth/Handler.html#M000053"><span class="method_name">queue</span> <span class="module_name">(Bluth::Handler)</span></a>' },
           { method: 'queue', module: 'bluth', html: '<a href="classes/Bluth.html#M000009"><span class="method_name">queue</span> <span class="module_name">(Bluth)</span></a>' },
+          { method: 'queue', module: 'bluth::timingbelt::notch', html: '<a href="classes/Bluth/TimingBelt/Notch.html#M000027"><span class="method_name">queue</span> <span class="module_name">(Bluth::TimingBelt::Notch)</span></a>' },
+          { method: 'queue', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000085"><span class="method_name">queue</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'queue', module: 'bluth::queue', html: '<a href="classes/Bluth/Queue.html#M000048"><span class="method_name">queue</span> <span class="module_name">(Bluth::Queue)</span></a>' },
           { method: 'queue?', module: 'bluth', html: '<a href="classes/Bluth.html#M000008"><span class="method_name">queue?</span> <span class="module_name">(Bluth)</span></a>' },
-          { method: 'queues', module: 'bluth::queue', html: '<a href="classes/Bluth/Queue.html#M000028"><span class="method_name">queues</span> <span class="module_name">(Bluth::Queue)</span></a>' },
-          { method: 'read_pid_file', module: 'daemonizable::classmethods', html: '<a href="classes/Daemonizable/ClassMethods.html#M000082"><span class="method_name">read_pid_file</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a>' },
-          { method: 'remove_pid_file', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000075"><span class="method_name">remove_pid_file</span> <span class="module_name">(Daemonizable)</span></a>' },
-          { method: 'remove_stale_pid_file', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000077"><span class="method_name">remove_stale_pid_file</span> <span class="module_name">(Daemonizable)</span></a>' },
-          { method: 'restart', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000074"><span class="method_name">restart</span> <span class="module_name">(Daemonizable)</span></a>' },
-          { method: 'restart', module: 'daemonizable::classmethods', html: '<a href="classes/Daemonizable/ClassMethods.html#M000079"><span class="method_name">restart</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a>' },
-          { method: 'retry!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000059"><span class="method_name">retry!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
-          { method: 'run', module: 'bluth::scheduleworker', html: '<a href="classes/Bluth/ScheduleWorker.html#M000049"><span class="method_name">run</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a>' },
-          { method: 'run', module: 'bluth::worker', html: '<a href="classes/Bluth/Worker.html#M000045"><span class="method_name">run</span> <span class="module_name">(Bluth::Worker)</span></a>' },
-          { method: 'run', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000021"><span class="method_name">run</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
-          { method: 'run!', module: 'bluth::worker', html: '<a href="classes/Bluth/Worker.html#M000044"><span class="method_name">run!</span> <span class="module_name">(Bluth::Worker)</span></a>' },
-          { method: 'run!', module: 'bluth::scheduleworker', html: '<a href="classes/Bluth/ScheduleWorker.html#M000048"><span class="method_name">run!</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a>' },
-          { method: 'run!', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000020"><span class="method_name">run!</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
-          { method: 'runblock', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000025"><span class="method_name">runblock</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
-          { method: 'running!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000065"><span class="method_name">running!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
-          { method: 'running?', module: 'process', html: '<a href="classes/Process.html#M000068"><span class="method_name">running?</span> <span class="module_name">(Process)</span></a>' },
-          { method: 'schedulers', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000039"><span class="method_name">schedulers</span> <span class="module_name">(Bluth::CLI)</span></a>' },
-          { method: 'send_signal', module: 'daemonizable::classmethods', html: '<a href="classes/Daemonizable/ClassMethods.html#M000080"><span class="method_name">send_signal</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a>' },
+          { method: 'queues', module: 'bluth::queue', html: '<a href="classes/Bluth/Queue.html#M000046"><span class="method_name">queues</span> <span class="module_name">(Bluth::Queue)</span></a>' },
+          { method: 'range', module: 'bluth::timingbelt', html: '<a href="classes/Bluth/TimingBelt.html#M000013"><span class="method_name">range</span> <span class="module_name">(Bluth::TimingBelt)</span></a>' },
+          { method: 'read_pid_file', module: 'daemonizable::classmethods', html: '<a href="classes/Daemonizable/ClassMethods.html#M000104"><span class="method_name">read_pid_file</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a>' },
+          { method: 'remove_pid_file', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000097"><span class="method_name">remove_pid_file</span> <span class="module_name">(Daemonizable)</span></a>' },
+          { method: 'remove_stale_pid_file', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000099"><span class="method_name">remove_stale_pid_file</span> <span class="module_name">(Daemonizable)</span></a>' },
+          { method: 'replace_worker', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000064"><span class="method_name">replace_worker</span> <span class="module_name">(Bluth::CLI)</span></a>' },
+          { method: 'restart', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000096"><span class="method_name">restart</span> <span class="module_name">(Daemonizable)</span></a>' },
+          { method: 'restart', module: 'daemonizable::classmethods', html: '<a href="classes/Daemonizable/ClassMethods.html#M000101"><span class="method_name">restart</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a>' },
+          { method: 'retry!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000081"><span class="method_name">retry!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'run', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000038"><span class="method_name">run</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
+          { method: 'run', module: 'bluth::worker', html: '<a href="classes/Bluth/Worker.html#M000067"><span class="method_name">run</span> <span class="module_name">(Bluth::Worker)</span></a>' },
+          { method: 'run', module: 'bluth::scheduleworker', html: '<a href="classes/Bluth/ScheduleWorker.html#M000071"><span class="method_name">run</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a>' },
+          { method: 'run!', module: 'bluth::scheduleworker', html: '<a href="classes/Bluth/ScheduleWorker.html#M000070"><span class="method_name">run!</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a>' },
+          { method: 'run!', module: 'bluth::worker', html: '<a href="classes/Bluth/Worker.html#M000066"><span class="method_name">run!</span> <span class="module_name">(Bluth::Worker)</span></a>' },
+          { method: 'run!', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000037"><span class="method_name">run!</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
+          { method: 'runblock', module: 'bluth::workerbase::classmethods', html: '<a href="classes/Bluth/WorkerBase/ClassMethods.html#M000042"><span class="method_name">runblock</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a>' },
+          { method: 'running!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000087"><span class="method_name">running!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'running?', module: 'process', html: '<a href="classes/Process.html#M000090"><span class="method_name">running?</span> <span class="module_name">(Process)</span></a>' },
+          { method: 'schedulers', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000060"><span class="method_name">schedulers</span> <span class="module_name">(Bluth::CLI)</span></a>' },
+          { method: 'select', module: 'bluth::timingbelt', html: '<a href="classes/Bluth/TimingBelt.html#M000015"><span class="method_name">select</span> <span class="module_name">(Bluth::TimingBelt)</span></a>' },
+          { method: 'send_signal', module: 'daemonizable::classmethods', html: '<a href="classes/Daemonizable/ClassMethods.html#M000102"><span class="method_name">send_signal</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a>' },
           { method: 'shift', module: 'bluth', html: '<a href="classes/Bluth.html#M000010"><span class="method_name">shift</span> <span class="module_name">(Bluth)</span></a>' },
-          { method: 'silent', module: 'logging', html: '<a href="classes/Logging.html#M000086"><span class="method_name">silent</span> <span class="module_name">(Logging)</span></a>' },
-          { method: 'silent=', module: 'logging', html: '<a href="classes/Logging.html#M000087"><span class="method_name">silent=</span> <span class="module_name">(Logging)</span></a>' },
-          { method: 'silent?', module: 'logging', html: '<a href="classes/Logging.html#M000085"><span class="method_name">silent?</span> <span class="module_name">(Logging)</span></a>' },
-          { method: 'start_scheduler', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000037"><span class="method_name">start_scheduler</span> <span class="module_name">(Bluth::CLI)</span></a>' },
-          { method: 'start_worker', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000040"><span class="method_name">start_worker</span> <span class="module_name">(Bluth::CLI)</span></a>' },
-          { method: 'start_workers', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000036"><span class="method_name">start_workers</span> <span class="module_name">(Bluth::CLI)</span></a>' },
-          { method: 'stop_scheduler', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000038"><span class="method_name">stop_scheduler</span> <span class="module_name">(Bluth::CLI)</span></a>' },
-          { method: 'stop_worker', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000042"><span class="method_name">stop_worker</span> <span class="module_name">(Bluth::CLI)</span></a>' },
-          { method: 'stop_workers', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000041"><span class="method_name">stop_workers</span> <span class="module_name">(Bluth::CLI)</span></a>' },
-          { method: 'success!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000061"><span class="method_name">success!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
+          { method: 'silent', module: 'logging', html: '<a href="classes/Logging.html#M000108"><span class="method_name">silent</span> <span class="module_name">(Logging)</span></a>' },
+          { method: 'silent=', module: 'logging', html: '<a href="classes/Logging.html#M000109"><span class="method_name">silent=</span> <span class="module_name">(Logging)</span></a>' },
+          { method: 'silent?', module: 'logging', html: '<a href="classes/Logging.html#M000107"><span class="method_name">silent?</span> <span class="module_name">(Logging)</span></a>' },
+          { method: 'skip', module: 'bluth::timingbelt::notch', html: '<a href="classes/Bluth/TimingBelt/Notch.html#M000026"><span class="method_name">skip</span> <span class="module_name">(Bluth::TimingBelt::Notch)</span></a>' },
+          { method: 'stamp', module: 'bluth::timingbelt', html: '<a href="classes/Bluth/TimingBelt.html#M000018"><span class="method_name">stamp</span> <span class="module_name">(Bluth::TimingBelt)</span></a>' },
+          { method: 'start_scheduler', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000058"><span class="method_name">start_scheduler</span> <span class="module_name">(Bluth::CLI)</span></a>' },
+          { method: 'start_worker', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000061"><span class="method_name">start_worker</span> <span class="module_name">(Bluth::CLI)</span></a>' },
+          { method: 'start_workers', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000057"><span class="method_name">start_workers</span> <span class="module_name">(Bluth::CLI)</span></a>' },
+          { method: 'stop_scheduler', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000059"><span class="method_name">stop_scheduler</span> <span class="module_name">(Bluth::CLI)</span></a>' },
+          { method: 'stop_worker', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000063"><span class="method_name">stop_worker</span> <span class="module_name">(Bluth::CLI)</span></a>' },
+          { method: 'stop_workers', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000062"><span class="method_name">stop_workers</span> <span class="module_name">(Bluth::CLI)</span></a>' },
+          { method: 'success!', module: 'bluth::gob', html: '<a href="classes/Bluth/Gob.html#M000083"><span class="method_name">success!</span> <span class="module_name">(Bluth::Gob)</span></a>' },
           { method: 'sysinfo', module: 'bluth', html: '<a href="classes/Bluth.html#M000003"><span class="method_name">sysinfo</span> <span class="module_name">(Bluth)</span></a>' },
-          { method: 'to_s', module: 'bluth::version', html: '<a href="classes/Bluth/VERSION.html#M000026"><span class="method_name">to_s</span> <span class="module_name">(Bluth::VERSION)</span></a>' },
-          { method: 'trace', module: 'logging', html: '<a href="classes/Logging.html#M000091"><span class="method_name">trace</span> <span class="module_name">(Logging)</span></a>' },
-          { method: 'trace', module: 'logging', html: '<a href="classes/Logging.html#M000090"><span class="method_name">trace</span> <span class="module_name">(Logging)</span></a>' },
-          { method: 'trace?', module: 'logging', html: '<a href="classes/Logging.html#M000083"><span class="method_name">trace?</span> <span class="module_name">(Logging)</span></a>' },
-          { method: 'wid', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000013"><span class="method_name">wid</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
-          { method: 'workers', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000043"><span class="method_name">workers</span> <span class="module_name">(Bluth::CLI)</span></a>' },
-          { method: 'working!', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000017"><span class="method_name">working!</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
-          { method: 'write_pid_file', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000076"><span class="method_name">write_pid_file</span> <span class="module_name">(Daemonizable)</span></a>' },
+          { method: 'to_s', module: 'bluth::version', html: '<a href="classes/Bluth/VERSION.html#M000043"><span class="method_name">to_s</span> <span class="module_name">(Bluth::VERSION)</span></a>' },
+          { method: 'trace', module: 'logging', html: '<a href="classes/Logging.html#M000113"><span class="method_name">trace</span> <span class="module_name">(Logging)</span></a>' },
+          { method: 'trace', module: 'logging', html: '<a href="classes/Logging.html#M000112"><span class="method_name">trace</span> <span class="module_name">(Logging)</span></a>' },
+          { method: 'trace?', module: 'logging', html: '<a href="classes/Logging.html#M000105"><span class="method_name">trace?</span> <span class="module_name">(Logging)</span></a>' },
+          { method: 'wid', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000030"><span class="method_name">wid</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
+          { method: 'workers', module: 'bluth::cli', html: '<a href="classes/Bluth/CLI.html#M000065"><span class="method_name">workers</span> <span class="module_name">(Bluth::CLI)</span></a>' },
+          { method: 'working!', module: 'bluth::workerbase', html: '<a href="classes/Bluth/WorkerBase.html#M000034"><span class="method_name">working!</span> <span class="module_name">(Bluth::WorkerBase)</span></a>' },
+          { method: 'write_pid_file', module: 'daemonizable', html: '<a href="classes/Daemonizable.html#M000098"><span class="method_name">write_pid_file</span> <span class="module_name">(Daemonizable)</span></a>' },
         ]
         $(document).observe('dom:loaded', function() {
         	// Setup search-during-typing.
@@ -4496,101 +4518,123 @@
       </form>
       <ol class='methods' id='search-results' style='display: none'></ol>
       <ol class='methods' id='index-entries'>
-        <li><a href="classes/Bluth/Handler.html#M000034"><span class="method_name">all</span> <span class="module_name">(Bluth::Handler)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000054"><span class="method_name">attempt!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000053"><span class="method_name">attempt?</span> <span class="module_name">(Bluth::Gob)</span></a></li>
-        <li><a href="classes/Daemonizable.html#M000072"><span class="method_name">change_privilege</span> <span class="module_name">(Daemonizable)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000051"><span class="method_name">clear!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt/Notch.html#M000028"><span class="method_name">-</span> <span class="module_name">(Bluth::TimingBelt::Notch)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt.html#M000022"><span class="method_name">add</span> <span class="module_name">(Bluth::TimingBelt)</span></a></li>
+        <li><a href="classes/Bluth/Handler.html#M000055"><span class="method_name">all</span> <span class="module_name">(Bluth::Handler)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000076"><span class="method_name">attempt!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000075"><span class="method_name">attempt?</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Daemonizable.html#M000094"><span class="method_name">change_privilege</span> <span class="module_name">(Daemonizable)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000073"><span class="method_name">clear!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
         <li><a href="classes/Bluth.html#M000006"><span class="method_name">clear_locks</span> <span class="module_name">(Bluth)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt.html#M000016"><span class="method_name">collect</span> <span class="module_name">(Bluth::TimingBelt)</span></a></li>
         <li><a href="classes/Bluth.html#M000005"><span class="method_name">connect</span> <span class="module_name">(Bluth)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase.html#M000015"><span class="method_name">current_job</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000055"><span class="method_name">current_queue</span> <span class="module_name">(Bluth::Gob)</span></a></li>
-        <li><a href="classes/Daemonizable.html#M000071"><span class="method_name">daemonize</span> <span class="module_name">(Daemonizable)</span></a></li>
-        <li><a href="classes/Logging.html#M000092"><span class="method_name">debug</span> <span class="module_name">(Logging)</span></a></li>
-        <li><a href="classes/Logging.html#M000093"><span class="method_name">debug</span> <span class="module_name">(Logging)</span></a></li>
-        <li><a href="classes/Logging.html#M000084"><span class="method_name">debug?</span> <span class="module_name">(Logging)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000058"><span class="method_name">delayed?</span> <span class="module_name">(Bluth::Gob)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000064"><span class="method_name">dequeue!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000062"><span class="method_name">duration</span> <span class="module_name">(Bluth::Gob)</span></a></li>
-        <li><a href="classes/Bluth/Handler.html#M000031"><span class="method_name">enqueue</span> <span class="module_name">(Bluth::Handler)</span></a></li>
+        <li><a href="classes/Bluth/Handler.html#M000051"><span class="method_name">create_job</span> <span class="module_name">(Bluth::Handler)</span></a></li>
+        <li><a href="classes/Bluth/Queue.html#M000045"><span class="method_name">create_queue</span> <span class="module_name">(Bluth::Queue)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase.html#M000032"><span class="method_name">current_job</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000077"><span class="method_name">current_queue</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Daemonizable.html#M000093"><span class="method_name">daemonize</span> <span class="module_name">(Daemonizable)</span></a></li>
+        <li><a href="classes/Logging.html#M000115"><span class="method_name">debug</span> <span class="module_name">(Logging)</span></a></li>
+        <li><a href="classes/Logging.html#M000114"><span class="method_name">debug</span> <span class="module_name">(Logging)</span></a></li>
+        <li><a href="classes/Logging.html#M000106"><span class="method_name">debug?</span> <span class="module_name">(Logging)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000080"><span class="method_name">delayed?</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000086"><span class="method_name">dequeue!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000084"><span class="method_name">duration</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt.html#M000014"><span class="method_name">each</span> <span class="module_name">(Bluth::TimingBelt)</span></a></li>
+        <li><a href="classes/Bluth/Handler.html#M000050"><span class="method_name">engauge</span> <span class="module_name">(Bluth::Handler)</span></a></li>
+        <li><a href="classes/Bluth/Handler.html#M000052"><span class="method_name">enqueue</span> <span class="module_name">(Bluth::Handler)</span></a></li>
         <li><a href="classes/ExampleHandler.html#M000001"><span class="method_name">enqueue</span> <span class="module_name">(ExampleHandler)</span></a></li>
-        <li><a href="classes/Bluth/Queue.html#M000029"><span class="method_name">entry_queues</span> <span class="module_name">(Bluth::Queue)</span></a></li>
-        <li><a href="classes/Bluth/ScheduleWorker.html#M000047"><span class="method_name">every</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a></li>
-        <li><a href="classes/Bluth/Handler.html#M000030"><span class="method_name">extended</span> <span class="module_name">(Bluth::Handler)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000060"><span class="method_name">failure!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Bluth/Queue.html#M000047"><span class="method_name">entry_queues</span> <span class="module_name">(Bluth::Queue)</span></a></li>
+        <li><a href="classes/Bluth/ScheduleWorker.html#M000069"><span class="method_name">every</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a></li>
+        <li><a href="classes/Bluth/Handler.html#M000049"><span class="method_name">extended</span> <span class="module_name">(Bluth::Handler)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000082"><span class="method_name">failure!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt.html#M000012"><span class="method_name">find</span> <span class="module_name">(Bluth::TimingBelt)</span></a></li>
         <li><a href="classes/Bluth.html#M000007"><span class="method_name">find_locks</span> <span class="module_name">(Bluth)</span></a></li>
-        <li><a href="classes/Daemonizable/ClassMethods.html#M000081"><span class="method_name">force_kill</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000019"><span class="method_name">from_redis</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
-        <li><a href="classes/Bluth/Handler.html#M000033"><span class="method_name">generate_id</span> <span class="module_name">(Bluth::Handler)</span></a></li>
-        <li><a href="classes/Rufus/Scheduler/SchedulerCore.html#M000067"><span class="method_name">handle_exception</span> <span class="module_name">(Rufus::Scheduler::SchedulerCore)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000056"><span class="method_name">handler</span> <span class="module_name">(Bluth::Gob)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase.html#M000018"><span class="method_name">included</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
-        <li><a href="classes/Daemonizable.html#M000069"><span class="method_name">included</span> <span class="module_name">(Daemonizable)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase.html#M000012"><span class="method_name">init</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
-        <li><a href="classes/Bluth/ScheduleWorker.html#M000046"><span class="method_name">interval</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000050"><span class="method_name">jobid</span> <span class="module_name">(Bluth::Gob)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase.html#M000016"><span class="method_name">kill</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000022"><span class="method_name">kill</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
-        <li><a href="classes/Daemonizable/ClassMethods.html#M000078"><span class="method_name">kill</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a></li>
-        <li><a href="classes/Bluth/VERSION.html#M000027"><span class="method_name">load_config</span> <span class="module_name">(Bluth::VERSION)</span></a></li>
-        <li><a href="classes/Logging.html#M000088"><span class="method_name">log</span> <span class="module_name">(Logging)</span></a></li>
-        <li><a href="classes/Logging.html#M000089"><span class="method_name">log</span> <span class="module_name">(Logging)</span></a></li>
-        <li><a href="classes/Logging.html#M000094"><span class="method_name">log_error</span> <span class="module_name">(Logging)</span></a></li>
-        <li><a href="classes/Logging.html#M000095"><span class="method_name">log_error</span> <span class="module_name">(Logging)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000066"><span class="method_name">move!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase.html#M000014"><span class="method_name">name</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
-        <li><a href="classes/Daemonizable.html#M000073"><span class="method_name">on_restart</span> <span class="module_name">(Daemonizable)</span></a></li>
+        <li><a href="classes/Daemonizable/ClassMethods.html#M000103"><span class="method_name">force_kill</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000036"><span class="method_name">from_redis</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
+        <li><a href="classes/Bluth/Handler.html#M000054"><span class="method_name">generate_id</span> <span class="module_name">(Bluth::Handler)</span></a></li>
+        <li><a href="classes/Rufus/Scheduler/SchedulerCore.html#M000089"><span class="method_name">handle_exception</span> <span class="module_name">(Rufus::Scheduler::SchedulerCore)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000078"><span class="method_name">handler</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Daemonizable.html#M000091"><span class="method_name">included</span> <span class="module_name">(Daemonizable)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase.html#M000035"><span class="method_name">included</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase.html#M000029"><span class="method_name">init</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
+        <li><a href="classes/Bluth/ScheduleWorker.html#M000068"><span class="method_name">interval</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000072"><span class="method_name">jobid</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000039"><span class="method_name">kill</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
+        <li><a href="classes/Daemonizable/ClassMethods.html#M000100"><span class="method_name">kill</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase.html#M000033"><span class="method_name">kill</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
+        <li><a href="classes/Bluth/VERSION.html#M000044"><span class="method_name">load_config</span> <span class="module_name">(Bluth::VERSION)</span></a></li>
+        <li><a href="classes/Logging.html#M000110"><span class="method_name">log</span> <span class="module_name">(Logging)</span></a></li>
+        <li><a href="classes/Logging.html#M000111"><span class="method_name">log</span> <span class="module_name">(Logging)</span></a></li>
+        <li><a href="classes/Logging.html#M000116"><span class="method_name">log_error</span> <span class="module_name">(Logging)</span></a></li>
+        <li><a href="classes/Logging.html#M000117"><span class="method_name">log_error</span> <span class="module_name">(Logging)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000088"><span class="method_name">move!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase.html#M000031"><span class="method_name">name</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt/Notch.html#M000024"><span class="method_name">next</span> <span class="module_name">(Bluth::TimingBelt::Notch)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt.html#M000021"><span class="method_name">next_empty_notch</span> <span class="module_name">(Bluth::TimingBelt)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt.html#M000019"><span class="method_name">notch</span> <span class="module_name">(Bluth::TimingBelt)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt.html#M000017"><span class="method_name">now</span> <span class="module_name">(Bluth::TimingBelt)</span></a></li>
+        <li><a href="classes/Daemonizable.html#M000095"><span class="method_name">on_restart</span> <span class="module_name">(Daemonizable)</span></a></li>
         <li><a href="classes/Bluth.html#M000004"><span class="method_name">onconnect</span> <span class="module_name">(Bluth)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000024"><span class="method_name">onexit</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000023"><span class="method_name">onstart</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000041"><span class="method_name">onexit</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000040"><span class="method_name">onstart</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
         <li><a href="classes/ExampleHandler.html#M000002"><span class="method_name">perform</span> <span class="module_name">(ExampleHandler)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000057"><span class="method_name">perform</span> <span class="module_name">(Bluth::Gob)</span></a></li>
-        <li><a href="classes/Daemonizable.html#M000070"><span class="method_name">pid</span> <span class="module_name">(Daemonizable)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000079"><span class="method_name">perform</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Daemonizable.html#M000092"><span class="method_name">pid</span> <span class="module_name">(Daemonizable)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt.html#M000023"><span class="method_name">pop</span> <span class="module_name">(Bluth::TimingBelt)</span></a></li>
         <li><a href="classes/Bluth.html#M000011"><span class="method_name">pop</span> <span class="module_name">(Bluth)</span></a></li>
-        <li><a href="classes/Bluth/Handler.html#M000035"><span class="method_name">prepare</span> <span class="module_name">(Bluth::Handler)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000052"><span class="method_name">preprocess</span> <span class="module_name">(Bluth::Gob)</span></a></li>
-        <li><a href="classes/Bluth/Handler.html#M000032"><span class="method_name">queue</span> <span class="module_name">(Bluth::Handler)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000063"><span class="method_name">queue</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Bluth/Handler.html#M000056"><span class="method_name">prepare</span> <span class="module_name">(Bluth::Handler)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000074"><span class="method_name">preprocess</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt/Notch.html#M000025"><span class="method_name">prev</span> <span class="module_name">(Bluth::TimingBelt::Notch)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt.html#M000020"><span class="method_name">priority</span> <span class="module_name">(Bluth::TimingBelt)</span></a></li>
+        <li><a href="classes/Bluth/Handler.html#M000053"><span class="method_name">queue</span> <span class="module_name">(Bluth::Handler)</span></a></li>
         <li><a href="classes/Bluth.html#M000009"><span class="method_name">queue</span> <span class="module_name">(Bluth)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt/Notch.html#M000027"><span class="method_name">queue</span> <span class="module_name">(Bluth::TimingBelt::Notch)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000085"><span class="method_name">queue</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Bluth/Queue.html#M000048"><span class="method_name">queue</span> <span class="module_name">(Bluth::Queue)</span></a></li>
         <li><a href="classes/Bluth.html#M000008"><span class="method_name">queue?</span> <span class="module_name">(Bluth)</span></a></li>
-        <li><a href="classes/Bluth/Queue.html#M000028"><span class="method_name">queues</span> <span class="module_name">(Bluth::Queue)</span></a></li>
-        <li><a href="classes/Daemonizable/ClassMethods.html#M000082"><span class="method_name">read_pid_file</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a></li>
-        <li><a href="classes/Daemonizable.html#M000075"><span class="method_name">remove_pid_file</span> <span class="module_name">(Daemonizable)</span></a></li>
-        <li><a href="classes/Daemonizable.html#M000077"><span class="method_name">remove_stale_pid_file</span> <span class="module_name">(Daemonizable)</span></a></li>
-        <li><a href="classes/Daemonizable.html#M000074"><span class="method_name">restart</span> <span class="module_name">(Daemonizable)</span></a></li>
-        <li><a href="classes/Daemonizable/ClassMethods.html#M000079"><span class="method_name">restart</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000059"><span class="method_name">retry!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
-        <li><a href="classes/Bluth/ScheduleWorker.html#M000049"><span class="method_name">run</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a></li>
-        <li><a href="classes/Bluth/Worker.html#M000045"><span class="method_name">run</span> <span class="module_name">(Bluth::Worker)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000021"><span class="method_name">run</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
-        <li><a href="classes/Bluth/Worker.html#M000044"><span class="method_name">run!</span> <span class="module_name">(Bluth::Worker)</span></a></li>
-        <li><a href="classes/Bluth/ScheduleWorker.html#M000048"><span class="method_name">run!</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000020"><span class="method_name">run!</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000025"><span class="method_name">runblock</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000065"><span class="method_name">running!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
-        <li><a href="classes/Process.html#M000068"><span class="method_name">running?</span> <span class="module_name">(Process)</span></a></li>
-        <li><a href="classes/Bluth/CLI.html#M000039"><span class="method_name">schedulers</span> <span class="module_name">(Bluth::CLI)</span></a></li>
-        <li><a href="classes/Daemonizable/ClassMethods.html#M000080"><span class="method_name">send_signal</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a></li>
+        <li><a href="classes/Bluth/Queue.html#M000046"><span class="method_name">queues</span> <span class="module_name">(Bluth::Queue)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt.html#M000013"><span class="method_name">range</span> <span class="module_name">(Bluth::TimingBelt)</span></a></li>
+        <li><a href="classes/Daemonizable/ClassMethods.html#M000104"><span class="method_name">read_pid_file</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a></li>
+        <li><a href="classes/Daemonizable.html#M000097"><span class="method_name">remove_pid_file</span> <span class="module_name">(Daemonizable)</span></a></li>
+        <li><a href="classes/Daemonizable.html#M000099"><span class="method_name">remove_stale_pid_file</span> <span class="module_name">(Daemonizable)</span></a></li>
+        <li><a href="classes/Bluth/CLI.html#M000064"><span class="method_name">replace_worker</span> <span class="module_name">(Bluth::CLI)</span></a></li>
+        <li><a href="classes/Daemonizable.html#M000096"><span class="method_name">restart</span> <span class="module_name">(Daemonizable)</span></a></li>
+        <li><a href="classes/Daemonizable/ClassMethods.html#M000101"><span class="method_name">restart</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000081"><span class="method_name">retry!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000038"><span class="method_name">run</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
+        <li><a href="classes/Bluth/Worker.html#M000067"><span class="method_name">run</span> <span class="module_name">(Bluth::Worker)</span></a></li>
+        <li><a href="classes/Bluth/ScheduleWorker.html#M000071"><span class="method_name">run</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a></li>
+        <li><a href="classes/Bluth/ScheduleWorker.html#M000070"><span class="method_name">run!</span> <span class="module_name">(Bluth::ScheduleWorker)</span></a></li>
+        <li><a href="classes/Bluth/Worker.html#M000066"><span class="method_name">run!</span> <span class="module_name">(Bluth::Worker)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000037"><span class="method_name">run!</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase/ClassMethods.html#M000042"><span class="method_name">runblock</span> <span class="module_name">(Bluth::WorkerBase::ClassMethods)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000087"><span class="method_name">running!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Process.html#M000090"><span class="method_name">running?</span> <span class="module_name">(Process)</span></a></li>
+        <li><a href="classes/Bluth/CLI.html#M000060"><span class="method_name">schedulers</span> <span class="module_name">(Bluth::CLI)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt.html#M000015"><span class="method_name">select</span> <span class="module_name">(Bluth::TimingBelt)</span></a></li>
+        <li><a href="classes/Daemonizable/ClassMethods.html#M000102"><span class="method_name">send_signal</span> <span class="module_name">(Daemonizable::ClassMethods)</span></a></li>
         <li><a href="classes/Bluth.html#M000010"><span class="method_name">shift</span> <span class="module_name">(Bluth)</span></a></li>
-        <li><a href="classes/Logging.html#M000086"><span class="method_name">silent</span> <span class="module_name">(Logging)</span></a></li>
-        <li><a href="classes/Logging.html#M000087"><span class="method_name">silent=</span> <span class="module_name">(Logging)</span></a></li>
-        <li><a href="classes/Logging.html#M000085"><span class="method_name">silent?</span> <span class="module_name">(Logging)</span></a></li>
-        <li><a href="classes/Bluth/CLI.html#M000037"><span class="method_name">start_scheduler</span> <span class="module_name">(Bluth::CLI)</span></a></li>
-        <li><a href="classes/Bluth/CLI.html#M000040"><span class="method_name">start_worker</span> <span class="module_name">(Bluth::CLI)</span></a></li>
-        <li><a href="classes/Bluth/CLI.html#M000036"><span class="method_name">start_workers</span> <span class="module_name">(Bluth::CLI)</span></a></li>
-        <li><a href="classes/Bluth/CLI.html#M000038"><span class="method_name">stop_scheduler</span> <span class="module_name">(Bluth::CLI)</span></a></li>
-        <li><a href="classes/Bluth/CLI.html#M000042"><span class="method_name">stop_worker</span> <span class="module_name">(Bluth::CLI)</span></a></li>
-        <li><a href="classes/Bluth/CLI.html#M000041"><span class="method_name">stop_workers</span> <span class="module_name">(Bluth::CLI)</span></a></li>
-        <li><a href="classes/Bluth/Gob.html#M000061"><span class="method_name">success!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
+        <li><a href="classes/Logging.html#M000108"><span class="method_name">silent</span> <span class="module_name">(Logging)</span></a></li>
+        <li><a href="classes/Logging.html#M000109"><span class="method_name">silent=</span> <span class="module_name">(Logging)</span></a></li>
+        <li><a href="classes/Logging.html#M000107"><span class="method_name">silent?</span> <span class="module_name">(Logging)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt/Notch.html#M000026"><span class="method_name">skip</span> <span class="module_name">(Bluth::TimingBelt::Notch)</span></a></li>
+        <li><a href="classes/Bluth/TimingBelt.html#M000018"><span class="method_name">stamp</span> <span class="module_name">(Bluth::TimingBelt)</span></a></li>
+        <li><a href="classes/Bluth/CLI.html#M000058"><span class="method_name">start_scheduler</span> <span class="module_name">(Bluth::CLI)</span></a></li>
+        <li><a href="classes/Bluth/CLI.html#M000061"><span class="method_name">start_worker</span> <span class="module_name">(Bluth::CLI)</span></a></li>
+        <li><a href="classes/Bluth/CLI.html#M000057"><span class="method_name">start_workers</span> <span class="module_name">(Bluth::CLI)</span></a></li>
+        <li><a href="classes/Bluth/CLI.html#M000059"><span class="method_name">stop_scheduler</span> <span class="module_name">(Bluth::CLI)</span></a></li>
+        <li><a href="classes/Bluth/CLI.html#M000063"><span class="method_name">stop_worker</span> <span class="module_name">(Bluth::CLI)</span></a></li>
+        <li><a href="classes/Bluth/CLI.html#M000062"><span class="method_name">stop_workers</span> <span class="module_name">(Bluth::CLI)</span></a></li>
+        <li><a href="classes/Bluth/Gob.html#M000083"><span class="method_name">success!</span> <span class="module_name">(Bluth::Gob)</span></a></li>
         <li><a href="classes/Bluth.html#M000003"><span class="method_name">sysinfo</span> <span class="module_name">(Bluth)</span></a></li>
-        <li><a href="classes/Bluth/VERSION.html#M000026"><span class="method_name">to_s</span> <span class="module_name">(Bluth::VERSION)</span></a></li>
-        <li><a href="classes/Logging.html#M000091"><span class="method_name">trace</span> <span class="module_name">(Logging)</span></a></li>
-        <li><a href="classes/Logging.html#M000090"><span class="method_name">trace</span> <span class="module_name">(Logging)</span></a></li>
-        <li><a href="classes/Logging.html#M000083"><span class="method_name">trace?</span> <span class="module_name">(Logging)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase.html#M000013"><span class="method_name">wid</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
-        <li><a href="classes/Bluth/CLI.html#M000043"><span class="method_name">workers</span> <span class="module_name">(Bluth::CLI)</span></a></li>
-        <li><a href="classes/Bluth/WorkerBase.html#M000017"><span class="method_name">working!</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
-        <li><a href="classes/Daemonizable.html#M000076"><span class="method_name">write_pid_file</span> <span class="module_name">(Daemonizable)</span></a></li>
+        <li><a href="classes/Bluth/VERSION.html#M000043"><span class="method_name">to_s</span> <span class="module_name">(Bluth::VERSION)</span></a></li>
+        <li><a href="classes/Logging.html#M000113"><span class="method_name">trace</span> <span class="module_name">(Logging)</span></a></li>
+        <li><a href="classes/Logging.html#M000112"><span class="method_name">trace</span> <span class="module_name">(Logging)</span></a></li>
+        <li><a href="classes/Logging.html#M000105"><span class="method_name">trace?</span> <span class="module_name">(Logging)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase.html#M000030"><span class="method_name">wid</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
+        <li><a href="classes/Bluth/CLI.html#M000065"><span class="method_name">workers</span> <span class="module_name">(Bluth::CLI)</span></a></li>
+        <li><a href="classes/Bluth/WorkerBase.html#M000034"><span class="method_name">working!</span> <span class="module_name">(Bluth::WorkerBase)</span></a></li>
+        <li><a href="classes/Daemonizable.html#M000098"><span class="method_name">write_pid_file</span> <span class="module_name">(Daemonizable)</span></a></li>
       </ol>
     </div>
   </body>

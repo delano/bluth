@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang='en'>
   <head>
-    <title>: Bluth [bluth 0.6.8]</title>
+    <title>: Bluth [bluth 0.7.0]</title>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
     <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
     <script type='text/javascript'>
@@ -32,6 +32,9 @@
         <ol class='paths'>
           <li>
             <a href="../files/lib/bluth/cli_rb.html">lib/bluth/cli.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/bluth/timingbelt_rb.html">lib/bluth/timingbelt.rb</a>
           </li>
           <li class='other'>
             <a href="../files/lib/bluth/worker_rb.html">lib/bluth/worker.rb</a>
@@ -66,6 +69,7 @@
               <h2>Classes and Modules</h2>
               Module <a href="Bluth/Handler.html" class="link">Bluth::Handler</a><br />
               Module <a href="Bluth/Queue.html" class="link">Bluth::Queue</a><br />
+              Module <a href="Bluth/TimingBelt.html" class="link">Bluth::TimingBelt</a><br />
               Module <a href="Bluth/VERSION.html" class="link">Bluth::VERSION</a><br />
               Module <a href="Bluth/WorkerBase.html" class="link">Bluth::WorkerBase</a><br />
               Class <a href="Bluth/Buster.html" class="link">Bluth::Buster</a><br />
@@ -215,7 +219,7 @@
                   <a class='source-toggle' href='#' onclick="toggleCode('M000011-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000011-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 129</span>&#x000A;  <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">pop</span>&#x000A;    <span class="ruby-identifier">blocking_queue_handler</span> <span class="ruby-identifier">:brpop</span>&#x000A;  <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000011-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 154</span>&#x000A;  <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">pop</span>&#x000A;    <span class="ruby-identifier">blocking_queue_handler</span> <span class="ruby-identifier">:brpop</span>&#x000A;  <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='method public-class' id='method-M000009'>
@@ -266,7 +270,7 @@
                   <a class='source-toggle' href='#' onclick="toggleCode('M000010-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000010-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 125</span>&#x000A;  <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">shift</span>&#x000A;    <span class="ruby-identifier">blocking_queue_handler</span> <span class="ruby-identifier">:blpop</span>&#x000A;  <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000010-source'><span class="ruby-comment cmt"># File lib/bluth.rb, line 150</span>&#x000A;  <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">shift</span>&#x000A;    <span class="ruby-identifier">blocking_queue_handler</span> <span class="ruby-identifier">:blpop</span>&#x000A;  <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='method public-class' id='method-M000003'>

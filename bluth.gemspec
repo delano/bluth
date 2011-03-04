@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Delano Mandelbaum"]
-  s.date = %q{2011-02-19}
+  s.date = %q{2011-03-04}
   s.default_executable = %q{bluth}
   s.description = %q{A Redis queuing system built on top of Familia}
   s.email = %q{delano@solutious.com}
@@ -37,7 +37,7 @@ Gem::Specification.new do |s|
      "try/17_gob_try.rb",
      "try/18_handler_try.rb",
      "try/19_bluth_try.rb",
-     "try/30_timingbelt.rb"
+     "try/30_timingbelt_try.rb"
   ]
   s.homepage = %q{http://github.com/delano/bluth}
   s.rdoc_options = ["--charset=UTF-8"]

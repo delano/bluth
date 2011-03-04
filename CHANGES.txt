@@ -1,11 +1,12 @@
 BLUTH, CHANGES
 
-#### 0.7.0 (2011-02-??) ###############################
+#### 0.7.0 (2011-03-04) ###############################
 
 * ADDED: backtrace field to Bluth::Gob
 * ADDED: Bluth::TimingBelt
 * ADDED: Bluth::Queue.queues/entry_queues include TimingBelt queues 
   when Bluth::TimingBelt is defined.
+* ADDED: replace-worker command
 
 
 #### 0.6.8 (2011-02-07) ###############################

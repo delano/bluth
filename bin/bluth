@@ -68,14 +68,17 @@ class Bluth::CLI::Definition
   
   command :start_worker => Bluth::CLI
   command :start_scheduler => Bluth::CLI
-
+  
   option :f, :force
   command :stop_workers => Bluth::CLI
   option :f, :force
   command :stop_worker => Bluth::CLI
   option :f, :force
   command :stop_scheduler => Bluth::CLI
-
+  
+  about "Stop the oldest worker and start a new instance in its place."
+  command :replace_worker => Bluth::CLI
+  
   command :workers => Bluth::CLI  
   command :schedulers => Bluth::CLI
   

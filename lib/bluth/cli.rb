@@ -45,17 +45,25 @@ module Bluth
       end
     end
     
-    def stop_worker wid=nil,worker_class=Bluth::Worker
-      wids = wid ? [wid] : @argv
+    def stop_worker wid=nil, worker_class=Bluth::Worker
       Bluth.connect
+      wids = wid ? [wid] : @argv
       wids.each do |wid|
         worker = worker_class.from_redis wid
         kill_worker worker, worker_class
       end
     end
     
+    def replace_worker worker_class=Bluth::Worker
+      Bluth.connect
+      @global.daemon = true
+      worker = worker_class.instances.first  # grabs the oldest worker
+      kill_worker worker, worker_class
+      start_worker worker_class
+    end
+    
     def workers worker_class=Bluth::Worker
-      Familia.info worker_class.all.collect &:key
+      Familia.info worker_class.all.collect &:rediskey
     end
     
     private 

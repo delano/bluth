@@ -35,7 +35,7 @@ module Bluth
   class Shutdown < Familia::Problem; end
   @db = 0
   @env = :dev
-  @queuetimeout = 60 #.seconds
+  @queuetimeout = 30 #.seconds
   @handlers = []
   @locks = []
   @sysinfo = nil

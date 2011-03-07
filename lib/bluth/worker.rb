@@ -187,6 +187,8 @@ module Bluth
           end
           Familia.info "Set intervals: #{Worker.interval} sec / #{Bluth.queuetimeout} sec"
         end
+        ## TODO: on_the_minute = Time.at(BS.quantize(Stella.now, 1.minute)+1.minute).utc  ## first_at
+        ## @option.ontheminute
         @task = @scheduler.every Worker.interval, :blocking => true, :first_in => '2s' do |task|
           Familia.ld "#{$$} TICK @ #{Time.now.utc}" if Familia.debug?
           find_gob task

@@ -66,6 +66,7 @@ class Bluth::CLI::Definition
   
   #TODO: command :enqueue
   
+  #option :o, :ontheminute, "Start the worker precisely on the minute"
   command :start_worker => Bluth::CLI
   command :start_scheduler => Bluth::CLI
   
@@ -77,6 +78,7 @@ class Bluth::CLI::Definition
   command :stop_scheduler => Bluth::CLI
   
   about "Stop the oldest worker and start a new instance in its place."
+  #option :o, :ontheminute, "Start the worker precisely on the minute"
   command :replace_worker => Bluth::CLI
   
   command :workers => Bluth::CLI  

@@ -1,5 +1,14 @@
 BLUTH, CHANGES
 
+#### 0.7.1 (2011-03-06) ###############################
+
+* CHANGE: Bluth::Gob objects have a ttl of 2 hours (up from 1)
+* CHANGE: Bluth::Worker.interval is now 1 sec (down from 2)
+* ADDED: Bluth::Worker processes now handle USR1 and USR2 signals
+  for enabling/disabling debugging and increasing/decreasing
+  Bluth.queuetimeout (respectively)
+
+
 #### 0.7.0 (2011-03-04) ###############################
 
 * ADDED: backtrace field to Bluth::Gob

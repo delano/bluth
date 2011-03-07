@@ -113,7 +113,7 @@ module Bluth
   end
   
   class Worker < Storable
-    @interval = 2 #.seconds
+    @interval = 1 #.seconds
     class << self
       attr_accessor :interval
     end
@@ -164,19 +164,35 @@ module Bluth
     def run
       begin
         @process_id = $$
-        scheduler = Rufus::Scheduler.start_new
+        @scheduler = Rufus::Scheduler.start_new
         Bluth.connect
         self.class.runblock :onstart
         Familia.info "Setting interval: #{Worker.interval} sec (queuetimeout: #{Bluth.queuetimeout})"
         Familia.reconnect_all! # Need to reconnect after daemonize
         save
-        scheduler.every Worker.interval, :blocking => true do |task|
+        Signal.trap("USR1") do
+          Familia.debug = (Familia.debug == false)
+          Familia.info "Debugging is #{Familia.debug ? 'enabled' : 'disabled'}"
+        end
+        @usr2_reduce = true
+        Signal.trap("USR2") do
+          @usr2_reduce = false if Bluth.queuetimeout <= 2
+          @usr2_reduce = true if Bluth.queuetimeout >= 60
+          if @usr2_reduce
+            #Worker.interval /= 2.0
+            Bluth.queuetimeout /= 2
+          else
+            #Worker.interval *= 2.0
+            Bluth.queuetimeout *= 2
+          end
+          Familia.info "Set intervals: #{Worker.interval} sec / #{Bluth.queuetimeout} sec"
+        end
+        @task = @scheduler.every Worker.interval, :blocking => true, :first_in => '2s' do |task|
           Familia.ld "#{$$} TICK @ #{Time.now.utc}" if Familia.debug?
-          sleep rand
           find_gob task
         end
-        scheduler.join
-            
+        @scheduler.join 
+        
       rescue => ex
         msg = "#{ex.class}: #{ex.message}"
         Familia.info msg
@@ -196,7 +212,6 @@ module Bluth
       end
       
     end
-    
     
     private 
     

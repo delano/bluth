@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{bluth}
-  s.version = "0.7.0"
+  s.version = "0.7.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Delano Mandelbaum"]
-  s.date = %q{2011-03-04}
+  s.date = %q{2011-03-06}
   s.default_executable = %q{bluth}
   s.description = %q{A Redis queuing system built on top of Familia}
   s.email = %q{delano@solutious.com}

@@ -2,6 +2,8 @@ BLUTH, CHANGES
 
 #### 0.7.1 (2011-03-06) ###############################
 
+* FIXED: replace-worker command now always grabs the oldest worker
+  and gracefully exits when there's no workers.
 * CHANGE: Bluth::Gob objects have a ttl of 2 hours (up from 1)
 * CHANGE: Bluth::Worker.interval is now 1 sec (down from 2)
 * ADDED: Bluth::Worker processes now handle USR1 and USR2 signals

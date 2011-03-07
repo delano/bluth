@@ -29,7 +29,7 @@ module Bluth
     def start_worker worker_class=Bluth::Worker
       if @global.daemon
         worker = worker_class.new
-        Familia.info "Created: #{worker.rediskey}"
+        Familia.info "Created: #{worker.index}"
         worker.daemonize
         worker.run
       else
@@ -56,14 +56,21 @@ module Bluth
     
     def replace_worker worker_class=Bluth::Worker
       Bluth.connect
-      @global.daemon = true
-      worker = worker_class.instances.first  # grabs the oldest worker
-      kill_worker worker, worker_class
-      start_worker worker_class
+      workers = worker_class.instances.members.select { |w| w.host == Bluth.sysinfo.hostname }
+      if workers.empty?
+        Familia.info "No workers running on #{Bluth.sysinfo.hostname}"
+      else
+        workers.sort! { |a,b| a.created <=> b.created }
+        oldest_worker = workers.first
+        Familia.info "Replacing #{oldest_worker.index}/#{oldest_worker.pid} (running since #{Time.at(oldest_worker.created).utc})"
+        kill_worker oldest_worker, worker_class
+        @global.daemon = true
+        start_worker worker_class
+      end
     end
     
     def workers worker_class=Bluth::Worker
-      Familia.info worker_class.all.collect &:rediskey
+      Familia.info worker_class.all.collect &:index
     end
     
     private 
@@ -73,7 +80,7 @@ module Bluth
         Familia.info "No such worker"
         exit 1
       else
-        Familia.info "Killing #{worker.rediskey}"
+        Familia.info "Killing #{worker.index}"
         worker.kill @option.force
       end
     end

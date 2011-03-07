@@ -80,13 +80,13 @@ module Bluth
       end
       def run!(*args)
         me = new
-        Familia.info "Created: #{me.rediskey}"
+        Familia.info "Created: #{me.index}"
         me.run!
         me
       end
       def run(*args)
         me = new
-        Familia.info "Created: #{me.rediskey}"
+        Familia.info "Created: #{me.index}"
         me.run
         me
       end

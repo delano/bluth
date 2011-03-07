@@ -255,7 +255,7 @@ module Bluth
     MAX_ATTEMPTS = 3.freeze unless defined?(Gob::MAX_ATTEMPTS)
     include Familia
     prefix [:bluth, :gob]
-    ttl 3600 #.seconds
+    ttl 60*60*2 # 2 hours
     index :jobid
     field :jobid => Gibbler::Digest
     field :handler => String

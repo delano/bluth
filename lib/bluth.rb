@@ -66,6 +66,18 @@ module Bluth
     def connect
       instance_eval &onconnect unless onconnect.nil?
     end
+    def reconnect! delay=5
+      sleep delay
+      success = begin
+        Familia.reconnect_all!
+        (Bluth::Gob.redis.ping.to_s.upcase == 'PONG')
+      rescue => ex
+        Familia.info "  #{ex.message}"
+        false
+      end
+      Familia.info "  reconnected: #{success}"
+      success
+    end      
   end
   
   def Bluth.clear_locks
@@ -173,6 +185,10 @@ module Bluth
         gob.current_queue = :running
         gob.save
       end
+      
+    rescue Errno::ECONNREFUSED => ex
+      raise ex
+      
     rescue => ex
       if queue.nil?
         Familia.info "ERROR: #{ex.message}"

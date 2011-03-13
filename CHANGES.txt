@@ -1,5 +1,12 @@
 BLUTH, CHANGES
 
+#### 0.7.2 (2011-03-??) ###############################
+
+* CHANGE: Gracefully rescue Errno::ECONNREFUSED and try to reconnect
+* ADDED: Bluth::Worker.reconnect!
+* ADDED: Bluth::Worker.onerror
+
+
 #### 0.7.1 (2011-03-06) ###############################
 
 * FIXED: replace-worker command now always grabs the oldest worker

@@ -78,6 +78,18 @@ module Bluth
         me = new nil, nil, wid
         super(me.index)
       end
+      def reconnect! name=nil
+        Familia.info "Reconnecting #{name}"
+        attempt = 0
+        success = false
+        reconnect_tries.times {
+          attempt += 1
+          Familia.info " reconnecting in #{reconnect_delay} (\##{attempt} of #{reconnect_tries})..."
+          success = Bluth.reconnect! reconnect_delay
+          break if success
+        }
+        success
+      end
       def run!(*args)
         me = new
         Familia.info "Created: #{me.index}"
@@ -99,6 +111,10 @@ module Bluth
         @onstart = blk unless blk.nil?
         @onstart
       end
+      def onerror &blk
+        @onerror = blk unless blk.nil?
+        @onerror
+      end
       def onexit &blk
         @onexit = blk unless blk.nil?
         @onexit
@@ -114,8 +130,10 @@ module Bluth
   
   class Worker < Storable
     @interval = 1 #.seconds
+    @reconnect_delay = 15 #.seconds
+    @reconnect_tries = 20
     class << self
-      attr_accessor :interval
+      attr_accessor :interval, :reconnect_delay, :reconnect_tries
     end
     include WorkerBase
     include Familia
@@ -143,11 +161,57 @@ module Bluth
       end
     end
     
+    def carefully
+      begin
+        yield
+      rescue Errno::ECONNREFUSED => ex
+        
+        unless Bluth::Worker.reconnect! self.index
+          self.class.onerror.call ex, self if self.class.onerror 
+          Familia.info "Reconnect failed :["
+        end
+      
+      rescue Bluth::Shutdown => ex
+        msg = "Shutdown requested: #{ex.message}"
+        job.success! msg
+        Familia.info msg
+        task.unschedule
+        destroy!
+        exit
+      rescue Bluth::Maeby => ex
+        Familia.info ex.message
+        job.success! ex.message
+        self.success!
+      rescue Bluth::Buster => ex  
+        Familia.info ex.message
+        job.failure! ex.message
+        self.failure!
+      rescue => ex
+        Familia.info ex.message
+        if self.class.onerror 
+          self.class.onerror.call ex, self
+        else
+          Familia.info ex.backtrace
+          job.retry! "#{ex.class}: #{ex.message}" if job
+          problem!
+        end
+        #if problem > 5
+        #  ## TODO: SEND EMAIL
+        #  task.unschedule unless task.nil? # Kill this worker b/c something is clearly wrong
+        #  destroy!
+        #  EM.stop
+        #  exit 1
+        #end
+      end
+    end
+    
     def run!
       begin
         Bluth.connect
         self.class.runblock :onstart
-        find_gob
+        carefully do
+          find_gob
+        end
       rescue => ex
         msg = "#{ex.class}: #{ex.message}"
         Familia.info msg
@@ -190,8 +254,10 @@ module Bluth
         ## TODO: on_the_minute = Time.at(BS.quantize(Stella.now, 1.minute)+1.minute).utc  ## first_at
         ## @option.ontheminute
         @task = @scheduler.every Worker.interval, :blocking => true, :first_in => '2s' do |task|
-          Familia.ld "#{$$} TICK @ #{Time.now.utc}" if Familia.debug?
-          find_gob task
+          carefully do
+            Familia.ld "#{$$} TICK @ #{Time.now.utc}" if Familia.debug?
+            find_gob task
+          end
         end
         @scheduler.join 
         
@@ -199,7 +265,6 @@ module Bluth
         msg = "#{ex.class}: #{ex.message}"
         Familia.info msg
         Familia.trace :EXCEPTION, msg, caller[1] if Familia.debug?
-        self.class.runblock :onexit
         destroy!
       rescue Interrupt => ex
         puts <<-EOS.gsub(/(?:^|\n)\s*/, "\n")
@@ -209,8 +274,9 @@ module Bluth
         EOS
         # We reconnect to the queue in case we're currently
         # waiting on a brpop (blocking pop) timeout.
-        self.class.runblock :onexit
         destroy!
+      ensure
+        self.class.runblock :onexit
       end
       
     end
@@ -219,55 +285,28 @@ module Bluth
     
     # DO NOT call return from this method
     def find_gob(task=nil)
-      begin
-        job = Bluth.pop
-        unless job.nil?
-          job.wid = self.wid
-          if job.delayed?
-            job.attempts = 0
-            job.retry!
-          elsif !job.attempt?
-            job.failure! "Too many attempts"
-          else
-            job.stime = Time.now.utc.to_i
-            self.working! job.jobid
-            tms = Benchmark.measure do
-              job.perform
-            end
-            job.cpu = [tms.utime,tms.stime,tms.real]
-            job.save
-            job.success!
-            self.success!
+
+      job = Bluth.pop
+      unless job.nil?
+        job.wid = self.wid
+        if job.delayed?
+          job.attempts = 0
+          job.retry!
+        elsif !job.attempt?
+          job.failure! "Too many attempts"
+        else
+          job.stime = Time.now.utc.to_i
+          self.working! job.jobid
+          tms = Benchmark.measure do
+            job.perform
           end
-        end   
-      rescue Bluth::Shutdown => ex
-        msg = "Shutdown requested: #{ex.message}"
-        job.success! msg
-        Familia.info msg
-        task.unschedule
-        destroy!
-        exit
-      rescue Bluth::Maeby => ex
-        Familia.info ex.message
-        job.success! ex.message
-        self.success!
-      rescue Bluth::Buster => ex  
-        Familia.info ex.message
-        job.failure! ex.message
-        self.failure!
-      rescue => ex
-        Familia.info ex.message
-        Familia.info ex.backtrace
-        job.retry! "#{ex.class}: #{ex.message}" if job
-        problem!
-        #if problem > 5
-        #  ## TODO: SEND EMAIL
-        #  task.unschedule unless task.nil? # Kill this worker b/c something is clearly wrong
-        #  destroy!
-        #  EM.stop
-        #  exit 1
-        #end
+          job.cpu = [tms.utime,tms.stime,tms.real]
+          job.save
+          job.success!
+          self.success!
+        end
       end
+      
     end
   end
   

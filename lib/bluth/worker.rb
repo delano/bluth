@@ -171,28 +171,12 @@ module Bluth
           Familia.info "Reconnect failed :["
         end
       
-      rescue Bluth::Shutdown => ex
-        msg = "Shutdown requested: #{ex.message}"
-        job.success! msg
-        Familia.info msg
-        task.unschedule
-        destroy!
-        exit
-      rescue Bluth::Maeby => ex
-        Familia.info ex.message
-        job.success! ex.message
-        self.success!
-      rescue Bluth::Buster => ex  
-        Familia.info ex.message
-        job.failure! ex.message
-        self.failure!
       rescue => ex
-        Familia.info ex.message
         if self.class.onerror 
           self.class.onerror.call ex, self
         else
-          Familia.info ex.backtrace
-          job.retry! "#{ex.class}: #{ex.message}" if job
+          Familia.info ex.message
+          Familia.ld ex.backtrace
           problem!
         end
         #if problem > 5
@@ -212,12 +196,6 @@ module Bluth
         carefully do
           find_gob
         end
-      rescue => ex
-        msg = "#{ex.class}: #{ex.message}"
-        Familia.info msg
-        Familia.trace :EXCEPTION, msg, caller[1] if Familia.debug?
-        self.class.runblock :onexit
-        destroy!
       rescue Interrupt => ex
         puts $/, "Exiting..."
         self.class.runblock :onexit
@@ -261,11 +239,6 @@ module Bluth
         end
         @scheduler.join 
         
-      rescue => ex
-        msg = "#{ex.class}: #{ex.message}"
-        Familia.info msg
-        Familia.trace :EXCEPTION, msg, caller[1] if Familia.debug?
-        destroy!
       rescue Interrupt => ex
         puts <<-EOS.gsub(/(?:^|\n)\s*/, "\n")
           Exiting...
@@ -285,28 +258,48 @@ module Bluth
     
     # DO NOT call return from this method
     def find_gob(task=nil)
-
-      job = Bluth.pop
-      unless job.nil?
-        job.wid = self.wid
-        if job.delayed?
-          job.attempts = 0
-          job.retry!
-        elsif !job.attempt?
-          job.failure! "Too many attempts"
-        else
-          job.stime = Time.now.utc.to_i
-          self.working! job.jobid
-          tms = Benchmark.measure do
-            job.perform
+      begin
+        job = Bluth.pop
+        unless job.nil?
+          job.wid = self.wid
+          if job.delayed?
+            job.attempts = 0
+            job.retry!
+          elsif !job.attempt?
+            job.failure! "Too many attempts"
+          else
+            job.stime = Time.now.utc.to_i
+            self.working! job.jobid
+            tms = Benchmark.measure do
+              job.perform
+            end
+            job.cpu = [tms.utime,tms.stime,tms.real]
+            job.save
+            job.success!
+            self.success!
           end
-          job.cpu = [tms.utime,tms.stime,tms.real]
-          job.save
-          job.success!
-          self.success!
         end
+      rescue Bluth::Shutdown => ex
+        msg = "Shutdown requested: #{ex.message}"
+        job.success! msg
+        Familia.info msg
+        task.unschedule
+        destroy!
+        exit
+      rescue Bluth::Maeby => ex
+        Familia.info ex.message
+        job.success! ex.message
+        self.success!
+      rescue Bluth::Buster => ex  
+        Familia.info ex.message
+        job.failure! ex.message
+        self.failure!
+      rescue => ex
+        Familia.info ex.backtrace
+        job.retry! "#{ex.class}: #{ex.message}" if job
+        raise ex
       end
-      
+        
     end
   end
   

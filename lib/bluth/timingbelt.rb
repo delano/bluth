@@ -65,18 +65,19 @@ module Bluth
         (time + (mins*60)).strftime('%H:%M')
       end
       def notch mins=0, filter=nil, time=now
+        cache_key = [now(mins, time).to_i, filter].join(':')
         key = rediskey(stamp(mins, time), filter)
         @notchcache ||= {}
-        if @notchcache[key].nil?
-          @notchcache[key] ||= Familia::Set.new key, 
+        if @notchcache[cache_key].nil?
+          @notchcache[cache_key] ||= Familia::Set.new key, 
               :ttl => 2*60*60, # 2 hours
               :extend => Bluth::TimingBelt::Notch, 
               :db => Bluth::TimingBelt.db
-          @notchcache[key].stamp = stamp(mins, time) 
-          @notchcache[key].filter = filter
-          @notchcache[key].time = now(mins, time)
+          @notchcache[cache_key].stamp = stamp(mins, time) 
+          @notchcache[cache_key].filter = filter
+          @notchcache[cache_key].time = now(mins, time)
         end
-        @notchcache[key]
+        @notchcache[cache_key]
       end
       def priority minutes=2, filter=nil, time=now
         (0..minutes).to_a.reverse.collect { |min| notch(min*-1, filter, time) }

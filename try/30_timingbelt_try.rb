@@ -9,11 +9,11 @@ Bluth::TimingBelt.redis.flushdb
 
 ## Knows now
 Bluth::TimingBelt.now(0, @now).to_s
-#=> '2011-02-14 00:00:00 UTC'
+#=> RUBY_VERSION <= '1.9' ? 'Mon Feb 14 00:00:00 UTC 2011' : '2011-02-14 00:00:00 UTC'
 
 ## Now can have an offset
 Bluth::TimingBelt.now(5, @now).to_s
-#=> '2011-02-14 00:05:00 UTC'
+#=> RUBY_VERSION <= '1.9' ? 'Mon Feb 14 00:05:00 UTC 2011' : '2011-02-14 00:05:00 UTC'
 
 ## Can create a timestamp
 Bluth::TimingBelt.stamp 0, @now
@@ -94,7 +94,6 @@ notches.first.name unless notches.first.nil?
 ## Can calculate the difference between two notches
 notch1 = Bluth::TimingBelt.notch
 notch2 = Bluth::TimingBelt.notch 67
-puts notch2.name
 notch2 - notch1
 #=> 67
 

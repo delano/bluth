@@ -1,7 +1,8 @@
 BLUTH, CHANGES
 
-#### 0.7.2 (2011-03-??) ###############################
+#### 0.7.2 (2011-04-10) ###############################
 
+* FIXED: Bluth::TimingBelt.notch now caches notches by absolute time (not just HH:MM)
 * CHANGE: Gracefully rescue Errno::ECONNREFUSED and try to reconnect
 * ADDED: Bluth::Worker.reconnect!
 * ADDED: Bluth::Worker.onerror

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang='en'>
   <head>
-    <title>: Logging [bluth 0.7.0]</title>
+    <title>: Logging [bluth 0.7.2]</title>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
     <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
     <script type='text/javascript'>
@@ -41,22 +41,22 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000115">debug</a></li>
-              <li><a href="#M000106">debug?</a></li>
-              <li><a href="#M000111">log</a></li>
-              <li><a href="#M000117">log_error</a></li>
-              <li><a href="#M000107">silent?</a></li>
-              <li><a href="#M000113">trace</a></li>
-              <li><a href="#M000105">trace?</a></li>
+              <li><a href="#M000119">debug</a></li>
+              <li><a href="#M000110">debug?</a></li>
+              <li><a href="#M000115">log</a></li>
+              <li><a href="#M000121">log_error</a></li>
+              <li><a href="#M000111">silent?</a></li>
+              <li><a href="#M000117">trace</a></li>
+              <li><a href="#M000109">trace?</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000114">debug</a></li>
-              <li><a href="#M000110">log</a></li>
-              <li><a href="#M000116">log_error</a></li>
-              <li><a href="#M000108">silent</a></li>
-              <li><a href="#M000109">silent=</a></li>
-              <li><a href="#M000112">trace</a></li>
+              <li><a href="#M000118">debug</a></li>
+              <li><a href="#M000114">log</a></li>
+              <li><a href="#M000120">log_error</a></li>
+              <li><a href="#M000112">silent</a></li>
+              <li><a href="#M000113">silent=</a></li>
+              <li><a href="#M000116">trace</a></li>
             </ol>
           </div>
           <div id='section'>
@@ -84,8 +84,8 @@
             </div>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='method public-class' id='method-M000115'>
-                <a name='M000115'>      </a>
+              <div class='method public-class' id='method-M000119'>
+                <a name='M000119'>      </a>
                 <div class='synopsis'>
                   <span class='name'>debug</span>
                   <span class='arguments'>(msg=nil) {|if Logging.debug?| ...}</span>
@@ -96,27 +96,27 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000115-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000119-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000115-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 209</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>(<span class="ruby-identifier">msg</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;      <span class="ruby-identifier">log</span> <span class="ruby-identifier">msg</span> <span class="ruby-operator">||</span> <span class="ruby-keyword kw">yield</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">debug?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000119-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 209</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>(<span class="ruby-identifier">msg</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;      <span class="ruby-identifier">log</span> <span class="ruby-identifier">msg</span> <span class="ruby-operator">||</span> <span class="ruby-keyword kw">yield</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">debug?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-class' id='method-M000106'>
-                <a name='M000106'>      </a>
+              <div class='method public-class' id='method-M000110'>
+                <a name='M000110'>      </a>
                 <div class='synopsis'>
                   <span class='name'>debug?</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000106-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000110-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000106-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 182</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug?</span>;  <span class="ruby-operator">!</span><span class="ruby-ivar">@silent</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@debug</span>  <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000110-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 182</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug?</span>;  <span class="ruby-operator">!</span><span class="ruby-ivar">@silent</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@debug</span>  <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-class' id='method-M000111'>
-                <a name='M000111'>      </a>
+              <div class='method public-class' id='method-M000115'>
+                <a name='M000115'>      </a>
                 <div class='synopsis'>
                   <span class='name'>log</span>
                   <span class='arguments'>(msg)</span>
@@ -127,14 +127,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000111-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000115-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000111-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 195</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log</span>(<span class="ruby-identifier">msg</span>)&#x000A;      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">msg</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">silent?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000115-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 195</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log</span>(<span class="ruby-identifier">msg</span>)&#x000A;      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">msg</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">silent?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-class' id='method-M000117'>
-                <a name='M000117'>      </a>
+              <div class='method public-class' id='method-M000121'>
+                <a name='M000121'>      </a>
                 <div class='synopsis'>
                   <span class='name'>log_error</span>
                   <span class='arguments'>(e=$!)</span>
@@ -145,27 +145,27 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000117-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000121-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000117-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 216</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log_error</span>(<span class="ruby-identifier">e</span>=<span class="ruby-identifier">$!</span>)&#x000A;      <span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;#{e}\n\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n\t&quot;</span>)&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000121-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 216</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log_error</span>(<span class="ruby-identifier">e</span>=<span class="ruby-identifier">$!</span>)&#x000A;      <span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;#{e}\n\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n\t&quot;</span>)&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-class' id='method-M000107'>
-                <a name='M000107'>      </a>
+              <div class='method public-class' id='method-M000111'>
+                <a name='M000111'>      </a>
                 <div class='synopsis'>
                   <span class='name'>silent?</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000107-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000111-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000107-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 183</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">silent?</span>;  <span class="ruby-ivar">@silent</span>            <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000111-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 183</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">silent?</span>;  <span class="ruby-ivar">@silent</span>            <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-class' id='method-M000113'>
-                <a name='M000113'>      </a>
+              <div class='method public-class' id='method-M000117'>
+                <a name='M000117'>      </a>
                 <div class='synopsis'>
                   <span class='name'>trace</span>
                   <span class='arguments'>(msg=nil) {|if Logging.trace?| ...}</span>
@@ -176,28 +176,28 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000113-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000117-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000113-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 202</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trace</span>(<span class="ruby-identifier">msg</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;      <span class="ruby-identifier">log</span> <span class="ruby-identifier">msg</span> <span class="ruby-operator">||</span> <span class="ruby-keyword kw">yield</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">trace?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000117-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 202</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trace</span>(<span class="ruby-identifier">msg</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;      <span class="ruby-identifier">log</span> <span class="ruby-identifier">msg</span> <span class="ruby-operator">||</span> <span class="ruby-keyword kw">yield</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">trace?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-class' id='method-M000105'>
-                <a name='M000105'>      </a>
+              <div class='method public-class' id='method-M000109'>
+                <a name='M000109'>      </a>
                 <div class='synopsis'>
                   <span class='name'>trace?</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000105-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000109-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000105-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 181</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trace?</span>;  <span class="ruby-operator">!</span><span class="ruby-ivar">@silent</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@trace</span>  <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000109-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 181</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trace?</span>;  <span class="ruby-operator">!</span><span class="ruby-ivar">@silent</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@trace</span>  <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000114'>
-                <a name='M000114'>      </a>
+              <div class='method public-instance' id='method-M000118'>
+                <a name='M000118'>      </a>
                 <div class='synopsis'>
                   <span class='name'>debug</span>
                   <span class='arguments'>(msg=nil) {|if Logging.debug?| ...}</span>
@@ -208,14 +208,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000114-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000118-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000114-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 209</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>(<span class="ruby-identifier">msg</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;      <span class="ruby-identifier">log</span> <span class="ruby-identifier">msg</span> <span class="ruby-operator">||</span> <span class="ruby-keyword kw">yield</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">debug?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000118-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 209</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>(<span class="ruby-identifier">msg</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;      <span class="ruby-identifier">log</span> <span class="ruby-identifier">msg</span> <span class="ruby-operator">||</span> <span class="ruby-keyword kw">yield</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">debug?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000110'>
-                <a name='M000110'>      </a>
+              <div class='method public-instance' id='method-M000114'>
+                <a name='M000114'>      </a>
                 <div class='synopsis'>
                   <span class='name'>log</span>
                   <span class='arguments'>(msg)</span>
@@ -226,14 +226,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000110-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000114-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000110-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 195</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log</span>(<span class="ruby-identifier">msg</span>)&#x000A;      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">msg</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">silent?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000114-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 195</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log</span>(<span class="ruby-identifier">msg</span>)&#x000A;      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">msg</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">silent?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000116'>
-                <a name='M000116'>      </a>
+              <div class='method public-instance' id='method-M000120'>
+                <a name='M000120'>      </a>
                 <div class='synopsis'>
                   <span class='name'>log_error</span>
                   <span class='arguments'>(e=$!)</span>
@@ -244,14 +244,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000116-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000120-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000116-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 216</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log_error</span>(<span class="ruby-identifier">e</span>=<span class="ruby-identifier">$!</span>)&#x000A;      <span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;#{e}\n\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n\t&quot;</span>)&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000120-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 216</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log_error</span>(<span class="ruby-identifier">e</span>=<span class="ruby-identifier">$!</span>)&#x000A;      <span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;#{e}\n\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n\t&quot;</span>)&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000108'>
-                <a name='M000108'>      </a>
+              <div class='method public-instance' id='method-M000112'>
+                <a name='M000112'>      </a>
                 <div class='synopsis'>
                   <span class='name'>silent</span>
                   <span class='arguments'>()</span>
@@ -262,27 +262,27 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000108-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000112-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000108-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 187</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">silent</span>&#x000A;      <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">silent?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000112-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 187</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">silent</span>&#x000A;      <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">silent?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000109'>
-                <a name='M000109'>      </a>
+              <div class='method public-instance' id='method-M000113'>
+                <a name='M000113'>      </a>
                 <div class='synopsis'>
                   <span class='name'>silent=</span>
                   <span class='arguments'>(value)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000109-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000113-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000109-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 190</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">silent=</span>(<span class="ruby-identifier">value</span>)&#x000A;      <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">silent</span> = <span class="ruby-identifier">value</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000113-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 190</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">silent=</span>(<span class="ruby-identifier">value</span>)&#x000A;      <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">silent</span> = <span class="ruby-identifier">value</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000112'>
-                <a name='M000112'>      </a>
+              <div class='method public-instance' id='method-M000116'>
+                <a name='M000116'>      </a>
                 <div class='synopsis'>
                   <span class='name'>trace</span>
                   <span class='arguments'>(msg=nil) {|if Logging.trace?| ...}</span>
@@ -293,10 +293,10 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000112-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000116-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000112-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 202</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trace</span>(<span class="ruby-identifier">msg</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;      <span class="ruby-identifier">log</span> <span class="ruby-identifier">msg</span> <span class="ruby-operator">||</span> <span class="ruby-keyword kw">yield</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">trace?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000116-source'><span class="ruby-comment cmt"># File lib/daemonizing.rb, line 202</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trace</span>(<span class="ruby-identifier">msg</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;      <span class="ruby-identifier">log</span> <span class="ruby-identifier">msg</span> <span class="ruby-operator">||</span> <span class="ruby-keyword kw">yield</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Logging</span>.<span class="ruby-identifier">trace?</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

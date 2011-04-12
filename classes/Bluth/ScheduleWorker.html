@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang='en'>
   <head>
-    <title>: Bluth::ScheduleWorker [bluth 0.7.0]</title>
+    <title>: Bluth::ScheduleWorker [bluth 0.7.2]</title>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
     <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
     <script type='text/javascript'>
@@ -45,13 +45,13 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000069">every</a></li>
-              <li><a href="#M000068">interval</a></li>
+              <li><a href="#M000073">every</a></li>
+              <li><a href="#M000072">interval</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000071">run</a></li>
-              <li><a href="#M000070">run!</a></li>
+              <li><a href="#M000075">run</a></li>
+              <li><a href="#M000074">run!</a></li>
             </ol>
           </div>
           <div id='context'>
@@ -91,57 +91,57 @@
             </div>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='method public-class' id='method-M000069'>
-                <a name='M000069'>      </a>
+              <div class='method public-class' id='method-M000073'>
+                <a name='M000073'>      </a>
                 <div class='synopsis'>
                   <span class='name'>every</span>
                   <span class='arguments'>(interval=nil, opts={})</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000069-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000073-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000069-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 272</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">every</span> <span class="ruby-identifier">interval</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">opts</span>={}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>&#x000A;        <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">interval</span>.<span class="ruby-identifier">nil?</span>&#x000A;          <span class="ruby-ivar">@every</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">interval</span>, <span class="ruby-identifier">opts</span>, <span class="ruby-identifier">blk</span>]&#x000A;        <span class="ruby-keyword kw">end</span>&#x000A;        <span class="ruby-ivar">@every</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000073-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 321</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">every</span> <span class="ruby-identifier">interval</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">opts</span>={}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>&#x000A;        <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">interval</span>.<span class="ruby-identifier">nil?</span>&#x000A;          <span class="ruby-ivar">@every</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">interval</span>, <span class="ruby-identifier">opts</span>, <span class="ruby-identifier">blk</span>]&#x000A;        <span class="ruby-keyword kw">end</span>&#x000A;        <span class="ruby-ivar">@every</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-class' id='method-M000068'>
-                <a name='M000068'>      </a>
+              <div class='method public-class' id='method-M000072'>
+                <a name='M000072'>      </a>
                 <div class='synopsis'>
                   <span class='name'>interval</span>
                   <span class='arguments'>(v=nil)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000068-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000072-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000068-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 268</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">interval</span>(<span class="ruby-identifier">v</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;        <span class="ruby-ivar">@interval</span> = <span class="ruby-identifier">v</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">nil?</span>&#x000A;        <span class="ruby-ivar">@interval</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000072-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 317</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">interval</span>(<span class="ruby-identifier">v</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;        <span class="ruby-ivar">@interval</span> = <span class="ruby-identifier">v</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">nil?</span>&#x000A;        <span class="ruby-ivar">@interval</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000071'>
-                <a name='M000071'>      </a>
+              <div class='method public-instance' id='method-M000075'>
+                <a name='M000075'>      </a>
                 <div class='synopsis'>
                   <span class='name'>run</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000071-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000075-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000071-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 293</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>&#x000A;      <span class="ruby-keyword kw">begin</span>&#x000A;        <span class="ruby-constant">EM</span>.<span class="ruby-identifier">run</span> {&#x000A;          <span class="ruby-ivar">@process_id</span> = <span class="ruby-identifier">$$</span>&#x000A;          <span class="ruby-identifier">srand</span>(<span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">salt</span>.<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>) <span class="ruby-operator">**</span> <span class="ruby-ivar">@process_id</span>)&#x000A;          <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">connect</span>&#x000A;          <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;Setting interval: #{Worker.interval} sec (queuetimeout: #{Bluth.queuetimeout})&quot;</span>&#x000A;          <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">reconnect_all!</span> <span class="ruby-comment cmt"># Need to reconnect after daemonize</span>&#x000A;          <span class="ruby-identifier">raise</span> <span class="ruby-constant">Familia</span><span class="ruby-operator">::</span><span class="ruby-constant">Problem</span>, <span class="ruby-value str">&quot;Only 1 scheduler at a time&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">ScheduleWorker</span>.<span class="ruby-identifier">instances</span>.<span class="ruby-identifier">empty?</span>&#x000A;          <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">runblock</span> <span class="ruby-identifier">:onstart</span>&#x000A;          <span class="ruby-identifier">save</span> <span class="ruby-comment cmt"># persist and make note the scheduler is running</span>&#x000A;          <span class="ruby-constant">ScheduleWorker</span>.<span class="ruby-identifier">schedule</span> = <span class="ruby-constant">Rufus</span><span class="ruby-operator">::</span><span class="ruby-constant">Scheduler</span><span class="ruby-operator">::</span><span class="ruby-constant">EmScheduler</span>.<span class="ruby-identifier">start_new</span>&#x000A;          <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">every</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">args</span><span class="ruby-operator">|</span>&#x000A;            <span class="ruby-identifier">interval</span>, <span class="ruby-identifier">opts</span>, <span class="ruby-identifier">blk</span> = <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>&#x000A;            <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">ld</span> <span class="ruby-node">&quot; scheduling every #{interval}: #{opts}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">debug?</span>&#x000A;            <span class="ruby-constant">ScheduleWorker</span>.<span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">every</span> <span class="ruby-identifier">interval</span>, <span class="ruby-identifier">opts</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>&#x000A;          <span class="ruby-keyword kw">end</span>&#x000A;        }&#x000A;      <span class="ruby-keyword kw">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>&#x000A;        <span class="ruby-identifier">msg</span> = <span class="ruby-node">&quot;#{ex.class}: #{ex.message}&quot;</span>&#x000A;        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">msg</span>&#x000A;        <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">info</span> <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">backtrace</span>&#x000A;        <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">trace</span> <span class="ruby-identifier">:EXCEPTION</span>, <span class="ruby-identifier">msg</span>, <span class="ruby-identifier">caller</span>[<span class="ruby-value">1</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">debug?</span>&#x000A;        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">runblock</span> <span class="ruby-identifier">:onexit</span>&#x000A;        <span class="ruby-identifier">destroy!</span>&#x000A;      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Interrupt</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>&#x000A;        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">$/</span>, <span class="ruby-value str">&quot;Exiting...&quot;</span>&#x000A;        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">runblock</span> <span class="ruby-identifier">:onexit</span>&#x000A;        <span class="ruby-identifier">destroy!</span>&#x000A;      <span class="ruby-keyword kw">end</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000075-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 342</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>&#x000A;      <span class="ruby-keyword kw">begin</span>&#x000A;        <span class="ruby-constant">EM</span>.<span class="ruby-identifier">run</span> {&#x000A;          <span class="ruby-ivar">@process_id</span> = <span class="ruby-identifier">$$</span>&#x000A;          <span class="ruby-identifier">srand</span>(<span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">salt</span>.<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>) <span class="ruby-operator">**</span> <span class="ruby-ivar">@process_id</span>)&#x000A;          <span class="ruby-constant">Bluth</span>.<span class="ruby-identifier">connect</span>&#x000A;          <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;Setting interval: #{Worker.interval} sec (queuetimeout: #{Bluth.queuetimeout})&quot;</span>&#x000A;          <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">reconnect_all!</span> <span class="ruby-comment cmt"># Need to reconnect after daemonize</span>&#x000A;          <span class="ruby-identifier">raise</span> <span class="ruby-constant">Familia</span><span class="ruby-operator">::</span><span class="ruby-constant">Problem</span>, <span class="ruby-value str">&quot;Only 1 scheduler at a time&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">ScheduleWorker</span>.<span class="ruby-identifier">instances</span>.<span class="ruby-identifier">empty?</span>&#x000A;          <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">runblock</span> <span class="ruby-identifier">:onstart</span>&#x000A;          <span class="ruby-identifier">save</span> <span class="ruby-comment cmt"># persist and make note the scheduler is running</span>&#x000A;          <span class="ruby-constant">ScheduleWorker</span>.<span class="ruby-identifier">schedule</span> = <span class="ruby-constant">Rufus</span><span class="ruby-operator">::</span><span class="ruby-constant">Scheduler</span><span class="ruby-operator">::</span><span class="ruby-constant">EmScheduler</span>.<span class="ruby-identifier">start_new</span>&#x000A;          <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">every</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">args</span><span class="ruby-operator">|</span>&#x000A;            <span class="ruby-identifier">interval</span>, <span class="ruby-identifier">opts</span>, <span class="ruby-identifier">blk</span> = <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>&#x000A;            <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">ld</span> <span class="ruby-node">&quot; scheduling every #{interval}: #{opts}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">debug?</span>&#x000A;            <span class="ruby-constant">ScheduleWorker</span>.<span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">every</span> <span class="ruby-identifier">interval</span>, <span class="ruby-identifier">opts</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>&#x000A;          <span class="ruby-keyword kw">end</span>&#x000A;        }&#x000A;      <span class="ruby-keyword kw">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>&#x000A;        <span class="ruby-identifier">msg</span> = <span class="ruby-node">&quot;#{ex.class}: #{ex.message}&quot;</span>&#x000A;        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">msg</span>&#x000A;        <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">info</span> <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">backtrace</span>&#x000A;        <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">trace</span> <span class="ruby-identifier">:EXCEPTION</span>, <span class="ruby-identifier">msg</span>, <span class="ruby-identifier">caller</span>[<span class="ruby-value">1</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Familia</span>.<span class="ruby-identifier">debug?</span>&#x000A;        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">runblock</span> <span class="ruby-identifier">:onexit</span>&#x000A;        <span class="ruby-identifier">destroy!</span>&#x000A;      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Interrupt</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>&#x000A;        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">$/</span>, <span class="ruby-value str">&quot;Exiting...&quot;</span>&#x000A;        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">runblock</span> <span class="ruby-identifier">:onexit</span>&#x000A;        <span class="ruby-identifier">destroy!</span>&#x000A;      <span class="ruby-keyword kw">end</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000070'>
-                <a name='M000070'>      </a>
+              <div class='method public-instance' id='method-M000074'>
+                <a name='M000074'>      </a>
                 <div class='synopsis'>
                   <span class='name'>run!</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000070-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000074-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000070-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 289</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run!</span>&#x000A;      <span class="ruby-identifier">run</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000074-source'><span class="ruby-comment cmt"># File lib/bluth/worker.rb, line 338</span>&#x000A;    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run!</span>&#x000A;      <span class="ruby-identifier">run</span>&#x000A;    <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

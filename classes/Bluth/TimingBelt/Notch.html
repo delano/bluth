@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang='en'>
   <head>
-    <title>: Bluth::TimingBelt::Notch [bluth 0.7.0]</title>
+    <title>: Bluth::TimingBelt::Notch [bluth 0.7.2]</title>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
     <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
     <script type='text/javascript'>
@@ -47,11 +47,11 @@
             <h2>Methods</h2>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000028">-</a></li>
-              <li><a href="#M000024">next</a></li>
-              <li><a href="#M000025">prev</a></li>
-              <li><a href="#M000027">queue</a></li>
-              <li><a href="#M000026">skip</a></li>
+              <li><a href="#M000029">-</a></li>
+              <li><a href="#M000025">next</a></li>
+              <li><a href="#M000026">prev</a></li>
+              <li><a href="#M000028">queue</a></li>
+              <li><a href="#M000027">skip</a></li>
             </ol>
           </div>
           <div id='section'>
@@ -79,69 +79,69 @@
             </div>
             <div id='methods'>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000028'>
-                <a name='M000028'>      </a>
+              <div class='method public-instance' id='method-M000029'>
+                <a name='M000029'>      </a>
                 <div class='synopsis'>
                   <span class='name'>-</span>
                   <span class='arguments'>(other)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000028-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000029-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000028-source'><span class="ruby-comment cmt"># File lib/bluth/timingbelt.rb, line 25</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-operator">-</span>(<span class="ruby-identifier">other</span>)&#x000A;        ((<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">time</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">time</span>)<span class="ruby-operator">/</span><span class="ruby-value">60</span>).<span class="ruby-identifier">to_i</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000024'>
-                <a name='M000024'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>next</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000024-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000024-source'><span class="ruby-comment cmt"># File lib/bluth/timingbelt.rb, line 12</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">next</span>&#x000A;        <span class="ruby-identifier">skip</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000029-source'><span class="ruby-comment cmt"># File lib/bluth/timingbelt.rb, line 25</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-operator">-</span>(<span class="ruby-identifier">other</span>)&#x000A;        ((<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">time</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">time</span>)<span class="ruby-operator">/</span><span class="ruby-value">60</span>).<span class="ruby-identifier">to_i</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='method public-instance' id='method-M000025'>
                 <a name='M000025'>      </a>
                 <div class='synopsis'>
-                  <span class='name'>prev</span>
+                  <span class='name'>next</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000025-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000025-source'><span class="ruby-comment cmt"># File lib/bluth/timingbelt.rb, line 15</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prev</span>&#x000A;        <span class="ruby-identifier">skip</span> <span class="ruby-value">-1</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000027'>
-                <a name='M000027'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>queue</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000027-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000027-source'><span class="ruby-comment cmt"># File lib/bluth/timingbelt.rb, line 22</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">queue</span>&#x000A;        <span class="ruby-constant">Bluth</span><span class="ruby-operator">::</span><span class="ruby-constant">Queue</span>.<span class="ruby-identifier">create_queue</span> <span class="ruby-identifier">stamp</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000025-source'><span class="ruby-comment cmt"># File lib/bluth/timingbelt.rb, line 12</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">next</span>&#x000A;        <span class="ruby-identifier">skip</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='method public-instance' id='method-M000026'>
                 <a name='M000026'>      </a>
                 <div class='synopsis'>
-                  <span class='name'>skip</span>
-                  <span class='arguments'>(mins=1)</span>
+                  <span class='name'>prev</span>
+                  <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000026-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000026-source'><span class="ruby-comment cmt"># File lib/bluth/timingbelt.rb, line 18</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">skip</span> <span class="ruby-identifier">mins</span>=<span class="ruby-value">1</span>&#x000A;        <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">stamp</span> <span class="ruby-operator">||</span> <span class="ruby-value str">''</span>)&#x000A;        <span class="ruby-constant">Bluth</span><span class="ruby-operator">::</span><span class="ruby-constant">TimingBelt</span>.<span class="ruby-identifier">notch</span> <span class="ruby-identifier">mins</span>, <span class="ruby-identifier">filter</span>, <span class="ruby-identifier">time</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000026-source'><span class="ruby-comment cmt"># File lib/bluth/timingbelt.rb, line 15</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prev</span>&#x000A;        <span class="ruby-identifier">skip</span> <span class="ruby-value">-1</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000028'>
+                <a name='M000028'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>queue</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000028-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000028-source'><span class="ruby-comment cmt"># File lib/bluth/timingbelt.rb, line 22</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">queue</span>&#x000A;        <span class="ruby-constant">Bluth</span><span class="ruby-operator">::</span><span class="ruby-constant">Queue</span>.<span class="ruby-identifier">create_queue</span> <span class="ruby-identifier">stamp</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000027'>
+                <a name='M000027'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>skip</span>
+                  <span class='arguments'>(mins=1)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000027-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000027-source'><span class="ruby-comment cmt"># File lib/bluth/timingbelt.rb, line 18</span>&#x000A;      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">skip</span> <span class="ruby-identifier">mins</span>=<span class="ruby-value">1</span>&#x000A;        <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">stamp</span> <span class="ruby-operator">||</span> <span class="ruby-value str">''</span>)&#x000A;        <span class="ruby-constant">Bluth</span><span class="ruby-operator">::</span><span class="ruby-constant">TimingBelt</span>.<span class="ruby-identifier">notch</span> <span class="ruby-identifier">mins</span>, <span class="ruby-identifier">filter</span>, <span class="ruby-identifier">time</span>&#x000A;      <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

@@ -42,8 +42,8 @@ module Bluth
   @priority = []
   @scheduler = nil 
   class << self
-    attr_reader :handlers, :db, :conf, :locks
-    attr_accessor :redis, :uri, :priority, :scheduler, :queuetimeout, :env
+    attr_reader :handlers, :conf, :locks
+    attr_accessor :redis, :uri, :db, :priority, :scheduler, :queuetimeout, :env
     def sysinfo
       @sysinfo ||= SysInfo.new.freeze
       @sysinfo 

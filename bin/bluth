@@ -28,7 +28,6 @@ class Bluth::CLI::Definition
   debug :on
   
   global :Y, :auto, "Auto confirm"
-  global :d, :database, Integer, "Redis database"
   global :e, :environment, String
   global :d, :daemon, "Start as a daemon"
   global :D, :debug do
@@ -37,6 +36,12 @@ class Bluth::CLI::Definition
   global :U, :uri, String, "Redis connection URI" do |v|
     uri = URI.parse v
     Bluth.uri = uri
+  end
+  global :db, :database, Integer, "Redis database [Integer]" do |v|
+    Bluth.db = v
+  end
+  global :apiversion, Integer, "Familia API version [Integer]" do |v|
+    Familia.apiversion = "v#{v}"
   end
   global :v, :verbose, "Increase output" do 
     @verbose ||= 0

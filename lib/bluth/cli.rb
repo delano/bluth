@@ -29,12 +29,13 @@ module Bluth
     def start_worker worker_class=Bluth::Worker
       if @global.daemon
         worker = worker_class.new
+        worker.runtime_args = @argv.clone
         Familia.info "Created: #{worker.index}"
         worker.daemonize
         worker.run
       else
         Bluth.queuetimeout = 3.seconds
-        worker_class.run
+        worker_class.run @argv.clone
       end
     end
     

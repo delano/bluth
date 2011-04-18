@@ -24,6 +24,7 @@ module Bluth
   end
   
   module WorkerBase
+    attr_accessor :runtime_args
     
     def init(h=nil, u=nil, w=nil)
       @host, @user, @wid, = h || Bluth.sysinfo.hostname, u || Bluth.sysinfo.user, w
@@ -90,16 +91,16 @@ module Bluth
         }
         success
       end
-      def run!(*args)
+      def run!(args=nil)
         me = new
         Familia.info "Created: #{me.index}"
-        me.run!
+        me.run! runtime_args || args
         me
       end
-      def run(*args)
+      def run(args=nil)
         me = new
         Familia.info "Created: #{me.index}"
-        me.run
+        me.run runtime_args || args
         me
       end
       def kill(pid_file)
@@ -189,7 +190,7 @@ module Bluth
       end
     end
     
-    def run!
+    def run! args=nil
       begin
         Bluth.connect
         self.class.runblock :onstart
@@ -203,7 +204,7 @@ module Bluth
       end
     end
     
-    def run
+    def run args=nil
       begin
         @process_id = $$
         @scheduler = Rufus::Scheduler.start_new
@@ -334,11 +335,11 @@ module Bluth
     field :log_file
     include Familia::Stamps
     
-    def run!
+    def run! args=nil
       run
     end
     
-    def run
+    def run args=nil
       begin
         EM.run {
           @process_id = $$

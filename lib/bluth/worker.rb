@@ -100,7 +100,7 @@ module Bluth
       def run(args=nil)
         me = new
         Familia.info "Created: #{me.index}"
-        me.run runtime_args || args
+        me.run args
         me
       end
       def kill(pid_file)

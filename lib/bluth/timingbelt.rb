@@ -16,6 +16,8 @@ module Bluth
         skip -1
       end
       def skip mins=1
+        # Time.parse gives us a freebie: it can 
+        # parse the stamp directly. e.g. "14d00:00"
         time = Time.parse(stamp || '')
         Bluth::TimingBelt.notch mins, filter, time
       end
@@ -26,9 +28,10 @@ module Bluth
         ((self.time - other.time)/60).to_i
       end
     end
-    @length = 60 # minutes
+    @length = 120 # minutes
     class << self
-      attr_reader :notchcache, :length
+      attr_reader :notchcache
+      attr_accessor :length
       def find v, mins=length, filter=nil, time=now
         raise ArgumentError, "value cannot be nil" if v.nil?
         select(mins, filter, time) do |notch| 
@@ -62,7 +65,7 @@ module Bluth
         time + (mins*60)  # time wants it in seconds
       end
       def stamp mins=0, time=now
-        (time + (mins*60)).strftime('%H:%M')
+        (time + (mins*60)).strftime('%dd%H:%M')
       end
       def notch mins=0, filter=nil, time=now
         cache_key = [now(mins, time).to_i, filter].join(':')
@@ -70,7 +73,7 @@ module Bluth
         @notchcache ||= {}
         if @notchcache[cache_key].nil?
           @notchcache[cache_key] ||= Familia::Set.new key, 
-              :ttl => 2*60*60, # 2 hours
+              :ttl => 36*3600, # 36 hours
               :extend => Bluth::TimingBelt::Notch, 
               :db => Bluth::TimingBelt.db
           @notchcache[cache_key].stamp = stamp(mins, time) 

@@ -6,6 +6,7 @@ BLUTH, CHANGES
 * CHANGE: TimingBelt stamp includes day. e.g. 02m31d23:59
 * CHANGE: TimingBelt stamp takes just Time.
 * CHANGE: TimingBelt.length defaults to 120 minutes (up from 60)
+* CHANGE: Bluth autoloads Worker and TimingBelt
 
 
 #### 0.7.2 (2011-04-10) ###############################

@@ -98,8 +98,9 @@ module Bluth
     Bluth::Queue.send n
   end
   
-  require 'bluth/worker'
-  
+  autoload :Worker, 'bluth/worker'
+  autoload :TimingBelt, 'bluth/timingbelt'
+    
   module Queue 
     include Familia
     prefix [:bluth, :queue]
@@ -372,6 +373,5 @@ module Bluth
       save # update messages
     end
   end
-  
 end
 

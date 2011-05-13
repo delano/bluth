@@ -98,8 +98,8 @@ module Bluth
     Bluth::Queue.send n
   end
   
-  autoload :Worker, 'bluth/worker'
-  autoload :TimingBelt, 'bluth/timingbelt'
+  require 'bluth/worker'
+  require 'bluth/timingbelt'
     
   module Queue 
     include Familia

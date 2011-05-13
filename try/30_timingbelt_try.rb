@@ -16,7 +16,7 @@ Bluth::TimingBelt.now(5, @now).to_s
 #=> RUBY_VERSION <= '1.9' ? 'Mon Feb 14 00:05:00 UTC 2011' : '2011-02-14 00:05:00 UTC'
 
 ## Can create a timestamp
-Bluth::TimingBelt.stamp 0, @now
+Bluth::TimingBelt.stamp @now
 #=> '14d00:00'
 
 ## Knows the current key

@@ -111,9 +111,10 @@ module Bluth
     class_list :successful
     class_list :failed
     class_list :orphaned
-    def self.create_queue name
+    def self.create_queue name, opts={}
       unless queue(name)
-        q = Familia::List.new name, :parent => self
+        opts = { :parent => self }.merge(opts)
+        q = Familia::List.new name, opts
         @queuecache[name.to_s.to_sym] = q
       end
       queue(name)

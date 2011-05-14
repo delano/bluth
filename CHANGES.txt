@@ -7,6 +7,8 @@ BLUTH, CHANGES
 * CHANGE: TimingBelt stamp takes just Time.
 * CHANGE: TimingBelt.length defaults to 120 minutes (up from 60)
 * CHANGE: lib/bluth.rb requires Worker and TimingBelt
+* CHANGE: Bluth::Gob.ttl is now 24 hours. The expire is set to 
+  1 hour after a job has completed successfully.
 
 
 #### 0.7.2 (2011-04-10) ###############################

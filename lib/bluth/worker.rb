@@ -278,6 +278,7 @@ module Bluth
             job.save
             job.success!
             self.success!
+            job.expire 1.hour
           end
         end
       rescue Bluth::Shutdown => ex
@@ -291,6 +292,7 @@ module Bluth
         Familia.info ex.message
         job.success! ex.message
         self.success!
+        job.expire 1.hour
       rescue Bluth::Buster => ex  
         Familia.info ex.message
         job.failure! ex.message

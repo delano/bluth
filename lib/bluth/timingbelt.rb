@@ -22,7 +22,7 @@ module Bluth
         Bluth::TimingBelt.notch mins, filter, time
       end
       def queue
-        Bluth::Queue.create_queue stamp
+        Bluth::Queue.create_queue stamp, :ttl => 36*3600
       end
       def -(other)
         ((self.time - other.time)/60).to_i

@@ -1,7 +1,9 @@
-require 'bluth'
-require 'bluth/test_helpers'
+require_relative '../lib/bluth'
+require_relative '../lib/bluth/test_helpers'
 
-#Familia.debug = true
+Familia.debug = true
+Bluth::Queue.critical.clear
+
 
 ## Can enqueue a job
 @job = ExampleHandler.enqueue :arg1 => :val1

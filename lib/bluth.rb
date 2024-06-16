@@ -2,7 +2,7 @@
 BLUTH_LIB_HOME = File.expand_path File.dirname(__FILE__) unless defined?(BLUTH_LIB_HOME)
 
 local_libs = %w{familia}
-local_libs.each { |dir| 
+local_libs.each { |dir|
   a = File.join(BLUTH_LIB_HOME, '..', '..', dir, 'lib')
   $:.unshift a
 }
@@ -10,6 +10,7 @@ local_libs.each { |dir|
 require 'sysinfo'
 require 'storable'
 require 'gibbler'
+require 'gibbler/mixins'
 require 'familia'
 
 module Bluth
@@ -26,7 +27,7 @@ module Bluth
   end
 end
 
-module Bluth   
+module Bluth
   # A fatal error. Gob fails.
   class Buster < Familia::Problem; end
   # A non-fatal error. Gob succeeds.
@@ -40,16 +41,16 @@ module Bluth
   @locks = []
   @sysinfo = nil
   @priority = []
-  @scheduler = nil 
+  @scheduler = nil
   class << self
     attr_reader :handlers, :db, :conf, :locks
     attr_accessor :redis, :uri, :priority, :scheduler, :queuetimeout, :env
     def sysinfo
       @sysinfo ||= SysInfo.new.freeze
-      @sysinfo 
+      @sysinfo
     end
     # A block to be called before a worker starts.
-    # 
+    #
     # e.g.
     #      Bluth.onconnect do
     #        config = YourProject.load_config
@@ -77,19 +78,19 @@ module Bluth
       end
       Familia.info "  reconnected: #{success}"
       success
-    end      
+    end
   end
-  
+
   def Bluth.clear_locks
-    @locks.each { |lock| 
+    @locks.each { |lock|
       Familia.info "Removing lock #{lock}"
-      Bluth.redis.del lock 
+      Bluth.redis.del lock
     }
   end
   def Bluth.find_locks
     @locks = Bluth.redis.keys(Familia.rediskey('*', :lock))
   end
-  
+
   def Bluth.queue?(n)
     Bluth::Queue.queues.collect(&:name).member?(n.to_s.to_sym)
   end
@@ -97,10 +98,10 @@ module Bluth
     raise ArgumentError, "No such queue: #{n}" unless queue?(n)
     Bluth::Queue.send n
   end
-  
+
   require 'bluth/worker'
-  
-  module Queue 
+
+  module Queue
     include Familia
     prefix [:bluth, :queue]
     class_list :critical #, :class => Bluth::Gob
@@ -143,32 +144,32 @@ module Bluth
           self.send(name)
         else
           @queuecache ||= {}
-          @queuecache[name.to_s.to_sym] 
+          @queuecache[name.to_s.to_sym]
         end
       end
     end
-    
+
     # Set default priority
     Bluth.priority = [:critical, :high, :low]
   end
-  
+
   # Workers use a blocking pop and will wait for up to
   # Bluth.queuetimeout (seconds) before returnning nil.
   # Note that the queues are still processed in order.
   # If all queues are empty, the first one to return a
-  # value is use. See: 
+  # value is use. See:
   #
   # http://code.google.com/p/redis/wiki/BlpopCommand
   def Bluth.shift
     blocking_queue_handler :blpop
   end
-  
+
   def Bluth.pop
     blocking_queue_handler :brpop
   end
-  
+
   private
-  
+
   # +meth+ is either :blpop or :brpop
   def Bluth.blocking_queue_handler meth
     gob = nil
@@ -185,10 +186,10 @@ module Bluth
         gob.current_queue = :running
         gob.save
       end
-      
+
     rescue Errno::ECONNREFUSED => ex
       raise ex
-      
+
     rescue => ex
       if queue.nil?
         Familia.info "ERROR: #{ex.message}"
@@ -199,14 +200,14 @@ module Bluth
       Familia.ld ex.backtrace if Familia.debug?
     end
     gob
-  end  
+  end
 end
 
 
 
 module Bluth
   module Handler
-    
+
     def self.extended(obj)
       obj.send :include, Familia
       obj.class_string :success
@@ -214,13 +215,13 @@ module Bluth
       obj.class_string :running
       Bluth.handlers << obj
     end
-    
-    [:success, :failure, :running].each do |name| 
+
+    [:success, :failure, :running].each do |name|
       define_method "#{name}!" do
         self.send(name).increment
       end
     end
-    
+
     def engauge(data={}, notch=nil)
       notch ||= Bluth::TimingBelt.notch 1
       gob = create_job data
@@ -230,14 +231,14 @@ module Bluth
       notch.add gob.jobid
       gob
     end
-    
+
     def create_job data={}
       gob = Gob.create generate_id(data), self, data
       gob.created
       gob.attempts = 0
       gob
     end
-    
+
     def enqueue(data={}, q=nil)
       q = self.queue(q) if q.nil? || Symbol === q
       gob = create_job data
@@ -261,7 +262,7 @@ module Bluth
     end
     def prepare
     end
-    
+
   end
 end
 
@@ -288,7 +289,7 @@ module Bluth
     field :cpu => Array
     field :wid => Gibbler::Digest
     include Familia::Stamps
-    
+
     def jobid
       Gibbler::Digest.new(@jobid)
     end
@@ -296,7 +297,7 @@ module Bluth
       @attempts = 0
       @messages = []
       save
-    end 
+    end
     def preprocess
       @attempts ||= 0
       @messages ||= []
@@ -328,7 +329,7 @@ module Bluth
       start = @stime || 0
       start > Time.now.utc.to_f
     end
-    def retry!(msg=nil) 
+    def retry!(msg=nil)
       move! :high, msg
     end
     def failure!(msg=nil)
@@ -365,13 +366,12 @@ module Bluth
       Familia.ld "Moving #{self.jobid} from #{from.rediskey} to #{to.rediskey}" if Familia.debug?
       @messages << msg unless msg.nil? || msg.empty?
       # We push first to make sure we never lose a Gob ID. Instead
-      # there's the small chance of a job ID being in two queues. 
+      # there's the small chance of a job ID being in two queues.
       to << @jobid
       ret = from.remove @jobid, 0
       @current_queue = to.name
       save # update messages
     end
   end
-  
-end
 
+end

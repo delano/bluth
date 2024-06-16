@@ -1,9 +1,9 @@
-require 'bluth'
-require 'bluth/timingbelt'
-require 'bluth/test_helpers'
+require_relative '../lib/bluth'
+require_relative '../lib/bluth/timingbelt'
+require_relative '../lib/bluth/test_helpers'
 
-#Familia.debug = true
-
+Familia.debug = true
+Bluth::Queue.critical.clear
 @now = Time.at(1297641600).utc # 2011-02-14 20:00:00
 Bluth::TimingBelt.redis.flushdb
 
@@ -108,12 +108,10 @@ notch.queue.rediskey
 #=> 'bluth:queue:00:00'
 
 ## We can get a list of queues by priority
-@current_notch = Bluth::TimingBelt.notch 
+@current_notch = Bluth::TimingBelt.notch
 Bluth::Queue.entry_queues.collect { |q| q.name }
 #=> [:critical, @current_notch.prev.prev.queue.name, @current_notch.prev.queue.name, @current_notch.queue.name, :high, :low]
 
 ## Just a test
 Bluth.pop
 ##=> true
-
-
